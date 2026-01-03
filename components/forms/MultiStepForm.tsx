@@ -71,7 +71,7 @@ export default function MultiStepForm({
       <div className="w-64 flex-shrink-0">
         <div className="sticky top-2">
           <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100 shadow-sm">
-            <h3 className="text-sm font-bold text-gray-700 mb-5 uppercase tracking-wider">
+            <h3 className="text-xs font-bold text-gray-700 mb-5 uppercase tracking-wider">
               Application Progress
             </h3>
             <div className="relative">
@@ -83,7 +83,7 @@ export default function MultiStepForm({
                       <button
                         onClick={() => goToStep(index)}
                         disabled={index > currentStep && !completedSteps.includes(index)}
-                        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${
+                        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-300 ${
                           index === currentStep
                             ? "bg-blue-600 text-white shadow-lg shadow-blue-600/40 scale-110"
                             : completedSteps.includes(index)
@@ -104,7 +104,7 @@ export default function MultiStepForm({
                     {/* Step Title and Description */}
                     <div className="flex-1 pt-1.5">
                       <h4
-                        className={`font-semibold text-sm transition-colors ${
+                        className={`font-semibold text-xs transition-colors ${
                           index === currentStep
                             ? "text-blue-600"
                             : completedSteps.includes(index)
@@ -114,7 +114,7 @@ export default function MultiStepForm({
                       >
                         {step.title}
                       </h4>
-                      <p className="text-xs text-gray-500 mt-0.5">
+                      <p className="text-[10px] text-gray-500 mt-0.5">
                         {index === currentStep
                           ? "In Progress"
                           : completedSteps.includes(index)
@@ -141,8 +141,8 @@ export default function MultiStepForm({
             {/* Progress Bar */}
             <div className="mt-5 pt-5 border-t border-blue-200">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-gray-600">Overall Progress</span>
-                <span className="text-xs font-bold text-blue-600">
+                <span className="text-[10px] font-medium text-gray-600">Overall Progress</span>
+                <span className="text-[10px] font-bold text-blue-600">
                   {Math.round(((completedSteps.length) / steps.length) * 100)}%
                 </span>
               </div>
