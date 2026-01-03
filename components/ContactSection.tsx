@@ -5,6 +5,7 @@ import { Phone, Mail, Clock, MapPin, Send, User, MessageSquare, Briefcase, FileT
 import { useState } from "react";
 
 export default function ContactSection() {
+    const [formValues, setFormValues] = useState<Record<string, string>>({});
     const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
     const inputs = [
@@ -15,6 +16,13 @@ export default function ContactSection() {
         { id: "company", label: "Company Name", icon: Briefcase, type: "text", placeholder: "Your Company Ltd." },
         { id: "loanType", label: "Interest", icon: FileText, type: "text", placeholder: "Personal Loan, Insurance..." },
     ];
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormValues({
+            ...formValues,
+            [e.target.id]: e.target.value
+        });
+    };
 
     return (
         <section className="relative py-20 bg-gray-50 overflow-hidden" id="contact">
@@ -129,7 +137,7 @@ export default function ContactSection() {
                                                     <label
                                                         htmlFor={input.id}
                                                         className={`absolute left-0 transition-all duration-300 pointer-events-none 
-                                                            ${focusedInput === input.id || (document.getElementById(input.id) as HTMLInputElement)?.value
+                                                            ${focusedInput === input.id || formValues[input.id]
                                                                 ? '-top-6 text-xs text-blue-600 font-semibold'
                                                                 : 'top-3 text-gray-400'}`}
                                                     >
@@ -140,6 +148,8 @@ export default function ContactSection() {
                                                             type={input.type}
                                                             id={input.id}
                                                             placeholder={focusedInput === input.id ? input.placeholder : ''}
+                                                            value={formValues[input.id] || ''}
+                                                            onChange={handleInputChange}
                                                             onFocus={() => setFocusedInput(input.id)}
                                                             onBlur={(e) => !e.target.value && setFocusedInput(null)}
                                                             className="w-full bg-transparent border-b-2 border-gray-200 py-3 pr-4 focus:border-blue-600 outline-none transition-colors"
@@ -156,6 +166,9 @@ export default function ContactSection() {
                                         <label className="block text-sm font-medium text-gray-700 mb-2">Message (Optional)</label>
                                         <textarea
                                             rows={4}
+                                            id="message"
+                                            value={formValues.message || ''}
+                                            onChange={handleInputChange}
                                             className="w-full bg-gray-50 rounded-xl border border-gray-200 p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
                                             placeholder="Tell us more about your requirements..."
                                         ></textarea>

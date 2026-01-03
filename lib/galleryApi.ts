@@ -14,12 +14,12 @@ function normalizeImageUrl(imageUrl: string): string {
   if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
     return imageUrl;
   }
-  
+
   // If relative URL (starts with /), prepend backend URL
   if (imageUrl.startsWith('/')) {
     return `${BACKEND_URL}${imageUrl}`;
   }
-  
+
   // Otherwise, assume it needs both / and backend URL
   return `${BACKEND_URL}/${imageUrl}`;
 }
@@ -45,13 +45,13 @@ export interface GalleryEvent {
 }
 
 export interface GalleryEventsResponse {
-  success: boolean;
+  success: true;
   total: number;
   events: GalleryEvent[];
 }
 
 export interface GalleryEventResponse {
-  success: boolean;
+  success: true;
   event: GalleryEvent;
 }
 
@@ -194,11 +194,11 @@ export function formatEventDate(dateString: string): string {
  */
 export function getFeaturedImage(event: GalleryEvent): GalleryImage | null {
   if (!event.images || event.images.length === 0) return null;
-  
+
   // Find image marked as featured
   const featuredImage = event.images.find(img => img.isFeatured);
   if (featuredImage) return featuredImage;
-  
+
   // Otherwise return first image by display order
   return event.images.sort((a, b) => a.displayOrder - b.displayOrder)[0];
 }

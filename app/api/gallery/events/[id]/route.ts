@@ -5,11 +5,12 @@ const BACKEND_URL = process.env.BACKEND_API_URL || 'https://loansarathi.com/api'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  props: { params: Promise<{ id: string }> }
 ) {
+  const params = await props.params;
   try {
     const { id } = params;
-    
+
     // Forward the request to the actual backend
     const response = await fetch(`${BACKEND_URL}/gallery/events/${id}`, {
       method: 'GET',
