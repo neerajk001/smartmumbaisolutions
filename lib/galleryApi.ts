@@ -23,7 +23,7 @@ function normalizeImageUrl(imageUrl: string): string {
   // Otherwise, assume it needs both / and backend URL
   return `${BACKEND_URL}/${imageUrl}`;
 }
-
+ // Add new function to get gallery events
 // Types
 export interface GalleryImage {
   id: number;

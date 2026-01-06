@@ -19,6 +19,7 @@ export const loans = [
         detail: "Up to ₹2cr",
         metric: "10.49% ROI",
         icon: HandCoins,
+        image: "/card-logos/PersonalLoan.png",
         description: "Get instant personal loans with minimal documentation. Whether it's for a wedding, medical emergency, or travel, our personal loans offer flexible repayment tenures and competitive interest rates.",
         features: [
             "Instant Approval within 24 hours",
@@ -55,6 +56,7 @@ export const loans = [
         detail: "Up to ₹2 Crores",
         metric: "14.00% ROI",
         icon: Briefcase,
+        image: "/card-logos/BusinessLoan.png",
         description: "Fuel your business growth with our tailored business financing solutions. From working capital to expansion funds, we support your entrepreneurial journey.",
         features: [
             "Collateral-free options available",
@@ -91,6 +93,7 @@ export const loans = [
         detail: "Up to ₹5 Crores",
         metric: "8.35% ROI",
         icon: Home,
+        image: "/card-logos/HomeLoan (2).png",
         description: "Turn your dream home into reality with our affordable home loans. We offer attractive interest rates and long repayment tenures to make home ownership easy.",
         features: [
             "Doorstep service",
@@ -127,6 +130,7 @@ export const loans = [
         detail: "Up to 5cr",
         metric: "8.75% ROI",
         icon: Building2,
+        image: "/card-logos/LAP (2).png",
         description: "Unlock the value of your property with a Loan Against Property. Use the funds for business needs, education, or personal requirements.",
         features: [
             "High LTV ratio",
@@ -163,6 +167,7 @@ export const loans = [
         detail: "Up to ₹2 Crores",
         metric: "9.50% ROI",
         icon: GraduationCap,
+        image: "/card-logos/EducationLoan.png",
         description: "Invest in your future with our comprehensive education loans. We cover tuition fees, living expenses, and travel costs for studies in India and abroad.",
         features: [
             "Cover for 100% expenses",
@@ -199,6 +204,7 @@ export const loans = [
         detail: "Up to 90% Value",
         metric: "9.00% ROI",
         icon: Car,
+        image: "/card-logos/CarLoan (2).png",
         description: "Drive home your dream car today. Our car loans come with instant approval and up to 100% on-road funding for select models.",
         features: [
             "Up to 90% on-road funding",
@@ -238,6 +244,7 @@ export const insurances = [
         detail: "₹1Cr Cover",
         metric: "Cashless",
         icon: HeartPulse,
+        image: "/card-logos/HealthInsurance.png",
         description: "Comprehensive health coverage for you and your family. Protect your savings from medical emergencies with our cashless network hospitals.",
         features: [
             "Cashless treatment at 10,000+ hospitals",
@@ -272,6 +279,7 @@ export const insurances = [
         detail: "Tax Benefits",
         metric: "₹10Cr+ Cover",
         icon: Shield,
+        image: "/card-logos/terminsurance.png",
         description: "Secure your family's financial future with our pure term life insurance plans. High life cover at affordable premiums with tax benefits.",
         features: [
             "High coverage at low premium",
@@ -307,6 +315,7 @@ export const insurances = [
         detail: "Instant Policy",
         metric: "Zero Dep",
         icon: Car,
+        image: "/card-logos/CarInsurance.png",
         description: "Protect your car against damages, theft, and third-party liabilities. Get comprehensive coverage with add-ons like Zero Depreciation.",
         features: [
             "Cashless repairs",
@@ -340,6 +349,7 @@ export const insurances = [
         detail: "Third Party",
         metric: "Comprehensive",
         icon: Bike,
+        image: "/card-logos/BikeInsurance.png",
         description: "Two-wheeler insurance that covers damage to your bike and third-party liabilities. Quick renewal and instant policy issuance.",
         features: [
             "Instant policy issuance",
@@ -368,6 +378,7 @@ export const insurances = [
         detail: "Liability Cover",
         metric: "Secure",
         icon: ShieldCheck,
+        image: "/card-logos/LoanProtector.png",
         description: "Ensure your loan liabilities are taken care of in case of unfortunate events. Protect your family from debt burden.",
         features: [
             "Covers outstanding loan amount",
@@ -397,6 +408,7 @@ export const insurances = [
         detail: "Job Loss Cover",
         metric: "Assured",
         icon: FileText,
+        image: "/card-logos/EMI Protector.png",
         description: "Secure your EMI payments against job loss or temporary disability. Maintain your credit score and financial stability.",
         features: [
             "Covers 3-6 months of EMI",

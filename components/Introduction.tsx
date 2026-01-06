@@ -44,46 +44,51 @@ export default function Introduction() {
                     </motion.div>
 
                     {/* Right Side: Animated Images */}
-                    <div className="relative h-[600px] w-full hidden lg:block">
-                        {/* Background Blob */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-50 rounded-full blur-3xl opacity-50 -z-10" />
-
-                        {/* Image 1 - Top Left (Coins/Docs) */}
+                    <div className="relative w-full hidden lg:block h-[500px]">
+                        {/* Image 1 - Main Background (Top Right) */}
                         <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, x: 20, y: -20 }}
+                            whileInView={{ opacity: 1, x: 0, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="absolute top-0 right-0 w-4/5 h-80 rounded-3xl shadow-2xl overflow-hidden z-10"
+                        >
+                            <img
+                                src="/intro/ChatGPT Image Jan 6, 2026, 02_51_48 PM.png"
+                                alt="Business Meeting"
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                            />
+                        </motion.div>
+
+                        {/* Image 2 - Overlapping (Bottom Left) */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -20, y: 20 }}
+                            whileInView={{ opacity: 1, x: 0, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="absolute top-0 left-0 w-72 h-96 overflow-hidden rounded-lg shadow-2xl border-4 border-white"
+                            className="absolute top-40 left-0 w-3/5 h-64 rounded-3xl shadow-2xl overflow-hidden z-20 border-[6px] border-white"
                         >
                             <img
-                                src="/loan_documents.png"
-                                alt="Financial Documents"
-                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                                src="/intro/ChatGPT Image Jan 6, 2026, 02_57_13 PM.png"
+                                alt="Growth and Investment"
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                             />
                         </motion.div>
 
-                        {/* Image 2 - Bottom Right (Money Bag/Growth) */}
+                        {/* Image 3 - Small Detail (Bottom Center/Right) */}
                         <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="absolute bottom-0 right-0 w-72 h-96 overflow-hidden rounded-lg shadow-2xl border-4 border-white z-20"
+                            className="absolute bottom-0 right-12 w-2/5 h-48 rounded-3xl shadow-2xl overflow-hidden z-30 border-[6px] border-white"
                         >
                             <img
-                                src="/wealth_growth.png"
-                                alt="Wealth Growth"
-                                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                                src="/intro/ChatGPT Image Jan 6, 2026, 02_58_06 PM.png"
+                                alt="Approved Loan Documents"
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                             />
                         </motion.div>
-
-                        {/* Floating Decor Element */}
-                        <motion.div
-                            animate={{ y: [-10, 10, -10] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute top-1/2 right-10 w-24 h-24 bg-orange-500 rounded-full opacity-10 blur-xl z-20"
-                        />
                     </div>
                 </div>
             </div>

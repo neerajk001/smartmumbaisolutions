@@ -23,8 +23,16 @@ const ProductCard = ({ product, index, category, onApplyClick }: { product: any,
                 <span className="bg-[#FFF0EB] text-[#9B2C2C] text-[10px] font-bold px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
                     {product.metric}
                 </span>
-                <div className="bg-orange-50 p-3 rounded-2xl w-16 h-16 flex items-center justify-center shadow-inner">
-                    <product.icon className="text-[#F8B656]" strokeWidth={2} size={32} />
+                <div className="bg-white p-2 rounded-2xl w-16 h-16 flex items-center justify-center shadow-sm border border-gray-100">
+                    {product.image ? (
+                        <img
+                            src={product.image}
+                            alt={product.title}
+                            className="w-full h-full object-contain"
+                        />
+                    ) : (
+                        <product.icon className="text-[#F8B656]" strokeWidth={2} size={32} />
+                    )}
                 </div>
             </div>
 
@@ -40,7 +48,7 @@ const ProductCard = ({ product, index, category, onApplyClick }: { product: any,
                 </Link>
 
                 <div className="mt-3">
-                    <button 
+                    <button
                         onClick={(e) => {
                             e.stopPropagation();
                             onApplyClick();
@@ -88,10 +96,10 @@ export default function ProductShowcase() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
                             {loans.map((loan, index) => (
-                                <ProductCard 
-                                    key={index} 
-                                    product={loan} 
-                                    index={index} 
+                                <ProductCard
+                                    key={index}
+                                    product={loan}
+                                    index={index}
                                     category="loan"
                                     onApplyClick={() => handleApplyClick(loan, "Loan")}
                                 />
@@ -110,10 +118,10 @@ export default function ProductShowcase() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
                             {insurances.map((insurance, index) => (
-                                <ProductCard 
-                                    key={index} 
-                                    product={insurance} 
-                                    index={index} 
+                                <ProductCard
+                                    key={index}
+                                    product={insurance}
+                                    index={index}
                                     category="insurance"
                                     onApplyClick={() => handleApplyClick(insurance, "Insurance")}
                                 />

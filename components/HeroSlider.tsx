@@ -7,7 +7,7 @@ import { ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
 const slides = [
     {
         id: 1,
-        image: "/Hero-images/hero1.jpeg",
+        image: "/Hero-images/hero-latest-1.png",
         title: "Business Capital Made Easy.",
         subtitle: "Fuel your business growth with low-interest loans and quick approvals. No hidden charges, just pure growth.",
         primaryButton: "Business Loans",
@@ -16,7 +16,7 @@ const slides = [
     },
     {
         id: 2,
-        image: "/Hero-images/hero2.jpeg",
+        image: "/Hero-images/hero-latest-2.png",
         title: "Trusted Insurance For Your Family.",
         subtitle: "Comprehensive coverage that actually pays out when you need it. Life, Health, and General Insurance tailored for you.",
         primaryButton: "Get Insured",
@@ -25,7 +25,7 @@ const slides = [
     },
     {
         id: 3,
-        image: "/Hero-images/hero3.jpeg",
+        image: "/Hero-images/hero-latest-3.png",
         title: "Your Dream Home Awaits.",
         subtitle: "Competitive interest rates and flexible tenures for your perfect home. Making home ownership a reality.",
         primaryButton: "Home Loans",
@@ -34,7 +34,7 @@ const slides = [
     },
     {
         id: 4,
-        image: "/Hero-images/hero4.jpeg",
+        image: "/Hero-images/hero-latest-4.png",
         title: "Invest in Your Future.",
         subtitle: "Education loans that empower your dreams. Partial coverage, full coverage, and global opportunities.",
         primaryButton: "Education Loans",
@@ -56,7 +56,7 @@ export default function HeroSlider() {
     const slide = slides[current];
 
     return (
-        <div className="relative w-[95%] max-w-[1400px] mx-auto mt-8 h-[550px] rounded-2xl overflow-hidden bg-gray-900 shadow-2xl">
+        <div className="relative w-[90%] max-w-[1200px] mx-auto mt-8 h-[550px] rounded-2xl overflow-hidden bg-gray-900 shadow-2xl">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={current}

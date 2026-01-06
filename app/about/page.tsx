@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { ShieldCheck, Users, Lock, FileText, BarChart3, Handshake, Award, Briefcase } from "lucide-react";
+import { ShieldCheck, Users, Lock, FileText, BarChart3, Handshake, Award, Briefcase, TrendingUp, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 
 // Team Members Data
@@ -49,309 +49,239 @@ const assistantManagers = [
     },
 ];
 
+const stats = [
+    { label: "Years Experience", value: "6+", icon: Award },
+    { label: "Satisfied Clients", value: "2500+", icon: Users },
+    { label: "Loans Approved", value: "₹500Cr+", icon: CheckCircle2 },
+    { label: "Partner Banks", value: "40+", icon: Handshake },
+];
+
 export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100 selection:text-blue-900">
             <Navbar />
 
             <main>
-                {/* HERO SECTION */}
-                <section className="relative h-[160px] md:h-[240px] flex items-center justify-center overflow-hidden">
-                    {/* Background Image with Overlay */}
-                    <div className="absolute inset-0">
-                        <img
-                            src="/about_us_banner.png"
-                            alt="About Us Banner"
-                            className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-blue-900/50 backdrop-blur-[2px]"></div>
-                    </div>
+                {/* MODERN HERO SECTION */}
+                <section className="relative pt-32 pb-40 lg:pt-48 lg:pb-56 overflow-hidden bg-[#0F3866] text-white rounded-b-[4rem] z-10">
+                    <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
-                    <div className="relative z-10 text-center text-white px-6">
-                        <motion.h1
+                    <div className="container mx-auto px-6 relative z-10 text-center">
+                        <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-2"
                         >
-                            About Us
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3, duration: 0.8 }}
-                            className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto"
-                        >
-                            Your Trusted Financial Advisory Partner
-                        </motion.p>
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.5, duration: 0.6 }}
-                            className="h-1 w-24 bg-orange-500 mx-auto mt-4 rounded-full"
-                        />
+                            <span className="inline-block py-1 px-3 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-sm font-semibold mb-6 tracking-wide">
+                                ESTABLISHED 2018
+                            </span>
+                            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                                Empowering Your <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">
+                                    Financial Future
+                                </span>
+                            </h1>
+                            <p className="text-xl md:text-2xl text-blue-100 max-w-2xl mx-auto font-light leading-relaxed">
+                                We bridge the gap between your dreams and financial reality with expert loan advisory services.
+                            </p>
+                        </motion.div>
                     </div>
                 </section>
 
-                {/* INTRODUCTION SECTION */}
-                <section className="py-20 md:py-24 bg-gradient-to-b from-white to-gray-50">
-                    <div className="container mx-auto px-6 md:px-8 lg:px-24">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="max-w-4xl mx-auto text-center"
-                        >
-                            <div className="flex items-center justify-center gap-3 mb-6">
-                                <span className="h-[2px] w-12 bg-orange-600"></span>
-                                <span className="text-orange-600 font-bold uppercase tracking-widest text-sm">About Smart Solutions</span>
-                                <span className="h-[2px] w-12 bg-orange-600"></span>
-                            </div>
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-                                Your Trusted Loan <span className="text-blue-700">Advisory Partner</span>
-                            </h2>
-                            <div className="space-y-6 text-base md:text-lg text-gray-600 font-light leading-relaxed">
-                                <p>
-                                    At Smart Solutions, we take pride in being a leading loan advisory firm, committed to assisting individuals and businesses in navigating the complex landscape of financial borrowing.
-                                </p>
-                                <p>
-                                    Established in 2018, we have swiftly emerged as a beacon of expertise and reliability in the lending industry. Our mission is to simplify the borrowing process, ensuring that you get the best possible terms tailored to your unique financial situation.
-                                </p>
-                                <div className="pt-6 border-t border-gray-200">
-                                    <p className="text-xl font-semibold text-gray-800 italic">
-                                        "Empowering your financial journey since 2018"
+                {/* STATS OVERLAY SECTION */}
+                <section className="relative z-20 -mt-24 container mx-auto px-6 mb-24">
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2, duration: 0.8 }}
+                        className="bg-white rounded-3xl shadow-2xl shadow-blue-900/10 p-8 md:p-12"
+                    >
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-x-0 lg:divide-x divide-gray-100">
+                            {stats.map((stat, index) => (
+                                <div key={index} className="flex flex-col items-center text-center group">
+                                    <div className="mb-4 p-4 bg-blue-50 rounded-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                                        <stat.icon size={28} />
+                                    </div>
+                                    <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">{stat.value}</h3>
+                                    <p className="text-gray-500 font-medium text-sm uppercase tracking-wider">{stat.label}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                </section>
+
+                {/* OUR STORY / MISSION */}
+                <section className="py-20 bg-white">
+                    <div className="container mx-auto px-6 md:px-12 lg:px-24">
+                        <div className="grid lg:grid-cols-2 gap-16 items-center">
+                            <motion.div
+                                initial={{ opacity: 0, x: -30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                            >
+                                <div className="flex items-center gap-4 mb-6">
+                                    <span className="h-[2px] w-12 bg-orange-500"></span>
+                                    <span className="text-orange-600 font-bold uppercase tracking-widest text-sm">Who We Are</span>
+                                </div>
+                                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+                                    Your Trusted Partner in <span className="text-blue-700">Financial Growth</span>
+                                </h2>
+                                <div className="space-y-6 text-lg text-gray-600 font-light leading-relaxed">
+                                    <p>
+                                        At <span className="font-semibold text-gray-900">Smart Solutions</span>, we take pride in being a leading loan advisory firm. Established in 2018, we have swiftly emerged as a beacon of expertise and reliability in the lending industry.
+                                    </p>
+                                    <p>
+                                        Our mission is simple: to simplify the complex landscape of borrowing. Whether you are an individual looking for a home loan or a business seeking expansion capital, we ensure you get terms tailored to your unique situation.
                                     </p>
                                 </div>
-                            </div>
-                        </motion.div>
+                                <div className="mt-10 p-6 bg-blue-50 border-l-4 border-blue-600 rounded-r-xl">
+                                    <p className="text-xl text-blue-900 font-medium italic">
+                                        "Transparency and integrity are not just values for us; they are the foundation of every client relationship we build."
+                                    </p>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                className="relative"
+                            >
+                                <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600 to-orange-500 rounded-3xl opacity-20 blur-lg"></div>
+                                <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+                                    <img
+                                        src="/intro/ChatGPT Image Jan 6, 2026, 02_51_48 PM.png"
+                                        alt="Office Meeting"
+                                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                    <div className="absolute bottom-8 left-8 text-white">
+                                        <div className="text-3xl font-bold mb-1">2000+</div>
+                                        <div className="text-blue-200">Happy Families & Businesses</div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
                 </section>
 
-                {/* OUR TEAM SECTION */}
-                <section className="py-20 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-                    <div className="container mx-auto px-6 md:px-8 lg:px-24">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="text-center mb-16"
-                        >
-                            <div className="flex items-center justify-center gap-2 mb-4">
-                                <Users className="text-blue-600" size={32} />
-                                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">Our Team</h2>
-                            </div>
-                            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                                Meet the experienced professionals dedicated to your financial success
+                {/* VALUES / FEATURES */}
+                <section className="py-24 bg-slate-50">
+                    <div className="container mx-auto px-6 md:px-12 lg:px-24">
+                        <div className="text-center max-w-3xl mx-auto mb-20">
+                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">What Sets Us Apart</h2>
+                            <p className="text-lg text-gray-600">
+                                We don't just find you a loan; we engineer the perfect financial solution for your specific needs.
                             </p>
-                            <div className="h-1 w-20 bg-blue-600 mx-auto mt-6 rounded-full"></div>
-                        </motion.div>
+                        </div>
 
-                        {/* Managers Section */}
-                        <div className="mb-16">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                                className="flex items-center gap-3 mb-8"
-                            >
-                                <Award className="text-blue-600" size={28} />
-                                <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Managers</h3>
-                            </motion.div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {managers.map((manager, index) => (
+                        <div className="grid md:grid-cols-3 gap-8">
+                            {[
+                                { icon: Users, title: "Expert Guidance", desc: "Seasoned professionals with deep domain expertise providing sound, tailored advice.", color: "text-blue-600", bg: "bg-blue-50" },
+                                { icon: Handshake, title: "Personalized Approach", desc: "Customized solutions aligned with your unique financial circumstances—because one size doesn't fit all.", color: "text-orange-600", bg: "bg-orange-50" },
+                                { icon: Lock, title: "Transparent & Ethical", desc: "Total transparency and ethical conduct are the cornerstones of our operations.", color: "text-green-600", bg: "bg-green-50" }
+                            ].map((feature, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group"
+                                >
+                                    <div className={`w-16 h-16 ${feature.bg} rounded-2xl flex items-center justify-center ${feature.color} mb-8 group-hover:scale-110 transition-transform duration-300`}>
+                                        <feature.icon size={32} />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+                                    <p className="text-gray-600 leading-relaxed font-light">
+                                        {feature.desc}
+                                    </p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* TEAM SECTION */}
+                <section className="py-24 bg-white relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50 skew-x-12 opacity-50 z-0"></div>
+                    <div className="container mx-auto px-6 relative z-10">
+                        <div className="mb-20">
+                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Meet The Team</h2>
+                            <p className="text-xl text-gray-500 max-w-2xl">The dedicated professionals driving your financial success.</p>
+                        </div>
+
+                        {/* Managers */}
+                        <div className="mb-24">
+                            <div className="flex items-center gap-3 mb-10">
+                                <span className="p-2 bg-blue-100 rounded-lg text-blue-700"><Award size={24} /></span>
+                                <h3 className="text-2xl font-bold text-gray-900">Leadership</h3>
+                            </div>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                                {managers.map((manager, idx) => (
                                     <motion.div
-                                        key={manager.id}
-                                        initial={{ opacity: 0, y: 30 }}
+                                        key={idx}
+                                        initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.6, delay: index * 0.1 }}
-                                        className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+                                        transition={{ delay: idx * 0.1 }}
+                                        className="group relative"
                                     >
-                                        <div className="relative h-[350px] overflow-hidden">
+                                        <div className="h-[400px] rounded-2xl overflow-hidden shadow-lg relative">
                                             <Image
                                                 src={manager.image}
                                                 alt={manager.name}
                                                 fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                className="object-contain transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 bg-gray-100"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                        </div>
-                                        <div className="p-6">
-                                            <h4 className="text-xl font-bold text-gray-900 mb-1">{manager.name}</h4>
-                                            <p className="text-blue-600 font-semibold">{manager.position}</p>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
+                                            <div className="absolute bottom-0 left-0 p-8 w-full">
+                                                <h4 className="text-2xl font-bold text-white mb-1 group-hover:translate-x-2 transition-transform duration-300">{manager.name}</h4>
+                                                <p className="text-blue-300 font-medium">{manager.position}</p>
+                                            </div>
                                         </div>
                                     </motion.div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Assistant Managers Section */}
+                        {/* Asst Managers */}
                         <div>
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                                className="flex items-center gap-3 mb-8"
-                            >
-                                <Briefcase className="text-orange-600" size={28} />
-                                <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Assistant Managers</h3>
-                            </motion.div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {assistantManagers.map((assistant, index) => (
+                            <div className="flex items-center gap-3 mb-10">
+                                <span className="p-2 bg-orange-100 rounded-lg text-orange-700"><Users size={24} /></span>
+                                <h3 className="text-2xl font-bold text-gray-900">Key Members</h3>
+                            </div>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                                {assistantManagers.map((assistant, idx) => (
                                     <motion.div
-                                        key={assistant.id}
-                                        initial={{ opacity: 0, y: 30 }}
+                                        key={idx}
+                                        initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.6, delay: index * 0.1 }}
-                                        className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+                                        transition={{ delay: idx * 0.1 }}
+                                        className="group relative"
                                     >
-                                        <div className="relative h-[350px] overflow-hidden">
+                                        <div className="h-[400px] rounded-2xl overflow-hidden shadow-lg relative">
                                             <Image
                                                 src={assistant.image}
                                                 alt={assistant.name}
                                                 fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                className="object-contain transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 bg-gray-100"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                        </div>
-                                        <div className="p-6">
-                                            <h4 className="text-xl font-bold text-gray-900 mb-1">{assistant.name}</h4>
-                                            <p className="text-orange-600 font-semibold">{assistant.position}</p>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
+                                            <div className="absolute bottom-0 left-0 p-8 w-full">
+                                                <h4 className="text-2xl font-bold text-white mb-1 group-hover:translate-x-2 transition-transform duration-300">{assistant.name}</h4>
+                                                <p className="text-orange-300 font-medium">{assistant.position}</p>
+                                            </div>
                                         </div>
                                     </motion.div>
                                 ))}
                             </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* WHAT SETS US APART */}
-                <section className="py-20 md:py-24 bg-white">
-                    <div className="container mx-auto px-6 md:px-8 lg:px-24">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">What Sets Us Apart</h2>
-                            <div className="h-1 w-20 bg-blue-600 mx-auto rounded-full"></div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {/* Feature 1 */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300"
-                            >
-                                <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6">
-                                    <Users size={28} />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-4">Expert Guidance</h3>
-                                <p className="text-gray-600 leading-relaxed font-light">
-                                    Our team comprises seasoned professionals with extensive expertise in the lending domain. We leverage our knowledge to offer sound advice tailored to your specific needs.
-                                </p>
-                            </motion.div>
-
-                            {/* Feature 2 */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2 }}
-                                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-orange-600"></div>
-                                <div className="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center text-orange-600 mb-6">
-                                    <Handshake size={28} />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-4">Personalized Approach</h3>
-                                <p className="text-gray-600 leading-relaxed font-light">
-                                    We acknowledge that one size doesn't fit all. That's why we take a personalized approach, ensuring that each client receives customized solutions aligned with their circumstances.
-                                </p>
-                            </motion.div>
-
-                            {/* Feature 3 */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3 }}
-                                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300"
-                            >
-                                <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6">
-                                    <Lock size={28} />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-4">Transparent & Ethical</h3>
-                                <p className="text-gray-600 leading-relaxed font-light">
-                                    Transparency and ethical conduct form the cornerstone of our operations. We believe in fostering trust by maintaining the highest standards of integrity and honesty.
-                                </p>
-                            </motion.div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* OUR SERVICES */}
-                <section className="py-20 md:py-24 bg-gray-50">
-                    <div className="container mx-auto px-6 md:px-8 lg:px-24">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Our Services</h2>
-                            <div className="h-1 w-20 bg-blue-600 mx-auto rounded-full"></div>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="p-8 bg-white border border-gray-100 rounded-2xl hover:border-blue-200 hover:shadow-lg transition-all duration-300 group"
-                            >
-                                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 mb-6 group-hover:scale-110 transition-transform">
-                                    <ShieldCheck size={32} />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">Loan Consultation</h3>
-                                <p className="text-gray-600 leading-relaxed text-sm">
-                                    Whether it's a personal loan, business loan, mortgage, education loan, or Doctor loan, we provide comprehensive consultation to guide you through the borrowing process.
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2 }}
-                                className="p-8 bg-white border border-gray-100 rounded-2xl hover:border-blue-200 hover:shadow-lg transition-all duration-300 group"
-                            >
-                                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 mb-6 group-hover:scale-110 transition-transform">
-                                    <BarChart3 size={32} />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">Financial Analysis</h3>
-                                <p className="text-gray-600 leading-relaxed text-sm">
-                                    We conduct in-depth financial analyses to assess your eligibility, recommend suitable loan options, and help optimize your financial portfolio.
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3 }}
-                                className="p-8 bg-white border border-gray-100 rounded-2xl hover:border-blue-200 hover:shadow-lg transition-all duration-300 group"
-                            >
-                                <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 mb-6 group-hover:scale-110 transition-transform">
-                                    <FileText size={32} />
-                                </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">Loan Application Support</h3>
-                                <p className="text-gray-600 leading-relaxed text-sm">
-                                    From paperwork to negotiations, we offer full-scale support throughout the loan application process, ensuring a smooth and hassle-free experience.
-                                </p>
-                            </motion.div>
                         </div>
                     </div>
                 </section>
