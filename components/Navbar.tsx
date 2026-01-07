@@ -31,10 +31,10 @@ export default function Navbar() {
             <nav className="sticky top-0 z-50 w-full md:w-[90%] md:max-w-[1200px] md:mx-auto md:top-2.5 rounded-none md:rounded-xl flex items-center justify-between px-4 md:px-8 h-20 md:overflow-visible overflow-hidden bg-white/80 backdrop-blur-md shadow-md border-x-0 md:border border-gray-200 supports-[backdrop-filter]:bg-white/60">
                 {/* Logo Section */}
                 <Link href="/" className="flex items-center h-full">
-                    <Image 
-                        src="/logo.png" 
-                        alt="Smart Solutions Logo" 
-                        width={160} 
+                    <Image
+                        src="/logo1.png"
+                        alt="Smart Solutions Logo"
+                        width={160}
                         height={160}
                         className="object-contain h-14 md:h-16 w-auto"
                     />
@@ -186,9 +186,8 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             <div
-                className={`fixed inset-0 top-20 z-40 bg-white/95 backdrop-blur-md md:hidden transition-transform duration-300 ease-in-out ${
-                    isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-                }`}
+                className={`fixed inset-0 top-20 z-40 bg-white/95 backdrop-blur-md md:hidden transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+                    }`}
             >
                 <div className="flex flex-col h-full overflow-y-auto px-6 py-4">
                     <Link
@@ -217,7 +216,7 @@ export default function Navbar() {
                                 size={16}
                                 className={`transition-transform ${openDropdown === "loans" ? "rotate-180" : ""}`}
                             />
-                        </button>  
+                        </button>
                         {openDropdown === "loans" && (
                             <div className="pl-4 pb-2 space-y-2">
                                 <Link
