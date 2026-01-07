@@ -206,8 +206,13 @@ export default function AboutPage() {
                             >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-bl-[100px] transition-all group-hover:bg-blue-500/10"></div>
                                 <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600">
-                                        <TrendingUp size={32} />
+                                    <div className="relative w-24 h-24 shrink-0 rounded-2xl overflow-hidden bg-white p-2 border border-blue-50">
+                                        <Image
+                                            src="/our-product/loansarathi.png"
+                                            alt="Loan Sarathi Logo"
+                                            fill
+                                            className="object-contain p-1"
+                                        />
                                     </div>
                                     <div>
                                         <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Loan Sarathi</h3>
@@ -242,8 +247,13 @@ export default function AboutPage() {
                             >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-[100px] transition-all group-hover:bg-orange-500/10"></div>
                                 <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600">
-                                        <PhoneCall size={32} />
+                                    <div className="relative w-24 h-24 shrink-0 rounded-2xl overflow-hidden bg-white p-2 border border-orange-50">
+                                        <Image
+                                            src="/our-product/smart-dial.jpg"
+                                            alt="Smart Dial Logo"
+                                            fill
+                                            className="object-contain p-1"
+                                        />
                                     </div>
                                     <div>
                                         <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Smart Dial</h3>
