@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { ShieldCheck, Users, Lock, FileText, BarChart3, Handshake, Award, Briefcase, TrendingUp, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, Users, Lock, FileText, BarChart3, Handshake, Award, Briefcase, TrendingUp, CheckCircle2, PhoneCall } from "lucide-react";
 import Image from "next/image";
 
 // Team Members Data
@@ -75,7 +75,7 @@ export default function AboutPage() {
                             transition={{ duration: 0.8 }}
                         >
                             <span className="inline-block py-1 px-3 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-sm font-semibold mb-6 tracking-wide">
-                                ESTABLISHED 2018
+                                ESTABLISHED 2022
                             </span>
                             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
                                 Empowering Your <br />
@@ -100,7 +100,12 @@ export default function AboutPage() {
                         className="bg-white rounded-3xl shadow-2xl shadow-blue-900/10 p-8 md:p-12"
                     >
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-x-0 lg:divide-x divide-gray-100">
-                            {stats.map((stat, index) => (
+                            {[
+                                { label: "Years Experience", value: "3+", icon: Award },
+                                { label: "Satisfied Clients", value: "2500+", icon: Users },
+                                { label: "Loans Approved", value: "₹500Cr+", icon: CheckCircle2 },
+                                { label: "Partner Banks", value: "40+", icon: Handshake },
+                            ].map((stat, index) => (
                                 <div key={index} className="flex flex-col items-center text-center group">
                                     <div className="mb-4 p-4 bg-blue-50 rounded-2xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                                         <stat.icon size={28} />
@@ -113,10 +118,10 @@ export default function AboutPage() {
                     </motion.div>
                 </section>
 
-                {/* OUR STORY / MISSION */}
+                {/* OUR STORY - REPLACED CONTENT */}
                 <section className="py-20 bg-white">
                     <div className="container mx-auto px-6 md:px-12 lg:px-24">
-                        <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <div className="grid lg:grid-cols-2 gap-16 items-start">
                             <motion.div
                                 initial={{ opacity: 0, x: -30 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -125,23 +130,32 @@ export default function AboutPage() {
                             >
                                 <div className="flex items-center gap-4 mb-6">
                                     <span className="h-[2px] w-12 bg-orange-500"></span>
-                                    <span className="text-orange-600 font-bold uppercase tracking-widest text-sm">Who We Are</span>
+                                    <span className="text-orange-600 font-bold uppercase tracking-widest text-sm">About Smart Solutions</span>
                                 </div>
-                                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-                                    Your Trusted Partner in <span className="text-blue-700">Financial Growth</span>
+                                <h2 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+                                    We act as a trusted bridge between <span className="text-blue-700">customers & financial partners.</span>
                                 </h2>
                                 <div className="space-y-6 text-lg text-gray-600 font-light leading-relaxed">
                                     <p>
-                                        At <span className="font-semibold text-gray-900">Smart Solutions</span>, we take pride in being a leading loan advisory firm. Established in 2018, we have swiftly emerged as a beacon of expertise and reliability in the lending industry.
+                                        <span className="font-semibold text-gray-900">Smart Solutions</span>, incorporated on 1st July 2022, is a technology-driven financial services company committed to simplifying access to loans and credit solutions for individuals, professionals, and businesses across India.
                                     </p>
                                     <p>
-                                        Our mission is simple: to simplify the complex landscape of borrowing. Whether you are an individual looking for a home loan or a business seeking expansion capital, we ensure you get terms tailored to your unique situation.
+                                        Since inception, we have focused on building a reliable, transparent, and efficient lending ecosystem powered by technology and deep banking expertise. We combine domain knowledge with smart digital innovation to deliver faster and more accurate loan outcomes.
+                                    </p>
+                                    <p>
+                                        Our core objective is simple — to make lending transparent, faster, and more reliable, while ensuring customers receive the right financial product based on their profile, eligibility, and financial requirements.
                                     </p>
                                 </div>
-                                <div className="mt-10 p-6 bg-blue-50 border-l-4 border-blue-600 rounded-r-xl">
-                                    <p className="text-xl text-blue-900 font-medium italic">
-                                        "Transparency and integrity are not just values for us; they are the foundation of every client relationship we build."
-                                    </p>
+
+                                <div className="mt-12">
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                                        <Award className="text-orange-500" /> Our Vision
+                                    </h3>
+                                    <div className="p-6 bg-blue-50 border-l-4 border-blue-600 rounded-r-xl">
+                                        <p className="text-xl text-blue-900 font-medium italic leading-relaxed">
+                                            "To become India’s most trusted digital lending support ecosystem by empowering customers, bankers, and partners through technology, transparency, and operational efficiency."
+                                        </p>
+                                    </div>
                                 </div>
                             </motion.div>
 
@@ -150,19 +164,21 @@ export default function AboutPage() {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8 }}
-                                className="relative"
+                                className="relative mt-8 lg:mt-0"
                             >
                                 <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600 to-orange-500 rounded-3xl opacity-20 blur-lg"></div>
-                                <div className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+                                <div className="relative h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl">
                                     <img
                                         src="/intro/ChatGPT Image Jan 6, 2026, 02_51_48 PM.png"
                                         alt="Office Meeting"
                                         className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    <div className="absolute bottom-8 left-8 text-white">
-                                        <div className="text-3xl font-bold mb-1">2000+</div>
-                                        <div className="text-blue-200">Happy Families & Businesses</div>
+                                    <div className="absolute bottom-8 left-8 text-white pr-8">
+                                        <div className="text-2xl font-bold mb-2">End-to-End Support</div>
+                                        <p className="text-blue-100 font-light opacity-90">
+                                            From eligibility evaluation and documentation to approval coordination and disbursement.
+                                        </p>
                                     </div>
                                 </div>
                             </motion.div>
@@ -170,39 +186,87 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* VALUES / FEATURES */}
+                {/* OUR PRODUCTS & PLATFORMS */}
                 <section className="py-24 bg-slate-50">
                     <div className="container mx-auto px-6 md:px-12 lg:px-24">
                         <div className="text-center max-w-3xl mx-auto mb-20">
-                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">What Sets Us Apart</h2>
+                            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Our Products & Platforms</h2>
                             <p className="text-lg text-gray-600">
-                                We don't just find you a loan; we engineer the perfect financial solution for your specific needs.
+                                Leveraging technology to simplify your financial journey.
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8">
-                            {[
-                                { icon: Users, title: "Expert Guidance", desc: "Seasoned professionals with deep domain expertise providing sound, tailored advice.", color: "text-blue-600", bg: "bg-blue-50" },
-                                { icon: Handshake, title: "Personalized Approach", desc: "Customized solutions aligned with your unique financial circumstances—because one size doesn't fit all.", color: "text-orange-600", bg: "bg-orange-50" },
-                                { icon: Lock, title: "Transparent & Ethical", desc: "Total transparency and ethical conduct are the cornerstones of our operations.", color: "text-green-600", bg: "bg-green-50" }
-                            ].map((feature, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group"
-                                >
-                                    <div className={`w-16 h-16 ${feature.bg} rounded-2xl flex items-center justify-center ${feature.color} mb-8 group-hover:scale-110 transition-transform duration-300`}>
-                                        <feature.icon size={32} />
+                        <div className="grid lg:grid-cols-2 gap-12">
+                            {/* LOAN SARATHI */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-blue-100 relative overflow-hidden group"
+                            >
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-bl-[100px] transition-all group-hover:bg-blue-500/10"></div>
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600">
+                                        <TrendingUp size={32} />
                                     </div>
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                                    <p className="text-gray-600 leading-relaxed font-light">
-                                        {feature.desc}
-                                    </p>
-                                </motion.div>
-                            ))}
+                                    <div>
+                                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Loan Sarathi</h3>
+                                        <p className="text-blue-600 font-medium">Your Loan Guidance Partner</p>
+                                    </div>
+                                </div>
+                                <p className="text-gray-600 mb-8 leading-relaxed">
+                                    Loan Sarathi is our flagship loan facilitation platform designed to guide customers throughout their entire loan journey. True to its name, Loan Sarathi acts as a navigator, helping customers choose the most suitable loan product.
+                                </p>
+                                <ul className="space-y-4">
+                                    {[
+                                        "Smart loan eligibility assessment",
+                                        "Access to multiple banks and NBFCs",
+                                        "Personalized product recommendations",
+                                        "Reduced turnaround time (TAT)",
+                                        "Transparent and compliant processes"
+                                    ].map((item, i) => (
+                                        <li key={i} className="flex items-start gap-3 text-gray-700">
+                                            <CheckCircle2 className="text-green-500 mt-1 flex-shrink-0" size={18} />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+
+                            {/* SMART DIAL */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-orange-100 relative overflow-hidden group"
+                            >
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-[100px] transition-all group-hover:bg-orange-500/10"></div>
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600">
+                                        <PhoneCall size={32} />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Smart Dial</h3>
+                                        <p className="text-orange-600 font-medium">Intelligent Communication Platform</p>
+                                    </div>
+                                </div>
+                                <p className="text-gray-600 mb-8 leading-relaxed">
+                                    Smart Dial is an advanced communication and lead-management solution developed to strengthen engagement. It enables structured follow-ups, efficient call management, and data-driven tracking.
+                                </p>
+                                <ul className="space-y-4">
+                                    {[
+                                        "Manage high-volume customer interactions",
+                                        "Track leads and case status efficiently",
+                                        "Improve response time",
+                                        "Maintain accountability and transparency"
+                                    ].map((item, i) => (
+                                        <li key={i} className="flex items-start gap-3 text-gray-700">
+                                            <CheckCircle2 className="text-orange-500 mt-1 flex-shrink-0" size={18} />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
                         </div>
                     </div>
                 </section>

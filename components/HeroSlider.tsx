@@ -7,16 +7,7 @@ import { ArrowRight, ChevronRight, ChevronLeft } from "lucide-react";
 const slides = [
     {
         id: 1,
-        image: "/Hero-images/hero-latest-1.png",
-        title: "Business Capital Made Easy.",
-        subtitle: "Fuel your business growth with low-interest loans and quick approvals. No hidden charges, just pure growth.",
-        primaryButton: "Business Loans",
-        secondaryButton: "Contact Us",
-        theme: "blue"
-    },
-    {
-        id: 2,
-        image: "/Hero-images/hero-latest-2.png",
+        image: "/Hero-images/hero (1).png",
         title: "Trusted Insurance For Your Family.",
         subtitle: "Comprehensive coverage that actually pays out when you need it. Life, Health, and General Insurance tailored for you.",
         primaryButton: "Get Insured",
@@ -24,8 +15,17 @@ const slides = [
         theme: "green"
     },
     {
+        id: 2,
+        image: "/Hero-images/hero.png",
+        title: "Business Capital Made Easy.",
+        subtitle: "Fuel your business growth with low-interest loans and quick approvals. No hidden charges, just pure growth.",
+        primaryButton: "Business Loans",
+        secondaryButton: "Contact Us",
+        theme: "blue"
+    },
+    {
         id: 3,
-        image: "/Hero-images/hero-latest-3.png",
+        image: "/Hero-images/hero (2).png",
         title: "Your Dream Home Awaits.",
         subtitle: "Competitive interest rates and flexible tenures for your perfect home. Making home ownership a reality.",
         primaryButton: "Home Loans",
@@ -34,7 +34,7 @@ const slides = [
     },
     {
         id: 4,
-        image: "/Hero-images/hero-latest-4.png",
+        image: "/Hero-images/hero (3).png",
         title: "Invest in Your Future.",
         subtitle: "Education loans that empower your dreams. Partial coverage, full coverage, and global opportunities.",
         primaryButton: "Education Loans",
@@ -67,12 +67,10 @@ export default function HeroSlider() {
                     className="absolute inset-0 w-full h-full"
                 >
                     {/* Main Image - Stretched to fit container */}
-                    <div
-                        className="absolute inset-0 bg-center bg-no-repeat"
-                        style={{
-                            backgroundImage: `url(${slide.image})`,
-                            backgroundSize: '100% 100%'
-                        }}
+                    <img
+                        src={slide.image}
+                        alt={`Slide ${slide.id}`}
+                        className="absolute inset-0 w-full h-full object-cover"
                     />
 
 

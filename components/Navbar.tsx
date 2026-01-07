@@ -28,7 +28,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="sticky top-0 z-50 w-full md:w-[90%] md:max-w-[1200px] md:mx-auto md:top-2.5 rounded-none md:rounded-xl flex items-center justify-between px-4 md:px-8 h-20 overflow-hidden bg-white/80 backdrop-blur-md shadow-md border-x-0 md:border border-gray-200 supports-[backdrop-filter]:bg-white/60">
+            <nav className="sticky top-0 z-50 w-full md:w-[90%] md:max-w-[1200px] md:mx-auto md:top-2.5 rounded-none md:rounded-xl flex items-center justify-between px-4 md:px-8 h-20 md:overflow-visible overflow-hidden bg-white/80 backdrop-blur-md shadow-md border-x-0 md:border border-gray-200 supports-[backdrop-filter]:bg-white/60">
                 {/* Logo Section */}
                 <Link href="/" className="flex items-center h-full">
                     <Image 
@@ -36,7 +36,7 @@ export default function Navbar() {
                         alt="Smart Solutions Logo" 
                         width={160} 
                         height={160}
-                        className="object-contain h-[150px] w-auto"
+                        className="object-contain h-14 md:h-16 w-auto"
                     />
                 </Link>
 
@@ -55,8 +55,8 @@ export default function Navbar() {
                             Loans
                             <ChevronDown size={16} className="group-hover:rotate-180 transition-transform duration-200" />
                         </button>
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 w-[700px] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                            <div className="bg-white rounded-xl group-hover:rounded-t-none group-hover:rounded-b-xl shadow-xl border border-gray-100 p-4 grid grid-cols-3 gap-2 overflow-hidden transition-all duration-200">
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 w-[700px] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
+                            <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-4 grid grid-cols-3 gap-2 overflow-hidden transition-all duration-200">
                                 <Link href="/loan/personal-loan" className="flex items-center gap-3 p-3 hover:bg-blue-50 rounded-lg transition-colors">
                                     <div className="p-2 bg-yellow-100 text-yellow-600 rounded-lg shrink-0">
                                         <HandCoins size={20} />
@@ -103,8 +103,8 @@ export default function Navbar() {
                             Insurance
                             <ChevronDown size={16} className="group-hover:rotate-180 transition-transform duration-200" />
                         </button>
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 w-[700px] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                            <div className="bg-white rounded-xl group-hover:rounded-t-none group-hover:rounded-b-xl shadow-xl border border-gray-100 p-4 grid grid-cols-3 gap-2 overflow-hidden transition-all duration-200">
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 w-[700px] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
+                            <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-4 grid grid-cols-3 gap-2 overflow-hidden transition-all duration-200">
                                 <Link href="/insurance/health-insurance" className="flex items-center gap-3 p-3 hover:bg-blue-50 rounded-lg transition-colors">
                                     <div className="p-2 bg-red-100 text-red-600 rounded-lg shrink-0">
                                         <HeartPulse size={20} />
@@ -160,7 +160,7 @@ export default function Navbar() {
                 <div className="hidden md:block">
                     <button
                         onClick={() => setIsExpertModalOpen(true)}
-                        className="bg-black hover:bg-gray-800 text-white px-6 py-2.5 rounded-sm font-medium transition-all shadow-lg hover:shadow-xl text-sm transform hover:-translate-y-0.5"
+                        className="bg-black hover:bg-gray-800 text-white px-6 py-2.5 rounded-sm font-medium transition-all shadow-lg hover:shadow-xl text-sm transform hover:-translate-y-0.5 whitespace-nowrap"
                     >
                         Talk to Expert
                     </button>
