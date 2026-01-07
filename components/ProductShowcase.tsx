@@ -83,7 +83,7 @@ export default function ProductShowcase() {
     return (
         <>
             <section className="py-32 bg-transparent">
-                <div className="container mx-auto px-8 md:px-16 lg:px-24 space-y-24">
+                <div className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-8 space-y-24">
 
                     {/* Loan Section */}
                     <div>
