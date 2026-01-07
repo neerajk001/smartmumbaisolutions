@@ -160,7 +160,7 @@ export default function Navbar() {
                 <div className="hidden md:block">
                     <button
                         onClick={() => setIsExpertModalOpen(true)}
-                        className="bg-black hover:bg-gray-800 text-white px-6 py-2.5 rounded-sm font-medium transition-all shadow-lg hover:shadow-xl text-sm transform hover:-translate-y-0.5 whitespace-nowrap"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-sm font-medium transition-all shadow-lg hover:shadow-xl text-sm transform hover:-translate-y-0.5 whitespace-nowrap"
                     >
                         Talk to Expert
                     </button>
@@ -402,7 +402,7 @@ export default function Navbar() {
                             setIsExpertModalOpen(true);
                             setIsMobileMenuOpen(false);
                         }}
-                        className="mt-4 bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-sm font-medium transition-all shadow-lg text-sm"
+                        className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-sm font-medium transition-all shadow-lg text-sm"
                     >
                         Talk to Expert
                     </button>
