@@ -9,6 +9,7 @@ import {
     ShieldCheck
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
     return (
@@ -19,10 +20,13 @@ export default function Footer() {
                     {/* Brand Column */}
                     <div className="space-y-6">
                         <Link href="/" className="flex items-center space-x-2">
-                            <ShieldCheck className="h-8 w-8 text-blue-600" />
-                            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-                                Smart Solutions
-                            </span>
+                            <Image
+                                src="/Hero-images/3d.jpg"
+                                alt="Smart Solutions Logo"
+                                width={240}
+                                height={90}
+                                className="object-contain h-24 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                            />
                         </Link>
                         <p className="leading-relaxed text-gray-400 max-w-xs">
                             Your trusted partner for all financial needs. We make borrowing simple, transparent, and fast.
