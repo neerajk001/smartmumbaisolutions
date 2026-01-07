@@ -143,9 +143,8 @@ export default function InsuranceForm({
               value={formData.fullName || ""}
               onChange={(e) => handleChange("fullName", e.target.value)}
               onBlur={() => handleBlur("fullName")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.fullName ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.fullName ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.fullName && (
               <p className="text-red-500 text-xs mt-2">{errors.fullName}</p>
@@ -162,9 +161,8 @@ export default function InsuranceForm({
               onChange={(e) => handleChange("mobileNumber", e.target.value)}
               onBlur={() => handleBlur("mobileNumber")}
               maxLength={10}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.mobileNumber ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.mobileNumber ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.mobileNumber && (
               <p className="text-red-500 text-xs mt-2">{errors.mobileNumber}</p>
@@ -180,9 +178,8 @@ export default function InsuranceForm({
               value={formData.dob || ""}
               onChange={(e) => handleChange("dob", e.target.value)}
               onBlur={() => handleBlur("dob")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.dob ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.dob ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.dob && (
               <p className="text-red-500 text-xs mt-2">{errors.dob}</p>
@@ -196,9 +193,8 @@ export default function InsuranceForm({
             <select
               value={formData.sumInsured || ""}
               onChange={(e) => handleChange("sumInsured", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.sumInsured ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.sumInsured ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Cover Amount</option>
               {sumInsuredOptions.map((option) => (
@@ -248,9 +244,8 @@ export default function InsuranceForm({
               value={formData.fullName || ""}
               onChange={(e) => handleChange("fullName", e.target.value)}
               onBlur={() => handleBlur("fullName")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.fullName ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.fullName ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.fullName && (
               <p className="text-red-500 text-xs mt-2">{errors.fullName}</p>
@@ -267,9 +262,8 @@ export default function InsuranceForm({
               onChange={(e) => handleChange("mobileNumber", e.target.value)}
               onBlur={() => handleBlur("mobileNumber")}
               maxLength={10}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.mobileNumber ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.mobileNumber ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.mobileNumber && (
               <p className="text-red-500 text-xs mt-2">{errors.mobileNumber}</p>
@@ -285,9 +279,8 @@ export default function InsuranceForm({
               value={formData.dob || ""}
               onChange={(e) => handleChange("dob", e.target.value)}
               onBlur={() => handleBlur("dob")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.dob ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.dob ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.dob && (
               <p className="text-red-500 text-xs mt-2">{errors.dob}</p>
@@ -301,9 +294,8 @@ export default function InsuranceForm({
             <select
               value={formData.sumInsured || ""}
               onChange={(e) => handleChange("sumInsured", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.sumInsured ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.sumInsured ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Cover Amount</option>
               {sumInsuredOptions.map((option) => (
@@ -353,9 +345,8 @@ export default function InsuranceForm({
               value={formData.fullName || ""}
               onChange={(e) => handleChange("fullName", e.target.value)}
               onBlur={() => handleBlur("fullName")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.fullName ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.fullName ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.fullName && (
               <p className="text-red-500 text-xs mt-2">{errors.fullName}</p>
@@ -372,9 +363,8 @@ export default function InsuranceForm({
               onChange={(e) => handleChange("mobileNumber", e.target.value)}
               onBlur={() => handleBlur("mobileNumber")}
               maxLength={10}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.mobileNumber ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.mobileNumber ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.mobileNumber && (
               <p className="text-red-500 text-xs mt-2">{errors.mobileNumber}</p>
@@ -390,9 +380,8 @@ export default function InsuranceForm({
               value={formData.dob || ""}
               onChange={(e) => handleChange("dob", e.target.value)}
               onBlur={() => handleBlur("dob")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.dob ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.dob ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.dob && (
               <p className="text-red-500 text-xs mt-2">{errors.dob}</p>
@@ -409,9 +398,8 @@ export default function InsuranceForm({
               onChange={(e) => handleChange("pincode", e.target.value)}
               onBlur={() => handleBlur("pincode")}
               maxLength={6}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.pincode ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.pincode ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.pincode && (
               <p className="text-red-500 text-xs mt-2">{errors.pincode}</p>
@@ -430,9 +418,8 @@ export default function InsuranceForm({
               }
               onBlur={() => handleBlur("vehicleNumber")}
               placeholder="MH12AB1234"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.vehicleNumber ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.vehicleNumber ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.vehicleNumber && (
               <p className="text-red-500 text-xs mt-1">
@@ -448,9 +435,8 @@ export default function InsuranceForm({
             <select
               value={formData.policyTerm || ""}
               onChange={(e) => handleChange("policyTerm", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.policyTerm ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.policyTerm ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Term</option>
               {policyTerms.map((term) => (
@@ -500,9 +486,8 @@ export default function InsuranceForm({
               value={formData.fullName || ""}
               onChange={(e) => handleChange("fullName", e.target.value)}
               onBlur={() => handleBlur("fullName")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.fullName ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.fullName ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.fullName && (
               <p className="text-red-500 text-xs mt-2">{errors.fullName}</p>
@@ -519,9 +504,8 @@ export default function InsuranceForm({
               onChange={(e) => handleChange("mobileNumber", e.target.value)}
               onBlur={() => handleBlur("mobileNumber")}
               maxLength={10}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.mobileNumber ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.mobileNumber ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.mobileNumber && (
               <p className="text-red-500 text-xs mt-2">{errors.mobileNumber}</p>
@@ -540,9 +524,8 @@ export default function InsuranceForm({
               placeholder="18-100"
               min="18"
               max="100"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.age ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.age ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.age && (
               <p className="text-red-500 text-xs mt-2">{errors.age}</p>
@@ -556,9 +539,8 @@ export default function InsuranceForm({
             <select
               value={formData.loanType || ""}
               onChange={(e) => handleChange("loanType", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanType ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanType ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Loan Type</option>
               {loanTypes.map((type) => (
@@ -581,9 +563,8 @@ export default function InsuranceForm({
               value={formData.loanAmount || ""}
               onChange={(e) => handleChange("loanAmount", e.target.value)}
               onBlur={() => handleBlur("loanAmount")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanAmount ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanAmount ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.loanAmount && (
               <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
@@ -601,9 +582,8 @@ export default function InsuranceForm({
               placeholder="1-30 years"
               min="1"
               max="30"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.tenure ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.tenure ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.tenure && (
               <p className="text-red-500 text-xs mt-2">{errors.tenure}</p>
@@ -646,9 +626,8 @@ export default function InsuranceForm({
               value={formData.fullName || ""}
               onChange={(e) => handleChange("fullName", e.target.value)}
               onBlur={() => handleBlur("fullName")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.fullName ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.fullName ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.fullName && (
               <p className="text-red-500 text-xs mt-2">{errors.fullName}</p>
@@ -665,9 +644,8 @@ export default function InsuranceForm({
               onChange={(e) => handleChange("mobileNumber", e.target.value)}
               onBlur={() => handleBlur("mobileNumber")}
               maxLength={10}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.mobileNumber ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.mobileNumber ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.mobileNumber && (
               <p className="text-red-500 text-xs mt-2">{errors.mobileNumber}</p>
@@ -683,9 +661,8 @@ export default function InsuranceForm({
               value={formData.dob || ""}
               onChange={(e) => handleChange("dob", e.target.value)}
               onBlur={() => handleBlur("dob")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.dob ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.dob ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.dob && (
               <p className="text-red-500 text-xs mt-2">{errors.dob}</p>
@@ -699,9 +676,8 @@ export default function InsuranceForm({
             <select
               value={formData.loanType || ""}
               onChange={(e) => handleChange("loanType", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanType ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanType ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Loan Type</option>
               {loanTypes.map((type) => (
@@ -724,9 +700,8 @@ export default function InsuranceForm({
               value={formData.loanAmount || ""}
               onChange={(e) => handleChange("loanAmount", e.target.value)}
               onBlur={() => handleBlur("loanAmount")}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanAmount ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanAmount ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.loanAmount && (
               <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
@@ -744,9 +719,8 @@ export default function InsuranceForm({
               placeholder="1-30 years"
               min="1"
               max="30"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.tenure ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.tenure ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.tenure && (
               <p className="text-red-500 text-xs mt-2">{errors.tenure}</p>

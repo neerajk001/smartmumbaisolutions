@@ -81,9 +81,8 @@ export default function HomeLoanForm({
               value={formData.propertyCost || ""}
               onChange={(e) => handleChange("propertyCost", e.target.value)}
               placeholder="Estimated property value"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.propertyCost ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.propertyCost ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.propertyCost && (
               <p className="text-red-500 text-xs mt-2">{errors.propertyCost}</p>
@@ -98,9 +97,8 @@ export default function HomeLoanForm({
             <select
               value={formData.propertyLoanType || ""}
               onChange={(e) => handleChange("propertyLoanType", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.propertyLoanType ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.propertyLoanType ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Type</option>
               {propertyTypes.map((type) => (
@@ -126,9 +124,8 @@ export default function HomeLoanForm({
               value={formData.propertyCity || ""}
               onChange={(e) => handleChange("propertyCity", e.target.value)}
               placeholder="Enter property city"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.propertyCity ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.propertyCity ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.propertyCity && (
               <p className="text-red-500 text-xs mt-2">{errors.propertyCity}</p>

@@ -85,9 +85,8 @@ export default function PersonalLoanForm({
               value={formData.loanAmount || ""}
               onChange={(e) => handleChange("loanAmount", e.target.value)}
               placeholder="Enter loan amount"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanAmount ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanAmount ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.loanAmount && (
               <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
@@ -102,9 +101,8 @@ export default function PersonalLoanForm({
             <select
               value={formData.tenure || ""}
               onChange={(e) => handleChange("tenure", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.tenure ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.tenure ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Tenure</option>
               {tenures.map((tenure) => (
@@ -126,9 +124,8 @@ export default function PersonalLoanForm({
             <select
               value={formData.loanPurpose || ""}
               onChange={(e) => handleChange("loanPurpose", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanPurpose ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanPurpose ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Purpose</option>
               {purposes.map((purpose) => (

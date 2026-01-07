@@ -83,9 +83,8 @@ export default function BusinessLoanForm({
             <select
               value={formData.businessType || ""}
               onChange={(e) => handleChange("businessType", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.businessType ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.businessType ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Business Type</option>
               {businessTypes.map((type) => (
@@ -109,9 +108,8 @@ export default function BusinessLoanForm({
               value={formData.turnover || ""}
               onChange={(e) => handleChange("turnover", e.target.value)}
               placeholder="Enter annual turnover"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.turnover ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.turnover ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.turnover && (
               <p className="text-red-500 text-xs mt-2">{errors.turnover}</p>
@@ -130,9 +128,8 @@ export default function BusinessLoanForm({
                 handleChange("yearsInBusiness", e.target.value)
               }
               placeholder="Enter years"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.yearsInBusiness ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.yearsInBusiness ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.yearsInBusiness && (
               <p className="text-red-500 text-xs mt-1">
@@ -207,9 +204,8 @@ export default function BusinessLoanForm({
               value={formData.loanAmount || ""}
               onChange={(e) => handleChange("loanAmount", e.target.value)}
               placeholder="Enter loan amount"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanAmount ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanAmount ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.loanAmount && (
               <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
@@ -223,9 +219,8 @@ export default function BusinessLoanForm({
             <select
               value={formData.tenure || ""}
               onChange={(e) => handleChange("tenure", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.tenure ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.tenure ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Tenure</option>
               {tenures.map((tenure) => (
@@ -248,9 +243,8 @@ export default function BusinessLoanForm({
               value={formData.loanPurpose || ""}
               onChange={(e) => handleChange("loanPurpose", e.target.value)}
               placeholder="e.g., Working Capital, Expansion, Equipment Purchase"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanPurpose ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanPurpose ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.loanPurpose && (
               <p className="text-red-500 text-xs mt-2">{errors.loanPurpose}</p>
