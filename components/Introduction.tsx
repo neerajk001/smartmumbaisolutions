@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Introduction() {
     return (
-        <section className="relative py-24 bg-transparent overflow-hidden">
+        <section className="relative py-12 md:py-24 bg-transparent overflow-hidden">
             <div className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -18,23 +18,24 @@ export default function Introduction() {
                         className="relative z-10"
                     >
                         <div className="flex items-center gap-4 mb-6">
-                            <span className="text-gray-500 font-semibold text-sm uppercase tracking-wider">
-                                Introducing Smart Solutions
+                            <span className="h-[2px] w-12 bg-orange-500"></span>
+                            <span className="text-orange-600 font-bold uppercase tracking-widest text-sm">
+                                About Smart Solutions
                             </span>
-                            <span className="h-[2px] w-12 bg-blue-600"></span>
                         </div>
 
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
-                            Your Trusted Loan <br />
-                            <span className="text-blue-700">Advisory Partner</span>
+                            We act as a trusted bridge between <span className="text-blue-700">customers & financial partners.</span>
                         </h2>
 
-                        <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-xl">
-                            At Smart Solutions, we take pride in being a leading loan advisory firm, committed to assisting individuals and businesses in navigating the complex landscape of financial borrowing.
-                        </p>
-                        <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-xl">
-                            Established in 2018, we have swiftly emerged as a beacon of expertise and reliability in the lending industry.
-                        </p>
+                        <div className="space-y-6 text-lg text-gray-600 leading-relaxed mb-10">
+                            <p>
+                                <span className="font-semibold text-gray-900">Smart Solutions</span>, incorporated on 1st July 2022, is a technology-driven financial services company committed to simplifying access to loans and credit solutions for individuals, professionals, and businesses across India.
+                            </p>
+                            <p>
+                                Since inception, we have focused on building a reliable, transparent, and efficient lending ecosystem powered by technology and deep banking expertise.
+                            </p>
+                        </div>
 
                         <Link href="/about">
                             <button className="bg-[#0F3866] hover:bg-orange-600 text-white font-semibold py-3 px-8 rounded-sm transition-colors duration-300 shadow-lg">

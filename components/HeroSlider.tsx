@@ -113,7 +113,7 @@ export default function HeroSlider() {
                         <div className="absolute inset-0 bg-black/50" />
 
                         {/* Content */}
-                        <div className="absolute inset-0 flex flex-col justify-center px-12 md:px-20 text-white z-10 w-full md:w-3/4 lg:w-1/2">
+                        <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-20 text-white z-10 w-full md:w-3/4 lg:w-1/2">
                             <motion.h1
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}

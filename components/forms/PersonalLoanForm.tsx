@@ -5,6 +5,7 @@ import MultiStepForm from "./MultiStepForm";
 import { PersonalDetailsStep, EmploymentInfoStep } from "./CommonSteps";
 import { PersonalLoanFields } from "@/lib/formTypes";
 import { validateNumber, validateRequired } from "@/lib/validation";
+import { Banknote, Calendar, FileText } from "lucide-react";
 
 interface PersonalLoanFormProps {
   onSubmit: (data: PersonalLoanFields) => void;
@@ -80,16 +81,19 @@ export default function PersonalLoanForm({
             <label className="block text-sm font-semibold text-gray-700 mb-3">
               Loan Amount (₹) <span className="text-red-500">*</span>
             </label>
-            <input
-              type="number"
-              value={formData.loanAmount || ""}
-              onChange={(e) => handleChange("loanAmount", e.target.value)}
-              placeholder="Enter loan amount"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanAmount ? "border-red-500" : "border-gray-300"
-                }`}
-            />
+            <div className="relative">
+              <Banknote className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <input
+                type="number"
+                value={formData.loanAmount || ""}
+                onChange={(e) => handleChange("loanAmount", e.target.value)}
+                placeholder="Enter loan amount"
+                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.loanAmount ? "border-red-500" : "border-gray-200"
+                  }`}
+              />
+            </div>
             {errors.loanAmount && (
-              <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
+              <p className="text-red-500 text-xs mt-2 font-medium">{errors.loanAmount}</p>
             )}
           </div>
 
@@ -98,21 +102,24 @@ export default function PersonalLoanForm({
             <label className="block text-sm font-semibold text-gray-700 mb-3">
               Tenure (Years) <span className="text-red-500">*</span>
             </label>
-            <select
-              value={formData.tenure || ""}
-              onChange={(e) => handleChange("tenure", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.tenure ? "border-red-500" : "border-gray-300"
-                }`}
-            >
-              <option value="">Select Tenure</option>
-              {tenures.map((tenure) => (
-                <option key={tenure} value={tenure}>
-                  {tenure} {parseInt(tenure) === 1 ? "Year" : "Years"}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <select
+                value={formData.tenure || ""}
+                onChange={(e) => handleChange("tenure", e.target.value)}
+                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.tenure ? "border-red-500" : "border-gray-200"
+                  }`}
+              >
+                <option value="">Select Tenure</option>
+                {tenures.map((tenure) => (
+                  <option key={tenure} value={tenure}>
+                    {tenure} {parseInt(tenure) === 1 ? "Year" : "Years"}
+                  </option>
+                ))}
+              </select>
+            </div>
             {errors.tenure && (
-              <p className="text-red-500 text-xs mt-2">{errors.tenure}</p>
+              <p className="text-red-500 text-xs mt-2 font-medium">{errors.tenure}</p>
             )}
           </div>
 
@@ -121,21 +128,24 @@ export default function PersonalLoanForm({
             <label className="block text-sm font-semibold text-gray-700 mb-3">
               Loan Purpose <span className="text-red-500">*</span>
             </label>
-            <select
-              value={formData.loanPurpose || ""}
-              onChange={(e) => handleChange("loanPurpose", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base text-black ${errors.loanPurpose ? "border-red-500" : "border-gray-300"
-                }`}
-            >
-              <option value="">Select Purpose</option>
-              {purposes.map((purpose) => (
-                <option key={purpose.value} value={purpose.value}>
-                  {purpose.label}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <FileText className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <select
+                value={formData.loanPurpose || ""}
+                onChange={(e) => handleChange("loanPurpose", e.target.value)}
+                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.loanPurpose ? "border-red-500" : "border-gray-200"
+                  }`}
+              >
+                <option value="">Select Purpose</option>
+                {purposes.map((purpose) => (
+                  <option key={purpose.value} value={purpose.value}>
+                    {purpose.label}
+                  </option>
+                ))}
+              </select>
+            </div>
             {errors.loanPurpose && (
-              <p className="text-red-500 text-xs mt-2">{errors.loanPurpose}</p>
+              <p className="text-red-500 text-xs mt-2 font-medium">{errors.loanPurpose}</p>
             )}
           </div>
         </div>

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function VisionMission() {
     return (
-        <section className="py-24 bg-white overflow-hidden">
+        <section className="py-16 md:py-24 bg-white overflow-hidden">
             <div className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0 space-y-32">
 
                 {/* Mission Section */}
