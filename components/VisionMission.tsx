@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function VisionMission() {
     return (
         <section className="py-24 bg-white overflow-hidden">
-            <div className="max-w-[1400px] mx-auto px-6 space-y-32">
+            <div className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0 space-y-32">
 
                 {/* Mission Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">

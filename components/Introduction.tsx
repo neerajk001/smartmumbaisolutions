@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Introduction() {
     return (
         <section className="relative py-24 bg-transparent overflow-hidden">
-            <div className="container mx-auto px-8 md:px-16 lg:px-24">
+            <div className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                     {/* Text Content */}

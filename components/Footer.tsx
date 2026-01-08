@@ -21,11 +21,11 @@ export default function Footer() {
                     <div className="space-y-6">
                         <Link href="/" className="flex items-center space-x-2">
                             <Image
-                                src="/Hero-images/3d.jpg"
+                                src="/Hero-images/footer.png"
                                 alt="Smart Solutions Logo"
-                                width={240}
-                                height={90}
-                                className="object-contain h-24 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                                width={400}
+                                height={150}
+                                className="object-contain h-40 w-auto opacity-90 hover:opacity-100 transition-opacity"
                             />
                         </Link>
                         <p className="leading-relaxed text-gray-400 max-w-xs">

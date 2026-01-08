@@ -76,7 +76,7 @@ export default function FAQSection() {
 
     return (
         <section className="py-16 bg-[#F9FAFB]">
-            <div className="max-w-[1400px] mx-auto px-6">
+            <div className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 
                     {/* Left Column: Header & Filters */}
