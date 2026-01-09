@@ -69,11 +69,11 @@ export default function Footer() {
                     <div>
                         <h3 className="text-orange-500 font-bold text-base mb-6 uppercase tracking-wider">Company</h3>
                         <ul className="space-y-4">
-                            <li><Link href="#" className="hover:text-white transition-colors">About Us</Link></li>
-                            <li><Link href="#" className="hover:text-white transition-colors">Apply Now</Link></li>
-                            <li><Link href="#" className="hover:text-white transition-colors">Contact Us</Link></li>
-                            <li><Link href="#" className="hover:text-white transition-colors">Calculators</Link></li>
-                            <li><Link href="#" className="hover:text-white transition-colors">Check Eligibility</Link></li>
+                            <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                            <li><Link href="/contact" className="hover:text-white transition-colors">Apply Now</Link></li>
+                            <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+                            <li><Link href="/calculator" className="hover:text-white transition-colors">Calculators</Link></li>
+                            <li><Link href="/calculator?tab=eligibility" className="hover:text-white transition-colors">Check Eligibility</Link></li>
                         </ul>
                     </div>
 
@@ -83,7 +83,7 @@ export default function Footer() {
                         <ul className="space-y-6">
                             <li className="flex items-start gap-3">
                                 <Mail className="text-orange-500 shrink-0" size={20} />
-                                <a href="mailto:info@loansarathi.com" className="hover:text-white transition-colors">info@loansarathi.com</a>
+                                <a href="mailto:sales@smartsolutionsmumbai.com" className="hover:text-white transition-colors">sales@smartsolutionsmumbai.com</a>
                             </li>
                             <li className="flex items-start gap-3">
                                 <Phone className="text-orange-500 shrink-0" size={20} />
