@@ -6,7 +6,7 @@ export default function GalleryPage() {
     return (
         <main className="min-h-screen bg-[#FCF8F8]">
             <Navbar />
-            <div className="pt-10">
+            <div className="w-[90%] max-w-[1200px] mx-auto pt-10">
                 <GallerySection />
             </div>
             <Footer />
