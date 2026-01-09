@@ -2,10 +2,10 @@
  * Gallery API Client for Smart Mumbai Solutions
  * 
  * This module handles all gallery-related API calls.
- * It communicates with Next.js API routes which proxy to the Loan Sarathi backend.
+ * It fetches directly from the Loan Sarathi backend API.
  */
 
-// Backend URL for image assets
+// Backend URL for API and image assets
 const BACKEND_URL = 'https://loansarathi.com';
 
 // Helper function to normalize image URLs
@@ -23,7 +23,7 @@ function normalizeImageUrl(imageUrl: string): string {
   // Otherwise, assume it needs both / and backend URL
   return `${BACKEND_URL}/${imageUrl}`;
 }
- // Add new function to get gallery events
+
 // Types
 export interface GalleryImage {
   id: number;
@@ -60,8 +60,11 @@ export interface ApiErrorResponse {
   error: string;
 }
 
-// API Base URL (Next.js API routes)
-const API_BASE_URL = typeof window !== 'undefined' ? '/api' : 'http://localhost:3001/api';
+// API Base URL - Use Next.js API routes as proxy to avoid CORS issues
+// The Next.js API routes will proxy requests to the Loan Sarathi backend
+const API_BASE_URL = typeof window !== 'undefined' 
+  ? '/api/gallery' 
+  : `${BACKEND_URL}/api/gallery`;
 
 /**
  * Get all gallery events
@@ -81,42 +84,79 @@ export async function getGalleryEvents(
     if (offset !== undefined) params.append('offset', String(offset));
 
     const queryString = params.toString();
-    const url = `${API_BASE_URL}/gallery/events${queryString ? `?${queryString}` : ''}`;
+    const url = `${API_BASE_URL}/events${queryString ? `?${queryString}` : ''}`;
+
+    console.log('Fetching gallery events from:', url);
 
     const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       cache: 'no-store', // Always fetch fresh data
     });
 
+    console.log('Response status:', response.status, response.statusText);
+
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text();
+      console.error('Non-JSON response:', text);
+      return {
+        success: false,
+        error: `Invalid response format. Expected JSON but got ${contentType}`,
+      };
+    }
+
     const data = await response.json();
+    console.log('Response data:', data);
 
     if (!response.ok) {
       return {
         success: false,
-        error: data.error || 'Failed to fetch gallery events',
+        error: data.error || data.message || `Failed to fetch gallery events (${response.status})`,
+      };
+    }
+
+    // Handle different response structures
+    let events: GalleryEvent[] = [];
+    if (data.success && data.events) {
+      events = data.events;
+    } else if (Array.isArray(data)) {
+      // If API returns array directly
+      events = data;
+    } else if (data.data && Array.isArray(data.data)) {
+      // If API wraps in data property
+      events = data.data;
+    } else {
+      console.warn('Unexpected response structure:', data);
+      return {
+        success: false,
+        error: 'Unexpected response structure from API',
       };
     }
 
     // Normalize all image URLs
-    if (data.success && data.events) {
-      data.events = data.events.map((event: GalleryEvent) => ({
-        ...event,
-        images: event.images.map(img => ({
-          ...img,
-          imageUrl: normalizeImageUrl(img.imageUrl),
-        })),
-      }));
-    }
+    const normalizedEvents = events.map((event: GalleryEvent) => ({
+      ...event,
+      images: (event.images || []).map((img: GalleryImage) => ({
+        ...img,
+        imageUrl: normalizeImageUrl(img.imageUrl),
+      })),
+    }));
 
-    return data;
+    return {
+      success: true,
+      total: data.total || normalizedEvents.length,
+      events: normalizedEvents,
+    };
   } catch (error) {
     console.error('Error fetching gallery events:', error);
     return {
       success: false,
-      error: 'Network error. Please check your connection and try again.',
+      error: error instanceof Error ? error.message : 'Network error. Please check your connection and try again.',
     };
   }
 }
@@ -129,10 +169,11 @@ export async function getGalleryEvent(
   id: number
 ): Promise<GalleryEventResponse | ApiErrorResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/gallery/events/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       cache: 'no-store',
     });
@@ -169,6 +210,41 @@ export async function getGalleryEvent(
  */
 export async function getFeaturedGalleryEvents(): Promise<GalleryEventsResponse | ApiErrorResponse> {
   return getGalleryEvents(true, 2); // Get top 2 featured events
+}
+
+/**
+ * Health check endpoint to verify API connectivity
+ */
+export async function checkGalleryHealth(): Promise<{ success: boolean; message?: string; error?: string }> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/health`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      return {
+        success: false,
+        error: `Health check failed with status: ${response.status}`,
+      };
+    }
+
+    const data = await response.json();
+    return {
+      success: true,
+      message: data.message || 'API is healthy',
+    };
+  } catch (error) {
+    console.error('Error checking gallery health:', error);
+    return {
+      success: false,
+      error: 'Network error. Please check your connection and try again.',
+    };
+  }
 }
 
 /**

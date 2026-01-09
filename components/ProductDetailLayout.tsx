@@ -50,7 +50,7 @@ export default function ProductDetailLayout({ product, category }: ProductDetail
                                     </span>
                                     {product.metric && (
                                         <span className="text-sm text-gray-500 font-medium">
-                                            {product.metric}
+                                            {product.metric} ROI
                                         </span>
                                     )}
                                 </div>

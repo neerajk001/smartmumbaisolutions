@@ -240,9 +240,25 @@ export async function submitInsuranceApplication(insuranceType: string, formData
 }
 
 /**
- * Get Loan Products (Optional - for future use)
+ * Get Loan Products from backend API
+ * @param slug - Optional: Get specific product by slug
+ * @returns Loan products array or single product
  */
-export async function getLoanProducts(slug?: string): Promise<any> {
+export interface LoanProduct {
+  slug: string;
+  title: string;
+  maxAmount: string;
+  interestRate: string;
+}
+
+export interface LoanProductsResponse {
+  success: boolean;
+  products?: LoanProduct[];
+  product?: LoanProduct;
+  error?: string;
+}
+
+export async function getLoanProducts(slug?: string): Promise<LoanProductsResponse> {
   try {
     const url = slug
       ? `${API_BASE_URL}/loan-products?slug=${slug}`
@@ -250,18 +266,28 @@ export async function getLoanProducts(slug?: string): Promise<any> {
 
     const response = await fetch(url, {
       method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store', // Always fetch fresh data
     });
 
-    const result = await response.json();
+    const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(result.error || 'Failed to fetch loan products');
+      return {
+        success: false,
+        error: data.error || 'Failed to fetch loan products',
+      };
     }
 
-    return result;
+    return data;
   } catch (error) {
     console.error('Error fetching loan products:', error);
-    throw error;
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Network error. Please check your connection and try again.',
+    };
   }
 }
 

@@ -21,7 +21,7 @@ export default function Footer() {
                     <div className="space-y-6">
                         <Link href="/" className="flex items-center space-x-2">
                             <Image
-                                src="/Hero-images/footer.png"
+                                src="/card-logos/footer1.png"
                                 alt="Smart Solutions Logo"
                                 width={400}
                                 height={150}

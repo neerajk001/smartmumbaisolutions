@@ -6,8 +6,10 @@ import {
     ArrowUpRight
 } from "lucide-react";
 import { loans, insurances } from "@/lib/products";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ApplicationModal from "@/components/forms/ApplicationModal";
+import { getLoanProducts, LoanProduct } from "@/lib/api";
+import { extractROI } from "@/lib/utils/roi";
 
 const ProductCard = ({ product, index, category, onApplyClick }: { product: any, index: number, category: string, onApplyClick: () => void }) => (
     <motion.div
@@ -21,7 +23,7 @@ const ProductCard = ({ product, index, category, onApplyClick }: { product: any,
             {/* Left Column: Badge & Icon */}
             <div className="flex flex-col gap-3 items-start">
                 <span className="bg-[#FFF0EB] text-[#9B2C2C] text-[10px] font-bold px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
-                    {product.metric}
+                    {product.metric} ROI
                 </span>
                 <div className="bg-white p-2 rounded-2xl w-16 h-16 flex items-center justify-center shadow-sm border border-gray-100">
                     {product.image ? (
@@ -70,6 +72,51 @@ export default function ProductShowcase() {
         title: string;
         category: "Loan" | "Insurance";
     } | null>(null);
+    // Map of slug -> ROI from API (only ROI is fetched from backend)
+    const [roiMap, setRoiMap] = useState<Record<string, string>>({});
+    const [loadingROI, setLoadingROI] = useState(false);
+
+    // Fetch only ROI percentages from API
+    useEffect(() => {
+        async function loadROI() {
+            try {
+                setLoadingROI(true);
+                const response = await getLoanProducts();
+                
+                if (response.success && response.products) {
+                    // Create a map of slug -> ROI
+                    const roiData: Record<string, string> = {};
+                    response.products.forEach((product) => {
+                        roiData[product.slug] = extractROI(product.interestRate);
+                    });
+                    setRoiMap(roiData);
+                } else {
+                    console.error('Failed to load ROI from API:', response.error);
+                    // Continue with static ROI if API fails
+                }
+            } catch (error) {
+                console.error('Error loading ROI:', error);
+                // Continue with static ROI if API fails
+            } finally {
+                setLoadingROI(false);
+            }
+        }
+
+        loadROI();
+    }, []);
+
+    // Use static loans but update ROI from API if available
+    const getDisplayLoans = () => {
+        return loans.map((loan) => {
+            // If we have ROI from API for this loan, use it; otherwise use static ROI
+            const roi = roiMap[loan.slug] || loan.metric;
+            
+            return {
+                ...loan, // Keep all static data
+                metric: roi, // Only update the ROI/metric from API
+            };
+        });
+    };
 
     const handleApplyClick = (product: any, category: "Loan" | "Insurance") => {
         setSelectedProduct({
@@ -95,9 +142,9 @@ export default function ProductShowcase() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
-                            {loans.map((loan, index) => (
+                            {getDisplayLoans().map((loan, index) => (
                                 <ProductCard
-                                    key={index}
+                                    key={loan.slug || index}
                                     product={loan}
                                     index={index}
                                     category="loan"

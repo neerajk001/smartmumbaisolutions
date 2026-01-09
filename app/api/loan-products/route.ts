@@ -3,6 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 // Backend URL - where the actual Loan Sarathi backend is running
 const BACKEND_URL = process.env.BACKEND_API_URL || 'https://loansarathi.com/api';
 
+// Force dynamic rendering - no caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -17,7 +21,9 @@ export async function GET(request: NextRequest) {
       method: 'GET',
       headers: {
         'X-Application-Source': 'smartmumbaisolutions', // Required header
+        'Accept': 'application/json',
       },
+      cache: 'no-store', // Always fetch fresh data from backend
     });
 
     const data = await response.json();
