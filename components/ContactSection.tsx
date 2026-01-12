@@ -44,7 +44,7 @@ export default function ContactSection() {
                     </p>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-12 gap-12 items-start">
+                <div className="grid lg:grid-cols-12 gap-12 items-stretch">
 
                     {/* Contact Info Side */}
                     <div className="lg:col-span-5 space-y-8">
@@ -77,7 +77,7 @@ export default function ContactSection() {
                                     content={
                                         <div className="flex flex-col">
                                             <a href="mailto:sales@smartsolutionsmumbai.com" className="hover:text-blue-600 transition-colors">sales@smartsolutionsmumbai.com</a>
-                                            <a href="mailto:sales@ssolutions.com" className="hover:text-blue-600 transition-colors">sales@ssolutions.com</a>
+
                                         </div>
                                     }
                                 />
@@ -89,7 +89,7 @@ export default function ContactSection() {
                                 <InfoItem
                                     icon={MapPin}
                                     title="Visit Us"
-                                    content="B-101, Lawrence Trade Center, Vasai West, 401202"
+                                    content="B-203, 204, 205, Lawrence Trade Center, Manikpur Road, Near Madhuram Hotel, Vasai West 401202"
                                 />
                             </div>
                         </motion.div>
@@ -121,7 +121,7 @@ export default function ContactSection() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden"
+                            className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 relative overflow-hidden h-full"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full opacity-50"></div>
 

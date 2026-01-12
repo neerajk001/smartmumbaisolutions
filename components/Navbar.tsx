@@ -26,11 +26,18 @@ export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
     return (
         <>
             <nav className="sticky top-0 z-50 w-full md:w-[90%] md:max-w-[1200px] md:mx-auto md:top-2.5 rounded-none md:rounded-xl flex items-center justify-between px-4 md:px-8 h-20 md:overflow-visible overflow-hidden bg-white/80 backdrop-blur-md shadow-md border-x-0 md:border border-gray-200 supports-[backdrop-filter]:bg-white/60">
                 {/* Logo Section */}
-                <Link href="/" className="flex items-center h-full">
+                <Link href="/" onClick={scrollToTop} className="flex items-center h-full">
                     <Image
                         src="/logo1.png"
                         alt="Smart Solutions Logo"
@@ -42,7 +49,7 @@ export default function Navbar() {
 
                 {/* Navigation Links */}
                 <div className="hidden md:flex items-center gap-8 font-medium text-gray-600">
-                    <Link href="/" className="hover:text-blue-900 transition-colors">
+                    <Link href="/" onClick={scrollToTop} className="hover:text-blue-900 transition-colors">
                         Home
                     </Link>
                     <Link href="/about" className="hover:text-blue-900 transition-colors">
@@ -192,7 +199,10 @@ export default function Navbar() {
                 <div className="flex flex-col h-full overflow-y-auto px-6 py-4">
                     <Link
                         href="/"
-                        onClick={() => setIsMobileMenuOpen(false)}
+                        onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            scrollToTop();
+                        }}
                         className="py-3 text-gray-700 font-medium hover:text-blue-900 transition-colors border-b border-gray-200"
                     >
                         Home

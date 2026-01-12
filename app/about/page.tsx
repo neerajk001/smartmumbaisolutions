@@ -12,19 +12,19 @@ const managers = [
         id: 1,
         name: "Pratik Singh",
         position: "Manager",
-        image: "/employee/Pratik Photo New.jpg",
+        image: "/employee/pratik-photo.jpg",
     },
     {
         id: 2,
         name: "Nazia Khan",
         position: "Manager",
-        image: "/employee/Nazia Photo.png",
+        image: "/employee/nazia-photo.png",
     },
     {
         id: 3,
         name: "Remo Mendes",
         position: "Manager",
-        image: "/employee/Remo Photo.jpg",
+        image: "/employee/remo-photo.jpg",
     },
 ];
 
@@ -33,7 +33,7 @@ const assistantManagers = [
         id: 1,
         name: "Heena Sheikh",
         position: "Assistant Manager",
-        image: "/employee/Heena Photo.png",
+        image: "/employee/heena-photo.png",
     },
     {
         id: 2,
@@ -45,7 +45,7 @@ const assistantManagers = [
         id: 3,
         name: "Farhanaaz Aga",
         position: "Assistant Manager",
-        image: "/employee/Farhanaz Photo.png",
+        image: "/employee/farhanaz-photo.png",
     },
 ];
 
@@ -165,7 +165,7 @@ export default function AboutPage() {
                             <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600 to-orange-500 rounded-3xl opacity-20 blur-lg"></div>
                             <div className="relative h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl">
                                 <img
-                                    src="/intro/ChatGPT Image Jan 6, 2026, 02_51_48 PM.png"
+                                    src="/intro/office-meeting.png"
                                     alt="Office Meeting"
                                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                                 />

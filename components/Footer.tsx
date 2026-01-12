@@ -91,7 +91,7 @@ export default function Footer() {
                             </li>
                             <li className="flex items-start gap-3">
                                 <MapPin className="text-orange-500 shrink-0" size={20} />
-                                <span>Mumbai, India</span>
+                                <span>B-203, 204, 205, Lawrence Trade Center, Manikpur Road, Near Madhuram Hotel, Vasai West 401202</span>
                             </li>
                         </ul>
                     </div>

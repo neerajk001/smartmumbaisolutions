@@ -55,7 +55,7 @@ export default function Introduction() {
                             className="absolute top-0 right-0 w-4/5 h-80 rounded-3xl shadow-2xl overflow-hidden z-10"
                         >
                             <img
-                                src="/intro/ChatGPT Image Jan 6, 2026, 02_51_48 PM.png"
+                                src="/intro/office-meeting.png"
                                 alt="Business Meeting"
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                             />
@@ -70,7 +70,7 @@ export default function Introduction() {
                             className="absolute top-40 left-0 w-3/5 h-64 rounded-3xl shadow-2xl overflow-hidden z-20 border-[6px] border-white"
                         >
                             <img
-                                src="/intro/ChatGPT Image Jan 6, 2026, 02_57_13 PM.png"
+                                src="/intro/growth-investment.png"
                                 alt="Growth and Investment"
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                             />
@@ -85,7 +85,7 @@ export default function Introduction() {
                             className="absolute bottom-0 right-12 w-2/5 h-48 rounded-3xl shadow-2xl overflow-hidden z-30 border-[6px] border-white"
                         >
                             <img
-                                src="/intro/ChatGPT Image Jan 6, 2026, 02_58_06 PM.png"
+                                src="/intro/loan-documents.png"
                                 alt="Approved Loan Documents"
                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                             />
