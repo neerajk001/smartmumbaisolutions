@@ -10,7 +10,7 @@
  * Production: http://localhost:3001/api (Next.js API routes) → https://loansarathi.com/api
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ||
   (typeof window !== 'undefined' ? '/api' : 'http://localhost:3001/api');
 
 // API Response Types
@@ -37,15 +37,15 @@ type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
 function parseSumInsured(sumInsured: string): number {
   // Convert "₹5L", "₹10L", "₹1Cr" etc. to numbers
   if (!sumInsured) return 0;
-  
+
   const cleanValue = sumInsured.replace('₹', '').trim();
-  
+
   if (cleanValue.endsWith('Cr')) {
     return parseFloat(cleanValue.replace('Cr', '')) * 10000000;
   } else if (cleanValue.endsWith('L')) {
     return parseFloat(cleanValue.replace('L', '')) * 100000;
   }
-  
+
   return parseFloat(cleanValue) || 0;
 }
 
@@ -58,7 +58,7 @@ function mapLoanTypeToSlug(loanType: string): string {
     'Car Loan': 'car-loan',
     'Education Loan': 'education-loan',
   };
-  
+
   return mapping[loanType] || loanType.toLowerCase().replace(/\s+/g, '-');
 }
 
@@ -282,8 +282,15 @@ export async function getLoanProducts(slug?: string): Promise<LoanProductsRespon
     }
 
     return data;
-  } catch (error) {
-    console.error('Error fetching loan products:', error);
+  } catch (error: any) {
+    // Gracefully handle backend unavailability in development
+    if (error?.cause?.code === 'ECONNREFUSED' || error?.message?.includes('fetch failed')) {
+      // Backend is offline, this is expected in standalone mode
+      // console.warn('Backend API offline, falling back to static data.'); 
+    } else {
+      console.error('Error fetching loan products:', error);
+    }
+
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Network error. Please check your connection and try again.',

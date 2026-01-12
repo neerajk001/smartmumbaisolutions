@@ -32,7 +32,7 @@ export default function ProductDetailLayout({ product, category }: ProductDetail
             <Navbar />
 
             <main className="pt-24 pb-24">
-                <div className="container mx-auto px-8 md:px-16 lg:px-24">
+                <div className="w-[90%] max-w-[1200px] mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 relative">
 
                         {/* Left Side: Scrollable Information */}
@@ -162,7 +162,7 @@ export default function ProductDetailLayout({ product, category }: ProductDetail
                                     </p>
 
                                     <div className="space-y-4">
-                                        <button 
+                                        <button
                                             onClick={() => setShowApplicationModal(true)}
                                             className="w-full bg-blue-800 hover:bg-blue-900 text-white font-semibold py-4 rounded-xl transition-all shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2 group"
                                         >
@@ -170,7 +170,7 @@ export default function ProductDetailLayout({ product, category }: ProductDetail
                                             <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
                                         </button>
 
-                                        <button 
+                                        <button
                                             onClick={() => setShowExpertModal(true)}
                                             className="w-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 font-semibold py-4 rounded-xl transition-all"
                                         >
