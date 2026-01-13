@@ -152,7 +152,7 @@ export default function ContactSection() {
                                                             onChange={handleInputChange}
                                                             onFocus={() => setFocusedInput(input.id)}
                                                             onBlur={(e) => !e.target.value && setFocusedInput(null)}
-                                                            className="w-full bg-transparent border-b-2 border-gray-200 py-3 pr-4 focus:border-blue-600 outline-none transition-colors"
+                                                            className="w-full bg-transparent border-b-2 border-gray-200 py-3 pr-4 focus:border-blue-600 outline-none transition-colors text-gray-900"
                                                         />
                                                         <input.icon className={`absolute right-0 w-5 h-5 transition-colors ${focusedInput === input.id ? 'text-blue-600' : 'text-gray-300'}`} />
                                                     </div>
@@ -169,7 +169,7 @@ export default function ContactSection() {
                                             id="message"
                                             value={formValues.message || ''}
                                             onChange={handleInputChange}
-                                            className="w-full bg-gray-50 rounded-xl border border-gray-200 p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+                                            className="w-full bg-gray-50 rounded-xl border border-gray-200 p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none text-gray-900"
                                             placeholder="Tell us more about your requirements..."
                                         ></textarea>
                                     </div>
