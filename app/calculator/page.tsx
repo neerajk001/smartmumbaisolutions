@@ -219,7 +219,7 @@ const DetailedCalculatorContent = () => {
     const pageHeight = doc.internal.pageSize.getHeight();
 
     const logo = new Image();
-    logo.src = '/logo.jpeg';
+    logo.src = '/logo1.png';
 
     const drawSummary = (startY: number) => {
       // Enhanced Summary Box
@@ -369,7 +369,7 @@ const DetailedCalculatorContent = () => {
     };
 
     logo.onload = () => {
-      doc.addImage(logo, 'JPEG', 14, 10, 35, 13);
+      doc.addImage(logo, 'PNG', 14, 10, 35, 13);
 
       doc.setFontSize(19);
       doc.setTextColor(30, 58, 138);
@@ -480,7 +480,7 @@ const DetailedCalculatorContent = () => {
     const pageHeight = doc.internal.pageSize.getHeight();
 
     const logo = new Image();
-    logo.src = '/logo.jpeg';
+    logo.src = '/logo1.png';
 
     const generateSchedule = (startY: number) => {
       // Loan Summary Box
@@ -639,7 +639,7 @@ const DetailedCalculatorContent = () => {
     };
 
     logo.onload = () => {
-      doc.addImage(logo, 'JPEG', 14, 10, 35, 13);
+      doc.addImage(logo, 'PNG', 14, 10, 35, 13);
 
       doc.setFontSize(18);
       doc.setTextColor(30, 58, 138);
@@ -865,8 +865,8 @@ const DetailedCalculatorContent = () => {
             <button
               onClick={() => setActiveTab('emi')}
               className={`flex items-center gap-2 px-6 py-6 rounded-lg text-sm font-bold transition-all whitespace-nowrap ${activeTab === 'emi'
-                  ? 'bg-blue-900 text-white shadow-md'
-                  : 'text-gray-500 hover:text-blue-900 hover:bg-blue-50'
+                ? 'bg-blue-900 text-white shadow-md'
+                : 'text-gray-500 hover:text-blue-900 hover:bg-blue-50'
                 }`}
             >
               <CalculatorIcon className="w-4 h-4" />
@@ -875,8 +875,8 @@ const DetailedCalculatorContent = () => {
             <button
               onClick={() => setActiveTab('eligibility')}
               className={`flex items-center gap-2 px-6 py-6 rounded-lg text-sm font-bold transition-all whitespace-nowrap ${activeTab === 'eligibility'
-                  ? 'bg-blue-900 text-white shadow-md'
-                  : 'text-gray-500 hover:text-blue-900 hover:bg-blue-50'
+                ? 'bg-blue-900 text-white shadow-md'
+                : 'text-gray-500 hover:text-blue-900 hover:bg-blue-50'
                 }`}
             >
               <CheckCircle2 className="w-4 h-4" />
@@ -885,8 +885,8 @@ const DetailedCalculatorContent = () => {
             <button
               onClick={() => setActiveTab('balance')}
               className={`flex items-center gap-2 px-6 py-6 rounded-lg text-sm font-bold transition-all whitespace-nowrap ${activeTab === 'balance'
-                  ? 'bg-blue-900 text-white shadow-md'
-                  : 'text-gray-500 hover:text-blue-900 hover:bg-blue-50'
+                ? 'bg-blue-900 text-white shadow-md'
+                : 'text-gray-500 hover:text-blue-900 hover:bg-blue-50'
                 }`}
             >
               <RefreshCw className="w-4 h-4" />
@@ -895,8 +895,8 @@ const DetailedCalculatorContent = () => {
             <button
               onClick={() => setActiveTab('part-payment')}
               className={`flex items-center gap-2 px-6 py-6 rounded-lg text-sm font-bold transition-all whitespace-nowrap ${activeTab === 'part-payment'
-                  ? 'bg-blue-900 text-white shadow-md'
-                  : 'text-gray-500 hover:text-blue-900 hover:bg-blue-50'
+                ? 'bg-blue-900 text-white shadow-md'
+                : 'text-gray-500 hover:text-blue-900 hover:bg-blue-50'
                 }`}
             >
               <PercentIcon className="w-4 h-4" />
@@ -1222,8 +1222,8 @@ const DetailedCalculatorContent = () => {
                       onClick={() => setEmiCurrentPage(prev => Math.max(1, prev - 1))}
                       disabled={emiCurrentPage === 1}
                       className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${emiCurrentPage === 1
-                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                          : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
                         }`}
                     >
                       <ChevronLeft className="w-4 h-4" /> Previous
@@ -1242,8 +1242,8 @@ const DetailedCalculatorContent = () => {
                               key={page}
                               onClick={() => setEmiCurrentPage(page)}
                               className={`w-8 h-8 rounded-lg text-sm font-semibold transition-colors ${emiCurrentPage === page
-                                  ? 'bg-blue-900 text-white'
-                                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                ? 'bg-blue-900 text-white'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                 }`}
                             >
                               {page}
@@ -1267,8 +1267,8 @@ const DetailedCalculatorContent = () => {
                       onClick={() => setEmiCurrentPage(prev => Math.min(emiTotalPages, prev + 1))}
                       disabled={emiCurrentPage === emiTotalPages}
                       className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${emiCurrentPage === emiTotalPages
-                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                          : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
                         }`}
                     >
                       Next <ChevronRight className="w-4 h-4" />
@@ -1558,8 +1558,8 @@ const DetailedCalculatorContent = () => {
                     <button
                       onClick={() => setPpReductionType('emi')}
                       className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${ppReductionType === 'emi'
-                          ? 'bg-white text-blue-900 shadow-sm'
-                          : 'text-gray-500 hover:text-gray-700'
+                        ? 'bg-white text-blue-900 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
                         }`}
                     >
                       EMI
@@ -1567,8 +1567,8 @@ const DetailedCalculatorContent = () => {
                     <button
                       onClick={() => setPpReductionType('tenure')}
                       className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${ppReductionType === 'tenure'
-                          ? 'bg-white text-blue-900 shadow-sm'
-                          : 'text-gray-500 hover:text-gray-700'
+                        ? 'bg-white text-blue-900 shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
                         }`}
                     >
                       Tenure
@@ -1728,8 +1728,8 @@ const DetailedCalculatorContent = () => {
                         onClick={() => setPpCurrentPage(prev => Math.max(1, prev - 1))}
                         disabled={ppCurrentPage === 1}
                         className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${ppCurrentPage === 1
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
                           }`}
                       >
                         <ChevronLeft className="w-4 h-4" /> Previous
@@ -1748,8 +1748,8 @@ const DetailedCalculatorContent = () => {
                                 key={page}
                                 onClick={() => setPpCurrentPage(page)}
                                 className={`w-8 h-8 rounded-lg text-sm font-semibold transition-colors ${ppCurrentPage === page
-                                    ? 'bg-blue-900 text-white'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                  ? 'bg-blue-900 text-white'
+                                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                   }`}
                               >
                                 {page}
@@ -1773,8 +1773,8 @@ const DetailedCalculatorContent = () => {
                         onClick={() => setPpCurrentPage(prev => Math.min(ppTotalPages, prev + 1))}
                         disabled={ppCurrentPage === ppTotalPages}
                         className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${ppCurrentPage === ppTotalPages
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
                           }`}
                       >
                         Next <ChevronRight className="w-4 h-4" />

@@ -12,7 +12,7 @@ const managers = [
         id: 1,
         name: "Pratik Singh",
         position: "Manager",
-        image: "/employee/pratik-photo.jpg",
+        image: "/employee/pratik-photo.png",
     },
     {
         id: 2,
@@ -243,14 +243,16 @@ export default function AboutPage() {
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-[100px] transition-all group-hover:bg-orange-500/10"></div>
                             <div className="flex items-center gap-4 mb-8">
-                                <div className="relative w-24 h-24 shrink-0 rounded-2xl overflow-hidden bg-white p-2 border border-orange-50">
-                                    <Image
-                                        src="/our-product/smart-dial.jpg"
-                                        alt="Smart Dial Logo"
-                                        fill
-                                        className="object-contain p-1"
-                                    />
-                                </div>
+                                <a href="https://smartdial.co.in/" target="_blank" rel="noopener noreferrer">
+                                    <div className="relative w-24 h-24 shrink-0 rounded-2xl overflow-hidden bg-white p-2 border border-orange-50 hover:shadow-md transition-shadow cursor-pointer">
+                                        <Image
+                                            src="/our-product/smart-dial.jpg"
+                                            alt="Smart Dial Logo"
+                                            fill
+                                            className="object-contain p-1"
+                                        />
+                                    </div>
+                                </a>
                                 <div>
                                     <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Smart Dial</h3>
                                     <p className="text-orange-600 font-medium">Intelligent Communication Platform</p>
