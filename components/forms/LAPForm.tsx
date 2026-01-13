@@ -15,7 +15,7 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
   const [formData, setFormData] = useState<Partial<LAPFields>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateStep = (stepIndex: number, data: any): boolean => {
+  const validateStep = (stepIndex: number, data: any, isPreview: boolean = false): boolean => {
     const newErrors: Record<string, string> = {};
 
     if (stepIndex === 0) {
@@ -59,7 +59,9 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
       }
     }
 
-    setErrors(newErrors);
+    if (!isPreview) {
+      setErrors(newErrors);
+    }
     return Object.keys(newErrors).length === 0;
   };
 
@@ -91,9 +93,8 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
             <select
               value={formData.propertyType || ""}
               onChange={(e) => handleChange("propertyType", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.propertyType ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyType ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Type</option>
               {propertyTypes.map((type) => (
@@ -117,9 +118,8 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
               value={formData.propertyCost || ""}
               onChange={(e) => handleChange("propertyCost", e.target.value)}
               placeholder="Current market value"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.propertyCost ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyCost ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.propertyCost && (
               <p className="text-red-500 text-xs mt-2">{errors.propertyCost}</p>
@@ -136,9 +136,8 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
               value={formData.propertyCity || ""}
               onChange={(e) => handleChange("propertyCity", e.target.value)}
               placeholder="Enter property city"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.propertyCity ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyCity ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.propertyCity && (
               <p className="text-red-500 text-xs mt-2">{errors.propertyCity}</p>
@@ -208,9 +207,8 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
               value={formData.loanAmount || ""}
               onChange={(e) => handleChange("loanAmount", e.target.value)}
               placeholder="Up to 70% of property value"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanAmount ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.loanAmount ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.loanAmount && (
               <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
@@ -228,9 +226,8 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
             <select
               value={formData.tenure || ""}
               onChange={(e) => handleChange("tenure", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.tenure ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.tenure ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Tenure</option>
               {tenures.map((tenure) => (
@@ -254,9 +251,8 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
               value={formData.loanPurpose || ""}
               onChange={(e) => handleChange("loanPurpose", e.target.value)}
               placeholder="e.g., Business expansion, Medical, Education"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.loanPurpose ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.loanPurpose ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.loanPurpose && (
               <p className="text-red-500 text-xs mt-2">{errors.loanPurpose}</p>

@@ -17,7 +17,7 @@ export default function EducationLoanForm({
   const [formData, setFormData] = useState<Partial<EducationLoanFields>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateStep = (stepIndex: number, data: any): boolean => {
+  const validateStep = (stepIndex: number, data: any, isPreview: boolean = false): boolean => {
     const newErrors: Record<string, string> = {};
 
     if (stepIndex === 0) {
@@ -50,7 +50,9 @@ export default function EducationLoanForm({
       if (!data.courseFee) newErrors.courseFee = "Course fee is required";
     }
 
-    setErrors(newErrors);
+    if (!isPreview) {
+      setErrors(newErrors);
+    }
     return Object.keys(newErrors).length === 0;
   };
 
@@ -85,9 +87,8 @@ export default function EducationLoanForm({
               value={formData.courseName || ""}
               onChange={(e) => handleChange("courseName", e.target.value)}
               placeholder="e.g., MBA, B.Tech, MS"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.courseName ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseName ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.courseName && (
               <p className="text-red-500 text-xs mt-2">{errors.courseName}</p>
@@ -104,9 +105,8 @@ export default function EducationLoanForm({
               value={formData.instituteName || ""}
               onChange={(e) => handleChange("instituteName", e.target.value)}
               placeholder="Enter institute name"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.instituteName ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.instituteName ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.instituteName && (
               <p className="text-red-500 text-xs mt-1">
@@ -123,9 +123,8 @@ export default function EducationLoanForm({
             <select
               value={formData.courseCountry || ""}
               onChange={(e) => handleChange("courseCountry", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.courseCountry ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseCountry ? "border-red-500" : "border-gray-300"
+                }`}
             >
               <option value="">Select Country</option>
               {countries.map((country) => (
@@ -153,9 +152,8 @@ export default function EducationLoanForm({
               placeholder="1-10 years"
               min="1"
               max="10"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.courseDuration ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseDuration ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.courseDuration && (
               <p className="text-red-500 text-xs mt-1">
@@ -174,9 +172,8 @@ export default function EducationLoanForm({
               value={formData.courseFee || ""}
               onChange={(e) => handleChange("courseFee", e.target.value)}
               placeholder="Enter total course fee"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.courseFee ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseFee ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.courseFee && (
               <p className="text-red-500 text-xs mt-2">{errors.courseFee}</p>

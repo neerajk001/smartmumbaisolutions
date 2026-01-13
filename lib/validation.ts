@@ -8,6 +8,7 @@ export const validateFullName = (name: string): string | null => {
 };
 
 export const validateMobileNumber = (mobile: string): string | null => {
+  if (!mobile) return "Mobile number is required";
   const cleanMobile = mobile.replace(/\D/g, "");
   if (cleanMobile.length !== 10) {
     return "Mobile number must be 10 digits";
@@ -19,6 +20,7 @@ export const validateMobileNumber = (mobile: string): string | null => {
 };
 
 export const validateEmail = (email: string): string | null => {
+  if (!email) return "Email is required";
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return "Please enter a valid email address";
@@ -27,6 +29,7 @@ export const validateEmail = (email: string): string | null => {
 };
 
 export const validatePincode = (pincode: string): string | null => {
+  if (!pincode) return "Pincode is required";
   const cleanPincode = pincode.replace(/\D/g, "");
   if (cleanPincode.length !== 6) {
     return "Pincode must be 6 digits";
@@ -35,6 +38,7 @@ export const validatePincode = (pincode: string): string | null => {
 };
 
 export const validatePanCard = (pan: string): string | null => {
+  if (!pan) return "PAN card number is required";
   const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
   if (!panRegex.test(pan.toUpperCase())) {
     return "Invalid PAN format (e.g., ABCDE1234F)";
@@ -43,6 +47,7 @@ export const validatePanCard = (pan: string): string | null => {
 };
 
 export const validateNumber = (value: string, min: number = 0): string | null => {
+  if (!value) return "Value is required";
   const num = parseFloat(value);
   if (isNaN(num)) {
     return "Please enter a valid number";
@@ -54,6 +59,7 @@ export const validateNumber = (value: string, min: number = 0): string | null =>
 };
 
 export const validateNonNegativeNumber = (value: string): string | null => {
+  if (!value) return "Value is required";
   const num = parseFloat(value);
   if (isNaN(num)) {
     return "Please enter a valid number";
@@ -72,6 +78,7 @@ export const validateRequired = (value: string, fieldName: string): string | nul
 };
 
 export const validateVehicleNumber = (vehicleNo: string): string | null => {
+  if (!vehicleNo) return "Vehicle number is required";
   // Format: MH12AB1234 or similar
   const vehicleRegex = /^[A-Z]{2}[0-9]{2}[A-Z]{1,2}[0-9]{4}$/;
   if (!vehicleRegex.test(vehicleNo.toUpperCase().replace(/[\s-]/g, ""))) {
@@ -81,6 +88,7 @@ export const validateVehicleNumber = (vehicleNo: string): string | null => {
 };
 
 export const validateAge = (age: string, min: number = 18, max: number = 100): string | null => {
+  if (!age) return "Age is required";
   const ageNum = parseInt(age);
   if (isNaN(ageNum)) {
     return "Please enter a valid age";
@@ -98,7 +106,7 @@ export const validateDOB = (dob: string): string | null => {
   const date = new Date(dob);
   const today = new Date();
   const age = today.getFullYear() - date.getFullYear();
-  
+
   if (age < 18) {
     return "You must be at least 18 years old";
   }
@@ -110,9 +118,10 @@ export const validateDOB = (dob: string): string | null => {
 
 export const validateCarYear = (year: string, carType: string): string | null => {
   if (carType === "used") {
+    if (!year) return "Year is required";
     const yearNum = parseInt(year);
     const currentYear = new Date().getFullYear();
-    
+
     if (isNaN(yearNum)) {
       return "Please enter a valid year";
     }
@@ -124,38 +133,40 @@ export const validateCarYear = (year: string, carType: string): string | null =>
 };
 
 export const validateDownPayment = (downPayment: string, carPrice: string): string | null => {
+  if (!downPayment || !carPrice) return "Values are required";
   const dp = parseFloat(downPayment);
   const price = parseFloat(carPrice);
-  
+
   if (isNaN(dp) || isNaN(price)) {
     return "Please enter valid amounts";
   }
-  
+
   const minDownPayment = price * 0.1; // 10% minimum
   if (dp < minDownPayment) {
     return `Minimum down payment is 10% (₹${minDownPayment.toLocaleString()})`;
   }
-  
+
   if (dp > price) {
     return "Down payment cannot exceed car price";
   }
-  
+
   return null;
 };
 
 export const validateLAPAmount = (loanAmount: string, propertyCost: string): string | null => {
+  if (!loanAmount || !propertyCost) return "Values are required";
   const loan = parseFloat(loanAmount);
   const property = parseFloat(propertyCost);
-  
+
   if (isNaN(loan) || isNaN(property)) {
     return "Please enter valid amounts";
   }
-  
+
   const maxLoan = property * 0.7; // 70% maximum
   if (loan > maxLoan) {
     return `Maximum loan amount is 70% of property value (₹${maxLoan.toLocaleString()})`;
   }
-  
+
   return null;
 };
 

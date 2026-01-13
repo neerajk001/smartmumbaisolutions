@@ -14,7 +14,7 @@ interface MultiStepFormProps {
   onSubmit: (data: any) => void;
   formData: any;
   setFormData: (data: any) => void;
-  validateStep?: (stepIndex: number, data: any) => boolean;
+  validateStep?: (stepIndex: number, data: any, isPreview?: boolean) => boolean;
 }
 
 export default function MultiStepForm({
@@ -30,12 +30,14 @@ export default function MultiStepForm({
   const isLastStep = currentStep === steps.length - 1;
   const isFirstStep = currentStep === 0;
 
+  // Check validity without setting errors
+  const isStepValid = validateStep ? validateStep(currentStep, formData, true) : true;
+
   const handleNext = () => {
-    // TEMPORARY: Skip validation to preview all form steps
-    // Uncomment below lines to enable validation
-    // if (validateStep && !validateStep(currentStep, formData)) {
-    //   return;
-    // }
+    // Determine if we can proceed
+    if (validateStep && !validateStep(currentStep, formData, false)) {
+      return;
+    }
 
     if (!completedSteps.includes(currentStep)) {
       setCompletedSteps([...completedSteps, currentStep]);
@@ -43,8 +45,7 @@ export default function MultiStepForm({
 
     if (isLastStep) {
       // Validate before final submission
-      if (validateStep && !validateStep(currentStep, formData)) {
-        alert("Please fill all required fields before submitting.");
+      if (validateStep && !validateStep(currentStep, formData, false)) {
         return;
       }
       onSubmit(formData);
@@ -83,15 +84,14 @@ export default function MultiStepForm({
                       <button
                         onClick={() => goToStep(index)}
                         disabled={index > currentStep && !completedSteps.includes(index)}
-                        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-300 ${
-                          index === currentStep
-                            ? "bg-blue-600 text-white shadow-lg shadow-blue-600/40 scale-110"
-                            : completedSteps.includes(index)
+                        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-300 ${index === currentStep
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-600/40 scale-110"
+                          : completedSteps.includes(index)
                             ? "bg-green-500 text-white cursor-pointer hover:scale-105 shadow-md"
                             : index < currentStep
-                            ? "bg-blue-400 text-white cursor-pointer hover:scale-105"
-                            : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                        }`}
+                              ? "bg-blue-400 text-white cursor-pointer hover:scale-105"
+                              : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                          }`}
                       >
                         {completedSteps.includes(index) ? (
                           <CheckCircle2 size={18} />
@@ -104,13 +104,12 @@ export default function MultiStepForm({
                     {/* Step Title and Description */}
                     <div className="flex-1 pt-1.5">
                       <h4
-                        className={`font-semibold text-xs transition-colors ${
-                          index === currentStep
-                            ? "text-blue-600"
-                            : completedSteps.includes(index)
+                        className={`font-semibold text-xs transition-colors ${index === currentStep
+                          ? "text-blue-600"
+                          : completedSteps.includes(index)
                             ? "text-green-600"
                             : "text-gray-500"
-                        }`}
+                          }`}
                       >
                         {step.title}
                       </h4>
@@ -118,8 +117,8 @@ export default function MultiStepForm({
                         {index === currentStep
                           ? "In Progress"
                           : completedSteps.includes(index)
-                          ? "Completed"
-                          : "Pending"}
+                            ? "Completed"
+                            : "Pending"}
                       </p>
                     </div>
                   </div>
@@ -127,11 +126,10 @@ export default function MultiStepForm({
                   {/* Connecting Line */}
                   {index < steps.length - 1 && (
                     <div
-                      className={`absolute left-5 top-10 w-0.5 h-6 -translate-x-1/2 transition-all duration-300 ${
-                        completedSteps.includes(index) || index < currentStep
-                          ? "bg-green-400"
-                          : "bg-gray-300"
-                      }`}
+                      className={`absolute left-5 top-10 w-0.5 h-6 -translate-x-1/2 transition-all duration-300 ${completedSteps.includes(index) || index < currentStep
+                        ? "bg-green-400"
+                        : "bg-gray-300"
+                        }`}
                     />
                   )}
                 </div>
@@ -189,11 +187,10 @@ export default function MultiStepForm({
           <button
             onClick={handleBack}
             disabled={isFirstStep}
-            className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all ${
-              isFirstStep
-                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
-            }`}
+            className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all ${isFirstStep
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
+              }`}
           >
             <ArrowLeft size={20} />
             Previous
@@ -201,7 +198,11 @@ export default function MultiStepForm({
 
           <button
             onClick={handleNext}
-            className="flex items-center gap-2 px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50"
+            disabled={!isStepValid}
+            className={`flex items-center gap-2 px-10 py-4 rounded-lg font-semibold transition-all shadow-lg ${!isStepValid
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
+                : "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-600/30 hover:shadow-blue-600/50"
+              }`}
           >
             {isLastStep ? "Submit Application" : "Continue"}
             <ArrowRight size={20} />

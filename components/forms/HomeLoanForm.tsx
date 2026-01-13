@@ -17,7 +17,7 @@ export default function HomeLoanForm({
   const [formData, setFormData] = useState<Partial<HomeLoanFields>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateStep = (stepIndex: number, data: any): boolean => {
+  const validateStep = (stepIndex: number, data: any, isPreview: boolean = false): boolean => {
     const newErrors: Record<string, string> = {};
 
     if (stepIndex === 0) {
@@ -49,7 +49,9 @@ export default function HomeLoanForm({
         newErrors.propertyStatus = "Property status is required";
     }
 
-    setErrors(newErrors);
+    if (!isPreview) {
+      setErrors(newErrors);
+    }
     return Object.keys(newErrors).length === 0;
   };
 

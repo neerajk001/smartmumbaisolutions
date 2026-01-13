@@ -19,7 +19,7 @@ export default function PersonalLoanForm({
   const [formData, setFormData] = useState<Partial<PersonalLoanFields>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateStep = (stepIndex: number, data: any): boolean => {
+  const validateStep = (stepIndex: number, data: any, isPreview: boolean = false): boolean => {
     const newErrors: Record<string, string> = {};
 
     if (stepIndex === 0) {
@@ -51,7 +51,9 @@ export default function PersonalLoanForm({
         newErrors.loanPurpose = "Loan purpose is required";
     }
 
-    setErrors(newErrors);
+    if (!isPreview) {
+      setErrors(newErrors);
+    }
     return Object.keys(newErrors).length === 0;
   };
 

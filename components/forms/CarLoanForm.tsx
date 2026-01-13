@@ -15,7 +15,7 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
   const [formData, setFormData] = useState<Partial<CarLoanFields>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateStep = (stepIndex: number, data: any): boolean => {
+  const validateStep = (stepIndex: number, data: any, isPreview: boolean = false): boolean => {
     const newErrors: Record<string, string> = {};
 
     if (stepIndex === 0) {
@@ -65,7 +65,9 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
       }
     }
 
-    setErrors(newErrors);
+    if (!isPreview) {
+      setErrors(newErrors);
+    }
     return Object.keys(newErrors).length === 0;
   };
 
@@ -124,9 +126,8 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               value={formData.carMake || ""}
               onChange={(e) => handleChange("carMake", e.target.value)}
               placeholder="e.g., Maruti, Hyundai, Honda"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.carMake ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carMake ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.carMake && (
               <p className="text-red-500 text-xs mt-2">{errors.carMake}</p>
@@ -143,9 +144,8 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               value={formData.carModel || ""}
               onChange={(e) => handleChange("carModel", e.target.value)}
               placeholder="e.g., Swift, i20, City"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.carModel ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carModel ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.carModel && (
               <p className="text-red-500 text-xs mt-2">{errors.carModel}</p>
@@ -162,9 +162,8 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               value={formData.carVariant || ""}
               onChange={(e) => handleChange("carVariant", e.target.value)}
               placeholder="e.g., VXi, SX, VX"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.carVariant ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carVariant ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.carVariant && (
               <p className="text-red-500 text-xs mt-2">{errors.carVariant}</p>
@@ -181,9 +180,8 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               value={formData.carPrice || ""}
               onChange={(e) => handleChange("carPrice", e.target.value)}
               placeholder="Enter on-road price"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.carPrice ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carPrice ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.carPrice && (
               <p className="text-red-500 text-xs mt-2">{errors.carPrice}</p>
@@ -203,9 +201,8 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
                 placeholder="e.g., 2020"
                 min="2018"
                 max={new Date().getFullYear()}
-                className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                  errors.carYear ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carYear ? "border-red-500" : "border-gray-300"
+                  }`}
               />
               {errors.carYear && (
                 <p className="text-red-500 text-xs mt-2">{errors.carYear}</p>
@@ -223,9 +220,8 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               value={formData.downPayment || ""}
               onChange={(e) => handleChange("downPayment", e.target.value)}
               placeholder="Min 10% of car price"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${
-                errors.downPayment ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.downPayment ? "border-red-500" : "border-gray-300"
+                }`}
             />
             {errors.downPayment && (
               <p className="text-red-500 text-xs mt-2">{errors.downPayment}</p>
