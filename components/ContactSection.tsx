@@ -9,12 +9,12 @@ export default function ContactSection() {
     const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
     const inputs = [
-        { id: "firstName", label: "First Name", icon: User, type: "text", placeholder: "John" },
-        { id: "lastName", label: "Last Name", icon: User, type: "text", placeholder: "Doe" },
-        { id: "email", label: "Email Address", icon: Mail, type: "email", placeholder: "john@example.com" },
-        { id: "phone", label: "Phone Number", icon: Phone, type: "tel", placeholder: "+91 98765 43210" },
-        { id: "company", label: "Company Name", icon: Briefcase, type: "text", placeholder: "Your Company Ltd." },
-        { id: "loanType", label: "Interest", icon: FileText, type: "text", placeholder: "Personal Loan, Insurance..." },
+        { id: "firstName", label: "First Name", icon: User, type: "text", placeholder: "John", required: true },
+        { id: "lastName", label: "Last Name", icon: User, type: "text", placeholder: "Doe", required: true },
+        { id: "email", label: "Email Address", icon: Mail, type: "email", placeholder: "john@example.com", required: true },
+        { id: "phone", label: "Phone Number", icon: Phone, type: "tel", placeholder: "+91 98765 43210", required: true },
+        { id: "company", label: "Company Name", icon: Briefcase, type: "text", placeholder: "Your Company Ltd.", required: false },
+        { id: "loanType", label: "Interest", icon: FileText, type: "text", placeholder: "Personal Loan, Insurance...", required: false },
     ];
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -76,7 +76,7 @@ export default function ContactSection() {
                                     title="Email Us"
                                     content={
                                         <div className="flex flex-col">
-                                            <a href="mailto:sales@smartsolutionsmumbai.com" className="hover:text-blue-600 transition-colors">sales@smartsolutionsmumbai.com</a>
+                                            <a href="mailto:info@smartsolutionsmumbai.com" className="hover:text-blue-600 transition-colors">info@smartsolutionsmumbai.com</a>
 
                                         </div>
                                     }
@@ -129,7 +129,7 @@ export default function ContactSection() {
                                 <h3 className="text-3xl font-bold text-gray-900 mb-2">Send us a Message</h3>
                                 <p className="text-gray-500 mb-10">Fill out the form below and we will get back to you shortly.</p>
 
-                                <form className="space-y-6">
+                                <form className="space-y-6" action="https://formspree.io/f/mjggvpob" method="POST">
                                     <div className="grid md:grid-cols-2 gap-6">
                                         {inputs.map((input) => (
                                             <div key={input.id} className={input.id === 'email' || input.id === 'loanType' || input.id === 'company' ? 'col-span-2 md:col-span-1' : ''}>
@@ -147,6 +147,8 @@ export default function ContactSection() {
                                                         <input
                                                             type={input.type}
                                                             id={input.id}
+                                                            name={input.id}
+                                                            required={input.required}
                                                             placeholder={focusedInput === input.id ? input.placeholder : ''}
                                                             value={formValues[input.id] || ''}
                                                             onChange={handleInputChange}
@@ -167,6 +169,7 @@ export default function ContactSection() {
                                         <textarea
                                             rows={4}
                                             id="message"
+                                            name="message"
                                             value={formValues.message || ''}
                                             onChange={handleInputChange}
                                             className="w-full bg-gray-50 rounded-xl border border-gray-200 p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none text-gray-900"
@@ -175,7 +178,7 @@ export default function ContactSection() {
                                     </div>
 
                                     <motion.button
-                                        type="button"
+                                        type="submit"
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group"

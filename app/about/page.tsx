@@ -39,7 +39,7 @@ const assistantManagers = [
         id: 2,
         name: "Ashwini Mishra",
         position: "Assistant Manager",
-        image: "/employee/ashwini-mishra.jpeg",
+        image: "/employee/Ashwini.png",
     },
     {
         id: 3,
@@ -340,7 +340,7 @@ export default function AboutPage() {
                                             src={assistant.image}
                                             alt={assistant.name}
                                             fill
-                                            className="object-contain transition-transform duration-700 group-hover:scale-110"
+                                            className={`object-contain transition-transform duration-700 ${assistant.name === "Ashwini Mishra" ? "scale-[1.6] group-hover:scale-[1.7]" : "group-hover:scale-110"}`}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
                                         <div className="absolute bottom-0 left-0 p-8 w-full">

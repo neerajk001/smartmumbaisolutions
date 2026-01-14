@@ -19,7 +19,7 @@ export default function Footer() {
 
                     {/* Brand Column */}
                     <div className="space-y-6">
-                        <Link href="/" className="flex items-center space-x-2">
+                        <Link href="/" className="flex items-center space-x-2 -ml-4">
                             <Image
                                 src="/3d.png"
                                 alt="Smart Solutions 3D Logo"
@@ -28,13 +28,13 @@ export default function Footer() {
                                 className="object-contain h-40 w-auto opacity-90 hover:opacity-100 transition-opacity"
                             />
                         </Link>
-                        <p className="leading-relaxed text-gray-400 max-w-xs">
+                        <p className="leading-relaxed text-gray-400 max-w-xs -ml-0.5">
                             Your trusted partner for all financial needs. We make borrowing simple, transparent, and fast.
                         </p>
                         <div className="flex gap-4">
                             <Link href="#" className="hover:text-blue-500 transition-colors"><Facebook size={20} /></Link>
                             <Link href="#" className="hover:text-blue-400 transition-colors"><Twitter size={20} /></Link>
-                            <Link href="#" className="hover:text-pink-600 transition-colors"><Instagram size={20} /></Link>
+                            <Link href="https://www.instagram.com/__smartsolutions__/" className="hover:text-pink-600 transition-colors" target="_blank" rel="noopener noreferrer"><Instagram size={20} /></Link>
                             <Link href="#" className="hover:text-blue-700 transition-colors"><Linkedin size={20} /></Link>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ export default function Footer() {
                         <ul className="space-y-6">
                             <li className="flex items-start gap-3">
                                 <Mail className="text-orange-500 shrink-0" size={20} />
-                                <a href="mailto:sales@smartsolutionsmumbai.com" className="hover:text-white transition-colors">sales@smartsolutionsmumbai.com</a>
+                                <a href="mailto:info@smartsolutionsmumbai.com" className="hover:text-white transition-colors">info@smartsolutionsmumbai.com</a>
                             </li>
                             <li className="flex items-start gap-3">
                                 <Phone className="text-orange-500 shrink-0" size={20} />
