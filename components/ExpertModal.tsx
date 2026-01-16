@@ -9,6 +9,12 @@ interface ExpertModalProps {
 }
 
 export default function ExpertModal({ isOpen, onClose }: ExpertModalProps) {
+    const handleClose = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onClose();
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -18,8 +24,8 @@ export default function ExpertModal({ isOpen, onClose }: ExpertModalProps) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        onClick={onClose}
-                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+                        onClick={handleClose}
+                        className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4 cursor-pointer"
                     >
                         {/* Modal */}
                         <motion.div
@@ -27,17 +33,19 @@ export default function ExpertModal({ isOpen, onClose }: ExpertModalProps) {
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.95, opacity: 0, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-white w-full max-w-md rounded-sm shadow-2xl p-8 relative overflow-hidden"
+                            className="bg-white w-full max-w-md rounded-sm shadow-2xl p-8 relative overflow-hidden cursor-default"
                         >
                             {/* Decorative background circle */}
                             <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-blue-50 to-transparent -z-0"></div>
 
                             {/* Close Button */}
                             <button
-                                onClick={onClose}
-                                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors z-10"
+                                onClick={handleClose}
+                                type="button"
+                                aria-label="Close modal"
+                                className="absolute top-4 right-4 p-3 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors z-[110] cursor-pointer touch-manipulation"
                             >
-                                <X size={20} />
+                                <X size={24} strokeWidth={2.5} />
                             </button>
 
                             <div className="relative z-10 flex flex-col items-center text-center">
