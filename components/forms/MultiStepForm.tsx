@@ -68,23 +68,23 @@ export default function MultiStepForm({
 
   return (
     <div className="w-full flex flex-col lg:flex-row gap-6">
-      {/* Vertical Progress Steps - Left Side */}
-      <div className="w-full lg:w-64 flex-shrink-0 flex flex-col">
-        <div className="flex-1 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-100 shadow-sm relative min-h-[500px] lg:min-h-0">
-          <div className="sticky top-4 p-5">
-            <h3 className="text-sm font-bold text-gray-700 mb-5 uppercase tracking-wider">
+      {/* Vertical Progress Steps - Left Side (Desktop) / Top Horizontal (Mobile) */}
+      <div className="w-full lg:w-64 flex-shrink-0 flex flex-col sticky top-0 z-30 lg:static">
+        <div className="flex-1 bg-white/95 backdrop-blur-md lg:bg-gradient-to-br lg:from-blue-50 lg:to-indigo-50 lg:rounded-2xl lg:border lg:border-blue-100 lg:shadow-sm relative lg:min-h-0 border-b border-gray-200 lg:border-b-0">
+          <div className="sticky top-0 lg:top-4 p-2 lg:p-5 z-10 lg:bg-transparent lg:backdrop-blur-none rounded-t-2xl lg:rounded-none">
+            <h3 className="hidden lg:block text-sm font-bold text-gray-700 mb-3 lg:mb-5 uppercase tracking-wider text-center lg:text-left">
               Application Progress
             </h3>
-            <div className="relative">
+            <div className="relative flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:items-stretch gap-0 lg:gap-0 px-4 lg:px-0">
               {steps.map((step, index) => (
-                <div key={index} className="relative">
-                  <div className="flex items-start gap-3 pb-6 last:pb-0">
+                <div key={index} className="relative flex-1 lg:flex-none flex justify-center lg:justify-start">
+                  <div className="flex flex-col lg:flex-row items-center lg:items-start gap-1 lg:gap-3 pb-0 lg:pb-6 last:pb-0 w-full lg:w-auto">
                     {/* Step Number/Icon */}
-                    <div className="relative z-10">
+                    <div className="relative z-10 flex flex-col items-center">
                       <button
                         onClick={() => goToStep(index)}
                         disabled={index > currentStep && !completedSteps.includes(index)}
-                        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${index === currentStep
+                        className={`w-7 h-7 lg:w-10 lg:h-10 rounded-full flex items-center justify-center font-bold text-xs lg:text-sm transition-all duration-300 ${index === currentStep
                           ? "bg-blue-600 text-white shadow-lg shadow-blue-600/40 scale-110"
                           : completedSteps.includes(index)
                             ? "bg-green-500 text-white cursor-pointer hover:scale-105 shadow-md"
@@ -94,15 +94,18 @@ export default function MultiStepForm({
                           }`}
                       >
                         {completedSteps.includes(index) ? (
-                          <CheckCircle2 size={18} />
+                          <CheckCircle2 className="w-4 h-4 lg:w-5 lg:h-5" />
                         ) : (
-                          index + 1
+                          <span>{index + 1}</span>
                         )}
                       </button>
+                      <span className="text-[9px] font-medium text-gray-600 mt-1 lg:hidden text-center leading-tight max-w-[60px]">
+                        {step.title.split(' ')[0]}
+                      </span>
                     </div>
 
-                    {/* Step Title and Description */}
-                    <div className="flex-1 pt-1.5">
+                    {/* Step Title and Description - Desktop Only */}
+                    <div className="hidden lg:flex flex-1 pt-1.5 flex-col">
                       <h4
                         className={`font-semibold text-sm transition-colors ${index === currentStep
                           ? "text-blue-600"
@@ -123,12 +126,22 @@ export default function MultiStepForm({
                     </div>
                   </div>
 
-                  {/* Connecting Line */}
+                  {/* Connecting Line - Desktop Only */}
                   {index < steps.length - 1 && (
                     <div
-                      className={`absolute left-5 top-10 w-0.5 h-6 -translate-x-1/2 transition-all duration-300 ${completedSteps.includes(index) || index < currentStep
+                      className={`hidden lg:block absolute left-5 top-10 w-0.5 h-6 -translate-x-1/2 transition-all duration-300 ${completedSteps.includes(index) || index < currentStep
                         ? "bg-green-400"
                         : "bg-gray-300"
+                        }`}
+                    />
+                  )}
+
+                  {/* Connection Line - Mobile Only */}
+                  {index < steps.length - 1 && (
+                    <div
+                      className={`lg:hidden absolute top-3.5 left-1/2 w-full h-[2px] -translate-y-1/2 -z-0 ${completedSteps.includes(index) || index < currentStep
+                        ? "bg-green-400"
+                        : "bg-gray-200"
                         }`}
                     />
                   )}
@@ -136,8 +149,8 @@ export default function MultiStepForm({
               ))}
             </div>
 
-            {/* Progress Bar */}
-            <div className="mt-5 pt-5 border-t border-blue-200">
+            {/* Progress Bar - Hidden on Mobile */}
+            <div className="hidden lg:block mt-5 pt-5 border-t border-blue-200">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-medium text-gray-600">Overall Progress</span>
                 <span className="text-xs font-bold text-blue-600">
@@ -212,4 +225,3 @@ export default function MultiStepForm({
     </div>
   );
 }
-

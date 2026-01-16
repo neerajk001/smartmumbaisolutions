@@ -230,7 +230,7 @@ export default function ApplicationModal({
                 </div>
 
                 {/* Form Content */}
-                <div className="p-6 max-h-[calc(100vh-100px)] overflow-y-auto">
+                <div className="p-0 lg:p-6 max-h-[calc(100vh-100px)] overflow-y-auto">
                   {renderForm()}
                 </div>
               </motion.div>
