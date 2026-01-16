@@ -11,6 +11,302 @@ interface LAPFormProps {
   onClose: () => void;
 }
 
+const PropertyInfoStep = ({ formData, setFormData, errors, setErrors }: any) => {
+  const handleChange = (field: keyof LAPFields, value: string) => {
+    setFormData({ ...formData, [field]: value });
+    if (errors[field]) {
+      setErrors({ ...errors, [field]: "" });
+    }
+  };
+
+  const propertyTypes = [
+    { value: "residential", label: "Residential" },
+    { value: "commercial", label: "Commercial" },
+    { value: "industrial", label: "Industrial" },
+    { value: "plot", label: "Plot" },
+  ];
+
+  const tenures = ["1", "2", "3", "5", "7", "10", "15"];
+
+  return (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Property Type */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Property Type <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={formData.propertyType || ""}
+            onChange={(e) => handleChange("propertyType", e.target.value)}
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyType ? "border-red-500" : "border-gray-300"
+              }`}
+          >
+            <option value="">Select Type</option>
+            {propertyTypes.map((type) => (
+              <option key={type.value} value={type.value}>
+                {type.label}
+              </option>
+            ))}
+          </select>
+          {errors.propertyType && (
+            <p className="text-red-500 text-xs mt-2">{errors.propertyType}</p>
+          )}
+        </div>
+
+        {/* Property Cost */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Property Market Value (₹) <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            value={formData.propertyCost || ""}
+            onChange={(e) => handleChange("propertyCost", e.target.value)}
+            placeholder="Current market value"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyCost ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.propertyCost && (
+            <p className="text-red-500 text-xs mt-2">{errors.propertyCost}</p>
+          )}
+        </div>
+
+        {/* Property City */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Property City <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={formData.propertyCity || ""}
+            onChange={(e) => handleChange("propertyCity", e.target.value)}
+            placeholder="Enter property city"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyCity ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.propertyCity && (
+            <p className="text-red-500 text-xs mt-2">{errors.propertyCity}</p>
+          )}
+        </div>
+
+        {/* Occupancy Status */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Occupancy Status <span className="text-red-500">*</span>
+          </label>
+          <div className="flex gap-3">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="occupancyStatus"
+                value="self"
+                checked={formData.occupancyStatus === "self"}
+                onChange={(e) =>
+                  handleChange("occupancyStatus", e.target.value)
+                }
+                className="w-4 h-4 text-blue-600"
+              />
+              <span className="text-gray-700 text-sm">Self</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="occupancyStatus"
+                value="rented"
+                checked={formData.occupancyStatus === "rented"}
+                onChange={(e) =>
+                  handleChange("occupancyStatus", e.target.value)
+                }
+                className="w-4 h-4 text-blue-600"
+              />
+              <span className="text-gray-700 text-sm">Rented</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="occupancyStatus"
+                value="vacant"
+                checked={formData.occupancyStatus === "vacant"}
+                onChange={(e) =>
+                  handleChange("occupancyStatus", e.target.value)
+                }
+                className="w-4 h-4 text-blue-600"
+              />
+              <span className="text-gray-700 text-sm">Vacant</span>
+            </label>
+          </div>
+          {errors.occupancyStatus && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.occupancyStatus}
+            </p>
+          )}
+        </div>
+
+        {/* Loan Amount */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Loan Amount (₹) <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            value={formData.loanAmount || ""}
+            onChange={(e) => handleChange("loanAmount", e.target.value)}
+            placeholder="Up to 70% of property value"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.loanAmount ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.loanAmount && (
+            <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
+          )}
+          <p className="text-xs text-gray-500 mt-1">
+            Minimum amount: ₹10,000. Maximum 70% of property value
+          </p>
+        </div>
+
+        {/* Tenure */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Tenure (Years) <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={formData.tenure || ""}
+            onChange={(e) => handleChange("tenure", e.target.value)}
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.tenure ? "border-red-500" : "border-gray-300"
+              }`}
+          >
+            <option value="">Select Tenure</option>
+            {tenures.map((tenure) => (
+              <option key={tenure} value={tenure}>
+                {tenure} {parseInt(tenure) === 1 ? "Year" : "Years"}
+              </option>
+            ))}
+          </select>
+          {errors.tenure && (
+            <p className="text-red-500 text-xs mt-2">{errors.tenure}</p>
+          )}
+        </div>
+
+        {/* Loan Purpose */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Loan Purpose <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={formData.loanPurpose || ""}
+            onChange={(e) => handleChange("loanPurpose", e.target.value)}
+            placeholder="e.g., Business expansion, Medical, Education"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.loanPurpose ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.loanPurpose && (
+            <p className="text-red-500 text-xs mt-2">{errors.loanPurpose}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ReviewStep = ({ formData }: any) => {
+  return (
+    <div className="space-y-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+        <h3 className="text-lg font-bold text-blue-900 mb-4">
+          Application Summary
+        </h3>
+
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Personal Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Name:</span>
+                <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">Mobile:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.mobileNumber}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Property Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Type:</span>
+                <span className="ml-2 font-medium text-gray-900 capitalize">
+                  {formData.propertyType}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Market Value:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  ₹
+                  {parseFloat(formData.propertyCost || "0").toLocaleString()}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">City:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.propertyCity}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Occupancy:</span>
+                <span className="ml-2 font-medium text-gray-900 capitalize">
+                  {formData.occupancyStatus}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Loan Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Amount:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  ₹{parseFloat(formData.loanAmount || "0").toLocaleString()}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Tenure:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.tenure} Years
+                </span>
+              </div>
+              <div className="col-span-2">
+                <span className="text-gray-600">Purpose:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.loanPurpose}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <p className="text-xs text-gray-600">
+          By submitting this application, you agree to our Terms & Conditions
+          and Privacy Policy.
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
   const [formData, setFormData] = useState<Partial<LAPFields>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -69,302 +365,6 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const PropertyInfoStep = () => {
-    const handleChange = (field: keyof LAPFields, value: string) => {
-      setFormData({ ...formData, [field]: value });
-      if (errors[field]) {
-        setErrors({ ...errors, [field]: "" });
-      }
-    };
-
-    const propertyTypes = [
-      { value: "residential", label: "Residential" },
-      { value: "commercial", label: "Commercial" },
-      { value: "industrial", label: "Industrial" },
-      { value: "plot", label: "Plot" },
-    ];
-
-    const tenures = ["1", "2", "3", "5", "7", "10", "15"];
-
-    return (
-      <div className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Property Type */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Property Type <span className="text-red-500">*</span>
-            </label>
-            <select
-              value={formData.propertyType || ""}
-              onChange={(e) => handleChange("propertyType", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyType ? "border-red-500" : "border-gray-300"
-                }`}
-            >
-              <option value="">Select Type</option>
-              {propertyTypes.map((type) => (
-                <option key={type.value} value={type.value}>
-                  {type.label}
-                </option>
-              ))}
-            </select>
-            {errors.propertyType && (
-              <p className="text-red-500 text-xs mt-2">{errors.propertyType}</p>
-            )}
-          </div>
-
-          {/* Property Cost */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Property Market Value (₹) <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              value={formData.propertyCost || ""}
-              onChange={(e) => handleChange("propertyCost", e.target.value)}
-              placeholder="Current market value"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyCost ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.propertyCost && (
-              <p className="text-red-500 text-xs mt-2">{errors.propertyCost}</p>
-            )}
-          </div>
-
-          {/* Property City */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Property City <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.propertyCity || ""}
-              onChange={(e) => handleChange("propertyCity", e.target.value)}
-              placeholder="Enter property city"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.propertyCity ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.propertyCity && (
-              <p className="text-red-500 text-xs mt-2">{errors.propertyCity}</p>
-            )}
-          </div>
-
-          {/* Occupancy Status */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Occupancy Status <span className="text-red-500">*</span>
-            </label>
-            <div className="flex gap-3">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="occupancyStatus"
-                  value="self"
-                  checked={formData.occupancyStatus === "self"}
-                  onChange={(e) =>
-                    handleChange("occupancyStatus", e.target.value)
-                  }
-                  className="w-4 h-4 text-blue-600"
-                />
-                <span className="text-gray-700 text-sm">Self</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="occupancyStatus"
-                  value="rented"
-                  checked={formData.occupancyStatus === "rented"}
-                  onChange={(e) =>
-                    handleChange("occupancyStatus", e.target.value)
-                  }
-                  className="w-4 h-4 text-blue-600"
-                />
-                <span className="text-gray-700 text-sm">Rented</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="occupancyStatus"
-                  value="vacant"
-                  checked={formData.occupancyStatus === "vacant"}
-                  onChange={(e) =>
-                    handleChange("occupancyStatus", e.target.value)
-                  }
-                  className="w-4 h-4 text-blue-600"
-                />
-                <span className="text-gray-700 text-sm">Vacant</span>
-              </label>
-            </div>
-            {errors.occupancyStatus && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.occupancyStatus}
-              </p>
-            )}
-          </div>
-
-          {/* Loan Amount */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Loan Amount (₹) <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              value={formData.loanAmount || ""}
-              onChange={(e) => handleChange("loanAmount", e.target.value)}
-              placeholder="Up to 70% of property value"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.loanAmount ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.loanAmount && (
-              <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
-            )}
-            <p className="text-xs text-gray-500 mt-1">
-              Minimum amount: ₹10,000. Maximum 70% of property value
-            </p>
-          </div>
-
-          {/* Tenure */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Tenure (Years) <span className="text-red-500">*</span>
-            </label>
-            <select
-              value={formData.tenure || ""}
-              onChange={(e) => handleChange("tenure", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.tenure ? "border-red-500" : "border-gray-300"
-                }`}
-            >
-              <option value="">Select Tenure</option>
-              {tenures.map((tenure) => (
-                <option key={tenure} value={tenure}>
-                  {tenure} {parseInt(tenure) === 1 ? "Year" : "Years"}
-                </option>
-              ))}
-            </select>
-            {errors.tenure && (
-              <p className="text-red-500 text-xs mt-2">{errors.tenure}</p>
-            )}
-          </div>
-
-          {/* Loan Purpose */}
-          <div className="md:col-span-2">
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Loan Purpose <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.loanPurpose || ""}
-              onChange={(e) => handleChange("loanPurpose", e.target.value)}
-              placeholder="e.g., Business expansion, Medical, Education"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.loanPurpose ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.loanPurpose && (
-              <p className="text-red-500 text-xs mt-2">{errors.loanPurpose}</p>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const ReviewStep = () => {
-    return (
-      <div className="space-y-6">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-blue-900 mb-4">
-            Application Summary
-          </h3>
-
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Personal Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Name:</span>
-                  <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Mobile:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.mobileNumber}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Property Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Type:</span>
-                  <span className="ml-2 font-medium text-gray-900 capitalize">
-                    {formData.propertyType}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Market Value:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    ₹
-                    {parseFloat(formData.propertyCost || "0").toLocaleString()}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">City:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.propertyCity}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Occupancy:</span>
-                  <span className="ml-2 font-medium text-gray-900 capitalize">
-                    {formData.occupancyStatus}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Loan Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Amount:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    ₹{parseFloat(formData.loanAmount || "0").toLocaleString()}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Tenure:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.tenure} Years
-                  </span>
-                </div>
-                <div className="col-span-2">
-                  <span className="text-gray-600">Purpose:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.loanPurpose}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <p className="text-xs text-gray-600">
-            By submitting this application, you agree to our Terms & Conditions
-            and Privacy Policy.
-          </p>
-        </div>
-      </div>
-    );
-  };
-
   const steps = [
     {
       title: "Personal Details",
@@ -380,11 +380,11 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
     },
     {
       title: "Property Info",
-      component: <PropertyInfoStep />,
+      component: <PropertyInfoStep formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} />,
     },
     {
       title: "Review",
-      component: <ReviewStep />,
+      component: <ReviewStep formData={formData} />,
     },
   ];
 
@@ -403,4 +403,3 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
     />
   );
 }
-

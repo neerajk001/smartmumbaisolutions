@@ -12,21 +12,6 @@ export default function GallerySection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Static Christmas event - always shown first
-  const staticChristmasEvent: GalleryEvent = {
-    id: 0,
-    title: "Christmas Festival Celebration 2024",
-    description: "Celebrating the joy and spirit of Christmas with our team and community. A festive gathering filled with joy, laughter, and togetherness.",
-    eventDate: "2024-12-25",
-    location: "Mumbai Office",
-    isFeatured: true,
-    images: [
-      { id: 1, imageUrl: "/events/event (2).jpeg", altText: "Christmas Festival 1", displayOrder: 0, isFeatured: true },
-      { id: 2, imageUrl: "/events/event (3).jpeg", altText: "Christmas Festival 2", displayOrder: 1, isFeatured: false },
-    ],
-    createdAt: new Date().toISOString(),
-  };
-
   useEffect(() => {
     async function loadGalleryEvents() {
       try {
@@ -61,9 +46,8 @@ export default function GallerySection() {
     );
   }
 
-
-  // Combine static Christmas event with API events (Christmas first, then API events)
-  const allEvents = [staticChristmasEvent, ...events];
+  // Render only API events
+  const allEvents = [...events];
 
   // Render events - Christmas first, then API events
   return (

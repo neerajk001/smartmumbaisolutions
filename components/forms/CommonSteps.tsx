@@ -106,7 +106,7 @@ export function PersonalDetailsStep({ formData, setFormData }: StepProps) {
               onChange={(e) => handleChange("fullName", e.target.value)}
               onBlur={() => handleBlur("fullName")}
               placeholder="Enter your full name"
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>
@@ -129,7 +129,7 @@ export function PersonalDetailsStep({ formData, setFormData }: StepProps) {
               onBlur={() => handleBlur("mobileNumber")}
               placeholder="10-digit mobile number"
               maxLength={10}
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>
@@ -151,7 +151,7 @@ export function PersonalDetailsStep({ formData, setFormData }: StepProps) {
               onChange={(e) => handleChange("email", e.target.value)}
               onBlur={() => handleBlur("email")}
               placeholder="your.email@example.com"
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.email ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.email ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>
@@ -172,7 +172,7 @@ export function PersonalDetailsStep({ formData, setFormData }: StepProps) {
               value={formData.dob || ""}
               onChange={(e) => handleChange("dob", e.target.value)}
               onBlur={() => handleBlur("dob")}
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>
@@ -192,7 +192,7 @@ export function PersonalDetailsStep({ formData, setFormData }: StepProps) {
               value={formData.city || ""}
               onChange={(e) => handleChange("city", e.target.value)}
               onBlur={() => handleBlur("city")}
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.city ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.city ? "border-red-500" : "border-gray-200"
                 }`}
             >
               <option value="">Select City</option>
@@ -222,7 +222,7 @@ export function PersonalDetailsStep({ formData, setFormData }: StepProps) {
               onBlur={() => handleBlur("pincode")}
               placeholder="6-digit pincode"
               maxLength={6}
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.pincode ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.pincode ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>
@@ -232,7 +232,7 @@ export function PersonalDetailsStep({ formData, setFormData }: StepProps) {
         </div>
 
         {/* PAN Card */}
-        <div className="md:col-span-2">
+        <div>
           <label className="block text-sm font-semibold text-gray-700 mb-3">
             PAN Card <span className="text-red-500">*</span>
           </label>
@@ -247,7 +247,7 @@ export function PersonalDetailsStep({ formData, setFormData }: StepProps) {
               onBlur={() => handleBlur("panCard")}
               placeholder="ABCDE1234F"
               maxLength={10}
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.panCard ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.panCard ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>
@@ -351,7 +351,7 @@ export function EmploymentInfoStep({ formData, setFormData }: StepProps) {
               onChange={(e) => handleChange("monthlyIncome", e.target.value)}
               onBlur={() => handleBlur("monthlyIncome")}
               placeholder="Enter monthly income"
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.monthlyIncome ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.monthlyIncome ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>
@@ -380,7 +380,7 @@ export function EmploymentInfoStep({ formData, setFormData }: StepProps) {
                   ? "Enter business name"
                   : "Enter employer name"
               }
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.employerName ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.employerName ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>
@@ -390,7 +390,7 @@ export function EmploymentInfoStep({ formData, setFormData }: StepProps) {
         </div>
 
         {/* Existing EMI */}
-        <div className="md:col-span-2">
+        <div>
           <label className="block text-sm font-semibold text-gray-700 mb-3">
             Existing EMI (₹) <span className="text-red-500">*</span>
           </label>
@@ -402,7 +402,7 @@ export function EmploymentInfoStep({ formData, setFormData }: StepProps) {
               onChange={(e) => handleChange("existingEmi", e.target.value)}
               onBlur={() => handleBlur("existingEmi")}
               placeholder="Enter 0 if no existing EMI"
-              className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.existingEmi ? "border-red-500" : "border-gray-200"
+              className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.existingEmi ? "border-red-500" : "border-gray-200"
                 }`}
             />
           </div>

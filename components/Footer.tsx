@@ -19,13 +19,13 @@ export default function Footer() {
 
                     {/* Brand Column */}
                     <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
-                        <Link href="/" className="flex items-center space-x-2 -ml-4 -mt-6">
+                        <Link href="/" className="flex items-center space-x-2 -ml-4 -mt-8">
                             <Image
                                 src="/sd.png"
                                 alt="Smart Solutions Logo"
                                 width={500}
-                                height={200}
-                                className="object-contain h-48 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                                height={300}
+                                className="object-contain h-36 md:h-52 w-auto opacity-90 hover:opacity-100 transition-opacity"
                             />
                         </Link>
                         <div className="flex gap-4">

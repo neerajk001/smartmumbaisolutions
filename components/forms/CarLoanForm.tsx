@@ -11,6 +11,269 @@ interface CarLoanFormProps {
   onClose: () => void;
 }
 
+const VehicleDetailsStep = ({ formData, setFormData, errors, setErrors }: any) => {
+  const handleChange = (field: keyof CarLoanFields, value: string) => {
+    setFormData({ ...formData, [field]: value });
+    if (errors[field]) {
+      setErrors({ ...errors, [field]: "" });
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Car Type */}
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-3">
+          Car Type <span className="text-red-500">*</span>
+        </label>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="carType"
+              value="new"
+              checked={formData.carType === "new"}
+              onChange={(e) => handleChange("carType", e.target.value)}
+              className="w-4 h-4 text-blue-600"
+            />
+            <span className="text-gray-700">New</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="carType"
+              value="used"
+              checked={formData.carType === "used"}
+              onChange={(e) => handleChange("carType", e.target.value)}
+              className="w-4 h-4 text-blue-600"
+            />
+            <span className="text-gray-700">Used</span>
+          </label>
+        </div>
+        {errors.carType && (
+          <p className="text-red-500 text-xs mt-1">{errors.carType}</p>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Car Make */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Car Make <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={formData.carMake || ""}
+            onChange={(e) => handleChange("carMake", e.target.value)}
+            placeholder="e.g., Maruti, Hyundai, Honda"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carMake ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.carMake && (
+            <p className="text-red-500 text-xs mt-2">{errors.carMake}</p>
+          )}
+        </div>
+
+        {/* Car Model */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Car Model <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={formData.carModel || ""}
+            onChange={(e) => handleChange("carModel", e.target.value)}
+            placeholder="e.g., Swift, i20, City"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carModel ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.carModel && (
+            <p className="text-red-500 text-xs mt-2">{errors.carModel}</p>
+          )}
+        </div>
+
+        {/* Car Variant */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Car Variant <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={formData.carVariant || ""}
+            onChange={(e) => handleChange("carVariant", e.target.value)}
+            placeholder="e.g., VXi, SX, VX"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carVariant ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.carVariant && (
+            <p className="text-red-500 text-xs mt-2">{errors.carVariant}</p>
+          )}
+        </div>
+
+        {/* Car Price */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            On-Road Price (₹) <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            value={formData.carPrice || ""}
+            onChange={(e) => handleChange("carPrice", e.target.value)}
+            placeholder="Enter on-road price"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carPrice ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.carPrice && (
+            <p className="text-red-500 text-xs mt-2">{errors.carPrice}</p>
+          )}
+        </div>
+
+        {/* Car Year (only for used cars) */}
+        {formData.carType === "used" && (
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-3">
+              Manufacturing Year <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="number"
+              value={formData.carYear || ""}
+              onChange={(e) => handleChange("carYear", e.target.value)}
+              placeholder="e.g., 2020"
+              min="2018"
+              max={new Date().getFullYear()}
+              className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carYear ? "border-red-500" : "border-gray-300"
+                }`}
+            />
+            {errors.carYear && (
+              <p className="text-red-500 text-xs mt-2">{errors.carYear}</p>
+            )}
+          </div>
+        )}
+
+        {/* Down Payment */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Down Payment (₹) <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            value={formData.downPayment || ""}
+            onChange={(e) => handleChange("downPayment", e.target.value)}
+            placeholder="Min 10% of car price"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.downPayment ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.downPayment && (
+            <p className="text-red-500 text-xs mt-2">{errors.downPayment}</p>
+          )}
+          <p className="text-xs text-gray-500 mt-1">
+            Min. 10% of car price. Loan amount (Price - Down Payment) must be greater than ₹10,000
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ReviewStep = ({ formData }: any) => {
+  return (
+    <div className="space-y-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+        <h3 className="text-lg font-bold text-blue-900 mb-4">
+          Application Summary
+        </h3>
+
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Personal Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Name:</span>
+                <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">Mobile:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.mobileNumber}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Vehicle Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Type:</span>
+                <span className="ml-2 font-medium text-gray-900 capitalize">
+                  {formData.carType}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Make & Model:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.carMake} {formData.carModel}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Variant:</span>
+                <span className="ml-2 font-medium text-gray-900">{formData.carVariant}</span>
+              </div>
+              {formData.carType === "used" && (
+                <div>
+                  <span className="text-gray-600">Year:</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.carYear}</span>
+                </div>
+              )}
+              <div>
+                <span className="text-gray-600">On-Road Price:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  ₹{parseFloat(formData.carPrice || "0").toLocaleString()}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Down Payment:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  ₹{parseFloat(formData.downPayment || "0").toLocaleString()}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Loan Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Loan Amount:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  ₹
+                  {(
+                    parseFloat(formData.carPrice || "0") -
+                    parseFloat(formData.downPayment || "0")
+                  ).toLocaleString()}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <p className="text-xs text-gray-600">
+          By submitting this application, you agree to our Terms & Conditions
+          and Privacy Policy.
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
   const [formData, setFormData] = useState<Partial<CarLoanFields>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -73,269 +336,6 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const VehicleDetailsStep = () => {
-    const handleChange = (field: keyof CarLoanFields, value: string) => {
-      setFormData({ ...formData, [field]: value });
-      if (errors[field]) {
-        setErrors({ ...errors, [field]: "" });
-      }
-    };
-
-    return (
-      <div className="space-y-6">
-        {/* Car Type */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-3">
-            Car Type <span className="text-red-500">*</span>
-          </label>
-          <div className="flex gap-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                name="carType"
-                value="new"
-                checked={formData.carType === "new"}
-                onChange={(e) => handleChange("carType", e.target.value)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-gray-700">New</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                name="carType"
-                value="used"
-                checked={formData.carType === "used"}
-                onChange={(e) => handleChange("carType", e.target.value)}
-                className="w-4 h-4 text-blue-600"
-              />
-              <span className="text-gray-700">Used</span>
-            </label>
-          </div>
-          {errors.carType && (
-            <p className="text-red-500 text-xs mt-1">{errors.carType}</p>
-          )}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Car Make */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Car Make <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.carMake || ""}
-              onChange={(e) => handleChange("carMake", e.target.value)}
-              placeholder="e.g., Maruti, Hyundai, Honda"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carMake ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.carMake && (
-              <p className="text-red-500 text-xs mt-2">{errors.carMake}</p>
-            )}
-          </div>
-
-          {/* Car Model */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Car Model <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.carModel || ""}
-              onChange={(e) => handleChange("carModel", e.target.value)}
-              placeholder="e.g., Swift, i20, City"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carModel ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.carModel && (
-              <p className="text-red-500 text-xs mt-2">{errors.carModel}</p>
-            )}
-          </div>
-
-          {/* Car Variant */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Car Variant <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.carVariant || ""}
-              onChange={(e) => handleChange("carVariant", e.target.value)}
-              placeholder="e.g., VXi, SX, VX"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carVariant ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.carVariant && (
-              <p className="text-red-500 text-xs mt-2">{errors.carVariant}</p>
-            )}
-          </div>
-
-          {/* Car Price */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              On-Road Price (₹) <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              value={formData.carPrice || ""}
-              onChange={(e) => handleChange("carPrice", e.target.value)}
-              placeholder="Enter on-road price"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carPrice ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.carPrice && (
-              <p className="text-red-500 text-xs mt-2">{errors.carPrice}</p>
-            )}
-          </div>
-
-          {/* Car Year (only for used cars) */}
-          {formData.carType === "used" && (
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
-                Manufacturing Year <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                value={formData.carYear || ""}
-                onChange={(e) => handleChange("carYear", e.target.value)}
-                placeholder="e.g., 2020"
-                min="2018"
-                max={new Date().getFullYear()}
-                className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.carYear ? "border-red-500" : "border-gray-300"
-                  }`}
-              />
-              {errors.carYear && (
-                <p className="text-red-500 text-xs mt-2">{errors.carYear}</p>
-              )}
-            </div>
-          )}
-
-          {/* Down Payment */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Down Payment (₹) <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              value={formData.downPayment || ""}
-              onChange={(e) => handleChange("downPayment", e.target.value)}
-              placeholder="Min 10% of car price"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.downPayment ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.downPayment && (
-              <p className="text-red-500 text-xs mt-2">{errors.downPayment}</p>
-            )}
-            <p className="text-xs text-gray-500 mt-1">
-              Min. 10% of car price. Loan amount (Price - Down Payment) must be greater than ₹10,000
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const ReviewStep = () => {
-    return (
-      <div className="space-y-6">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-blue-900 mb-4">
-            Application Summary
-          </h3>
-
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Personal Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Name:</span>
-                  <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Mobile:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.mobileNumber}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Vehicle Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Type:</span>
-                  <span className="ml-2 font-medium text-gray-900 capitalize">
-                    {formData.carType}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Make & Model:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.carMake} {formData.carModel}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Variant:</span>
-                  <span className="ml-2 font-medium text-gray-900">{formData.carVariant}</span>
-                </div>
-                {formData.carType === "used" && (
-                  <div>
-                    <span className="text-gray-600">Year:</span>
-                    <span className="ml-2 font-medium text-gray-900">{formData.carYear}</span>
-                  </div>
-                )}
-                <div>
-                  <span className="text-gray-600">On-Road Price:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    ₹{parseFloat(formData.carPrice || "0").toLocaleString()}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Down Payment:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    ₹{parseFloat(formData.downPayment || "0").toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Loan Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Loan Amount:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    ₹
-                    {(
-                      parseFloat(formData.carPrice || "0") -
-                      parseFloat(formData.downPayment || "0")
-                    ).toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <p className="text-xs text-gray-600">
-            By submitting this application, you agree to our Terms & Conditions
-            and Privacy Policy.
-          </p>
-        </div>
-      </div>
-    );
-  };
-
   const steps = [
     {
       title: "Personal Details",
@@ -351,11 +351,11 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
     },
     {
       title: "Vehicle Details",
-      component: <VehicleDetailsStep />,
+      component: <VehicleDetailsStep formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} />,
     },
     {
       title: "Review",
-      component: <ReviewStep />,
+      component: <ReviewStep formData={formData} />,
     },
   ];
 
@@ -374,4 +374,3 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
     />
   );
 }
-

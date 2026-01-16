@@ -10,6 +10,240 @@ interface EducationLoanFormProps {
   onClose: () => void;
 }
 
+const EducationDetailsStep = ({ formData, setFormData, errors, setErrors }: any) => {
+  const handleChange = (field: keyof EducationLoanFields, value: string) => {
+    setFormData({ ...formData, [field]: value });
+    if (errors[field]) {
+      setErrors({ ...errors, [field]: "" });
+    }
+  };
+
+  const countries = [
+    { value: "india", label: "India" },
+    { value: "usa", label: "USA" },
+    { value: "uk", label: "UK" },
+    { value: "canada", label: "Canada" },
+    { value: "australia", label: "Australia" },
+    { value: "germany", label: "Germany" },
+    { value: "other", label: "Other" },
+  ];
+
+  return (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Course Name */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Course Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={formData.courseName || ""}
+            onChange={(e) => handleChange("courseName", e.target.value)}
+            placeholder="e.g., MBA, B.Tech, MS"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseName ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.courseName && (
+            <p className="text-red-500 text-xs mt-2">{errors.courseName}</p>
+          )}
+        </div>
+
+        {/* Institute Name */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Institute/University Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={formData.instituteName || ""}
+            onChange={(e) => handleChange("instituteName", e.target.value)}
+            placeholder="Enter institute name"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.instituteName ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.instituteName && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.instituteName}
+            </p>
+          )}
+        </div>
+
+        {/* Course Country */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Country <span className="text-red-500">*</span>
+          </label>
+          <select
+            value={formData.courseCountry || ""}
+            onChange={(e) => handleChange("courseCountry", e.target.value)}
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseCountry ? "border-red-500" : "border-gray-300"
+              }`}
+          >
+            <option value="">Select Country</option>
+            {countries.map((country) => (
+              <option key={country.value} value={country.value}>
+                {country.label}
+              </option>
+            ))}
+          </select>
+          {errors.courseCountry && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.courseCountry}
+            </p>
+          )}
+        </div>
+
+        {/* Course Duration */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Course Duration (Years) <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            value={formData.courseDuration || ""}
+            onChange={(e) => handleChange("courseDuration", e.target.value)}
+            placeholder="1-10 years"
+            min="1"
+            max="10"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseDuration ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.courseDuration && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.courseDuration}
+            </p>
+          )}
+        </div>
+
+        {/* Course Fee */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Total Course Fee (₹) <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            value={formData.courseFee || ""}
+            onChange={(e) => handleChange("courseFee", e.target.value)}
+            placeholder="Enter total course fee"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseFee ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.courseFee && (
+            <p className="text-red-500 text-xs mt-2">{errors.courseFee}</p>
+          )}
+          <p className="text-xs text-gray-500 mt-1">
+            Minimum amount: ₹10,000. Include tuition and other expenses
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ReviewStep = ({ formData }: any) => {
+  return (
+    <div className="space-y-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+        <h3 className="text-lg font-bold text-blue-900 mb-4">
+          Application Summary
+        </h3>
+
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Personal Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Name:</span>
+                <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">Mobile:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.mobileNumber}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Email:</span>
+                <span className="ml-2 font-medium text-gray-900">{formData.email}</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Co-Applicant Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Employment Type:</span>
+                <span className="ml-2 font-medium text-gray-900 capitalize">
+                  {formData.employmentType}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Monthly Income:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  ₹{parseFloat(formData.monthlyIncome || "0").toLocaleString()}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-2">
+              Education Details
+            </h4>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="text-gray-600">Course:</span>
+                <span className="ml-2 font-medium text-gray-900">{formData.courseName}</span>
+              </div>
+              <div>
+                <span className="text-gray-600">Institute:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.instituteName}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Country:</span>
+                <span className="ml-2 font-medium text-gray-900 capitalize">
+                  {formData.courseCountry}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Duration:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.courseDuration}{" "}
+                  {parseInt(formData.courseDuration || "0") === 1
+                    ? "Year"
+                    : "Years"}
+                </span>
+              </div>
+              <div className="col-span-2">
+                <span className="text-gray-600">Total Fee:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  ₹{parseFloat(formData.courseFee || "0").toLocaleString()}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <p className="text-xs text-gray-600">
+          By submitting this application, you agree to our Terms & Conditions
+          and Privacy Policy. Note: A co-applicant (parent/guardian) is
+          required for education loans.
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export default function EducationLoanForm({
   onSubmit,
   onClose,
@@ -60,240 +294,6 @@ export default function EducationLoanForm({
     return Object.keys(newErrors).length === 0;
   };
 
-  const EducationDetailsStep = () => {
-    const handleChange = (field: keyof EducationLoanFields, value: string) => {
-      setFormData({ ...formData, [field]: value });
-      if (errors[field]) {
-        setErrors({ ...errors, [field]: "" });
-      }
-    };
-
-    const countries = [
-      { value: "india", label: "India" },
-      { value: "usa", label: "USA" },
-      { value: "uk", label: "UK" },
-      { value: "canada", label: "Canada" },
-      { value: "australia", label: "Australia" },
-      { value: "germany", label: "Germany" },
-      { value: "other", label: "Other" },
-    ];
-
-    return (
-      <div className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Course Name */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Course Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.courseName || ""}
-              onChange={(e) => handleChange("courseName", e.target.value)}
-              placeholder="e.g., MBA, B.Tech, MS"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseName ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.courseName && (
-              <p className="text-red-500 text-xs mt-2">{errors.courseName}</p>
-            )}
-          </div>
-
-          {/* Institute Name */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Institute/University Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.instituteName || ""}
-              onChange={(e) => handleChange("instituteName", e.target.value)}
-              placeholder="Enter institute name"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.instituteName ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.instituteName && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.instituteName}
-              </p>
-            )}
-          </div>
-
-          {/* Course Country */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Country <span className="text-red-500">*</span>
-            </label>
-            <select
-              value={formData.courseCountry || ""}
-              onChange={(e) => handleChange("courseCountry", e.target.value)}
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseCountry ? "border-red-500" : "border-gray-300"
-                }`}
-            >
-              <option value="">Select Country</option>
-              {countries.map((country) => (
-                <option key={country.value} value={country.value}>
-                  {country.label}
-                </option>
-              ))}
-            </select>
-            {errors.courseCountry && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.courseCountry}
-              </p>
-            )}
-          </div>
-
-          {/* Course Duration */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Course Duration (Years) <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              value={formData.courseDuration || ""}
-              onChange={(e) => handleChange("courseDuration", e.target.value)}
-              placeholder="1-10 years"
-              min="1"
-              max="10"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseDuration ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.courseDuration && (
-              <p className="text-red-500 text-xs mt-1">
-                {errors.courseDuration}
-              </p>
-            )}
-          </div>
-
-          {/* Course Fee */}
-          <div className="md:col-span-2">
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
-              Total Course Fee (₹) <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              value={formData.courseFee || ""}
-              onChange={(e) => handleChange("courseFee", e.target.value)}
-              placeholder="Enter total course fee"
-              className={`w-full px-5 py-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.courseFee ? "border-red-500" : "border-gray-300"
-                }`}
-            />
-            {errors.courseFee && (
-              <p className="text-red-500 text-xs mt-2">{errors.courseFee}</p>
-            )}
-            <p className="text-xs text-gray-500 mt-1">
-              Minimum amount: ₹10,000. Include tuition and other expenses
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const ReviewStep = () => {
-    return (
-      <div className="space-y-6">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="text-lg font-bold text-blue-900 mb-4">
-            Application Summary
-          </h3>
-
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Personal Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Name:</span>
-                  <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Mobile:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.mobileNumber}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Email:</span>
-                  <span className="ml-2 font-medium text-gray-900">{formData.email}</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Co-Applicant Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Employment Type:</span>
-                  <span className="ml-2 font-medium text-gray-900 capitalize">
-                    {formData.employmentType}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Monthly Income:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    ₹{parseFloat(formData.monthlyIncome || "0").toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">
-                Education Details
-              </h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Course:</span>
-                  <span className="ml-2 font-medium text-gray-900">{formData.courseName}</span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Institute:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.instituteName}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Country:</span>
-                  <span className="ml-2 font-medium text-gray-900 capitalize">
-                    {formData.courseCountry}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-gray-600">Duration:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    {formData.courseDuration}{" "}
-                    {parseInt(formData.courseDuration || "0") === 1
-                      ? "Year"
-                      : "Years"}
-                  </span>
-                </div>
-                <div className="col-span-2">
-                  <span className="text-gray-600">Total Fee:</span>
-                  <span className="ml-2 font-medium text-gray-900">
-                    ₹{parseFloat(formData.courseFee || "0").toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-          <p className="text-xs text-gray-600">
-            By submitting this application, you agree to our Terms & Conditions
-            and Privacy Policy. Note: A co-applicant (parent/guardian) is
-            required for education loans.
-          </p>
-        </div>
-      </div>
-    );
-  };
-
   const steps = [
     {
       title: "Personal Details",
@@ -309,11 +309,11 @@ export default function EducationLoanForm({
     },
     {
       title: "Education Details",
-      component: <EducationDetailsStep />,
+      component: <EducationDetailsStep formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} />,
     },
     {
       title: "Review",
-      component: <ReviewStep />,
+      component: <ReviewStep formData={formData} />,
     },
   ];
 
@@ -332,4 +332,3 @@ export default function EducationLoanForm({
     />
   );
 }
-

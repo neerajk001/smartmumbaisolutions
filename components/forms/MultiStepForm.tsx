@@ -170,11 +170,11 @@ export default function MultiStepForm({
             transition={{ duration: 0.3 }}
             className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 min-h-[550px]"
           >
-            <div className="mb-6 pb-6 border-b border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-900">
+            <div className="mb-4 pb-4 border-b border-gray-200">
+              <h2 className="text-xl font-bold text-gray-900">
                 {steps[currentStep].title}
               </h2>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-gray-500 mt-0.5">
                 Step {currentStep + 1} of {steps.length}
               </p>
             </div>
@@ -183,29 +183,29 @@ export default function MultiStepForm({
         </AnimatePresence>
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between mt-6">
+        <div className="sticky -bottom-8 z-20 flex justify-between p-3 bg-white/60 border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] backdrop-blur-2xl backdrop-saturate-150">
           <button
             onClick={handleBack}
             disabled={isFirstStep}
-            className={`flex items-center gap-2 px-8 py-4 rounded-lg font-semibold transition-all ${isFirstStep
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${isFirstStep
               ? "bg-gray-100 text-gray-400 cursor-not-allowed"
               : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
               }`}
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={18} />
             Previous
           </button>
 
           <button
             onClick={handleNext}
             disabled={!isStepValid}
-            className={`flex items-center gap-2 px-10 py-4 rounded-lg font-semibold transition-all shadow-lg ${!isStepValid
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-lg ${!isStepValid
               ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
               : "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-600/30 hover:shadow-blue-600/50"
               }`}
           >
             {isLastStep ? "Submit Application" : "Continue"}
-            <ArrowRight size={20} />
+            <ArrowRight size={18} />
           </button>
         </div>
       </div>

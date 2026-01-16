@@ -168,7 +168,7 @@ export default function InsuranceForm({
                 value={formData.fullName || ""}
                 onChange={(e) => handleChange("fullName", e.target.value)}
                 onBlur={() => handleBlur("fullName")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -189,7 +189,7 @@ export default function InsuranceForm({
                 onChange={(e) => handleChange("mobileNumber", e.target.value)}
                 onBlur={() => handleBlur("mobileNumber")}
                 maxLength={10}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -209,7 +209,7 @@ export default function InsuranceForm({
                 value={formData.dob || ""}
                 onChange={(e) => handleChange("dob", e.target.value)}
                 onBlur={() => handleBlur("dob")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -227,7 +227,7 @@ export default function InsuranceForm({
               <select
                 value={formData.sumInsured || ""}
                 onChange={(e) => handleChange("sumInsured", e.target.value)}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.sumInsured ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.sumInsured ? "border-red-500" : "border-gray-200"
                   }`}
               >
                 <option value="">Select Cover Amount</option>
@@ -281,7 +281,7 @@ export default function InsuranceForm({
                 value={formData.fullName || ""}
                 onChange={(e) => handleChange("fullName", e.target.value)}
                 onBlur={() => handleBlur("fullName")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -302,7 +302,7 @@ export default function InsuranceForm({
                 onChange={(e) => handleChange("mobileNumber", e.target.value)}
                 onBlur={() => handleBlur("mobileNumber")}
                 maxLength={10}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -322,7 +322,7 @@ export default function InsuranceForm({
                 value={formData.dob || ""}
                 onChange={(e) => handleChange("dob", e.target.value)}
                 onBlur={() => handleBlur("dob")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -340,7 +340,7 @@ export default function InsuranceForm({
               <select
                 value={formData.sumInsured || ""}
                 onChange={(e) => handleChange("sumInsured", e.target.value)}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.sumInsured ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.sumInsured ? "border-red-500" : "border-gray-200"
                   }`}
               >
                 <option value="">Select Cover Amount</option>
@@ -394,7 +394,7 @@ export default function InsuranceForm({
                 value={formData.fullName || ""}
                 onChange={(e) => handleChange("fullName", e.target.value)}
                 onBlur={() => handleBlur("fullName")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -415,7 +415,7 @@ export default function InsuranceForm({
                 onChange={(e) => handleChange("mobileNumber", e.target.value)}
                 onBlur={() => handleBlur("mobileNumber")}
                 maxLength={10}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -435,7 +435,7 @@ export default function InsuranceForm({
                 value={formData.dob || ""}
                 onChange={(e) => handleChange("dob", e.target.value)}
                 onBlur={() => handleBlur("dob")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -456,7 +456,7 @@ export default function InsuranceForm({
                 onChange={(e) => handleChange("pincode", e.target.value)}
                 onBlur={() => handleBlur("pincode")}
                 maxLength={6}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.pincode ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.pincode ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -479,7 +479,7 @@ export default function InsuranceForm({
                 }
                 onBlur={() => handleBlur("vehicleNumber")}
                 placeholder="MH12AB1234"
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.vehicleNumber ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.vehicleNumber ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -499,7 +499,7 @@ export default function InsuranceForm({
               <select
                 value={formData.policyTerm || ""}
                 onChange={(e) => handleChange("policyTerm", e.target.value)}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.policyTerm ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.policyTerm ? "border-red-500" : "border-gray-200"
                   }`}
               >
                 <option value="">Select Term</option>
@@ -553,7 +553,7 @@ export default function InsuranceForm({
                 value={formData.fullName || ""}
                 onChange={(e) => handleChange("fullName", e.target.value)}
                 onBlur={() => handleBlur("fullName")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -574,7 +574,7 @@ export default function InsuranceForm({
                 onChange={(e) => handleChange("mobileNumber", e.target.value)}
                 onBlur={() => handleBlur("mobileNumber")}
                 maxLength={10}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -597,7 +597,7 @@ export default function InsuranceForm({
                 placeholder="18-100"
                 min="18"
                 max="100"
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.age ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.age ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -615,7 +615,7 @@ export default function InsuranceForm({
               <select
                 value={formData.loanType || ""}
                 onChange={(e) => handleChange("loanType", e.target.value)}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.loanType ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.loanType ? "border-red-500" : "border-gray-200"
                   }`}
               >
                 <option value="">Select Loan Type</option>
@@ -642,7 +642,7 @@ export default function InsuranceForm({
                 value={formData.loanAmount || ""}
                 onChange={(e) => handleChange("loanAmount", e.target.value)}
                 onBlur={() => handleBlur("loanAmount")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.loanAmount ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.loanAmount ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -667,7 +667,7 @@ export default function InsuranceForm({
                 placeholder="1-30 years"
                 min="1"
                 max="30"
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.tenure ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.tenure ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -714,7 +714,7 @@ export default function InsuranceForm({
                 value={formData.fullName || ""}
                 onChange={(e) => handleChange("fullName", e.target.value)}
                 onBlur={() => handleBlur("fullName")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.fullName ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -735,7 +735,7 @@ export default function InsuranceForm({
                 onChange={(e) => handleChange("mobileNumber", e.target.value)}
                 onBlur={() => handleBlur("mobileNumber")}
                 maxLength={10}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.mobileNumber ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -755,7 +755,7 @@ export default function InsuranceForm({
                 value={formData.dob || ""}
                 onChange={(e) => handleChange("dob", e.target.value)}
                 onBlur={() => handleBlur("dob")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.dob ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -773,7 +773,7 @@ export default function InsuranceForm({
               <select
                 value={formData.loanType || ""}
                 onChange={(e) => handleChange("loanType", e.target.value)}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.loanType ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm appearance-none ${errors.loanType ? "border-red-500" : "border-gray-200"
                   }`}
               >
                 <option value="">Select Loan Type</option>
@@ -800,7 +800,7 @@ export default function InsuranceForm({
                 value={formData.loanAmount || ""}
                 onChange={(e) => handleChange("loanAmount", e.target.value)}
                 onBlur={() => handleBlur("loanAmount")}
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.loanAmount ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.loanAmount ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
@@ -825,7 +825,7 @@ export default function InsuranceForm({
                 placeholder="1-30 years"
                 min="1"
                 max="30"
-                className={`w-full pl-12 pr-5 py-4 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.tenure ? "border-red-500" : "border-gray-200"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 shadow-sm ${errors.tenure ? "border-red-500" : "border-gray-200"
                   }`}
               />
             </div>
