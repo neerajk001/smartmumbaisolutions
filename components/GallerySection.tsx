@@ -32,13 +32,9 @@ export default function GallerySection() {
       try {
         setLoading(true);
         const response = await getGalleryEvents();
-        
+
         if (response.success) {
-          // Filter out any Christmas event from API and only keep other events
-          const filteredEvents = response.events.filter(
-            event => !event.title.toLowerCase().includes('christmas')
-          );
-          setEvents(filteredEvents);
+          setEvents(response.events);
         } else {
           setError(response.error || 'Failed to load gallery events');
         }
@@ -97,9 +93,8 @@ export default function GallerySection() {
             return (
               <div
                 key={event.id}
-                className={`flex flex-col ${
-                  index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                } gap-8 lg:gap-12 items-center`}
+                className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                  } gap-8 lg:gap-12 items-center`}
               >
                 {/* Event Details */}
                 <div className="flex-1 w-full">
@@ -130,7 +125,7 @@ export default function GallerySection() {
                     </div>
 
                     <div className="pt-4">
-                      <Link 
+                      <Link
                         href="/gallery/view-all"
                         className="group flex items-center gap-2 text-blue-900 font-semibold hover:gap-3 transition-all duration-300"
                       >

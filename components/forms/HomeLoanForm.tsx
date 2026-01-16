@@ -194,11 +194,11 @@ export default function HomeLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Name:</span>
-                  <span className="ml-2 font-medium">{formData.fullName}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
                 </div>
                 <div>
                   <span className="text-gray-600">Mobile:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.mobileNumber}
                   </span>
                 </div>
@@ -212,13 +212,13 @@ export default function HomeLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Type:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.employmentType}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Monthly Income:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹{parseFloat(formData.monthlyIncome || "0").toLocaleString()}
                   </span>
                 </div>
@@ -232,26 +232,26 @@ export default function HomeLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Cost:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹
                     {parseFloat(formData.propertyCost || "0").toLocaleString()}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Type:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.propertyLoanType?.replace(/_/g, " ")}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">City:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.propertyCity}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Status:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.propertyStatus}
                   </span>
                 </div>

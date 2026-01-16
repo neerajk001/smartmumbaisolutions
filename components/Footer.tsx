@@ -13,24 +13,21 @@ import Image from "next/image";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#121212] text-gray-400 py-16 text-sm">
-            <div className="container mx-auto px-8 md:px-16 lg:px-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <footer className="bg-[#121212] text-gray-400 py-10 text-sm">
+            <div className="container mx-auto px-8 md:px-12 lg:px-16">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-10">
 
                     {/* Brand Column */}
-                    <div className="space-y-6">
-                        <Link href="/" className="flex items-center space-x-2 -ml-4 -mt-8">
+                    <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
+                        <Link href="/" className="flex items-center space-x-2 -ml-4 -mt-6">
                             <Image
                                 src="/sd.png"
                                 alt="Smart Solutions Logo"
-                                width={400}
-                                height={150}
-                                className="object-contain h-36 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                                width={500}
+                                height={200}
+                                className="object-contain h-48 w-auto opacity-90 hover:opacity-100 transition-opacity"
                             />
                         </Link>
-                        <p className="leading-relaxed text-gray-400 max-w-xs -ml-0.5">
-                            Your trusted partner for all financial needs. We make borrowing simple, transparent, and fast.
-                        </p>
                         <div className="flex gap-4">
                             <Link href="#" className="hover:text-blue-500 transition-colors"><Facebook size={20} /></Link>
                             <Link href="#" className="hover:text-blue-400 transition-colors"><Twitter size={20} /></Link>
@@ -41,8 +38,8 @@ export default function Footer() {
 
                     {/* Loan Column */}
                     <div>
-                        <h3 className="text-orange-500 font-bold text-base mb-6 uppercase tracking-wider">Loan</h3>
-                        <ul className="space-y-4">
+                        <h3 className="text-orange-500 font-bold text-base mb-4 uppercase tracking-wider">Loan</h3>
+                        <ul className="space-y-3">
                             <li><Link href="/loan/personal-loan" className="hover:text-white transition-colors">Personal Loan</Link></li>
                             <li><Link href="/loan/business-loan" className="hover:text-white transition-colors">Business Loan</Link></li>
                             <li><Link href="/loan/home-loan" className="hover:text-white transition-colors">Home Loan</Link></li>
@@ -54,8 +51,8 @@ export default function Footer() {
 
                     {/* Insurance Column */}
                     <div>
-                        <h3 className="text-orange-500 font-bold text-base mb-6 uppercase tracking-wider">Insurance</h3>
-                        <ul className="space-y-4">
+                        <h3 className="text-orange-500 font-bold text-base mb-4 uppercase tracking-wider">Insurance</h3>
+                        <ul className="space-y-3">
                             <li><Link href="/insurance/health-insurance" className="hover:text-white transition-colors">Health Insurance</Link></li>
                             <li><Link href="/insurance/term-life" className="hover:text-white transition-colors">Term Life Insurance</Link></li>
                             <li><Link href="/insurance/car-insurance" className="hover:text-white transition-colors">Car Insurance</Link></li>
@@ -67,8 +64,8 @@ export default function Footer() {
 
                     {/* Company Column */}
                     <div>
-                        <h3 className="text-orange-500 font-bold text-base mb-6 uppercase tracking-wider">Company</h3>
-                        <ul className="space-y-4">
+                        <h3 className="text-orange-500 font-bold text-base mb-4 uppercase tracking-wider">Company</h3>
+                        <ul className="space-y-3">
                             <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
                             <li><Link href="/contact" className="hover:text-white transition-colors">Apply Now</Link></li>
                             <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
@@ -79,8 +76,8 @@ export default function Footer() {
 
                     {/* Contact Column */}
                     <div>
-                        <h3 className="text-orange-500 font-bold text-base mb-6 uppercase tracking-wider">Contact</h3>
-                        <ul className="space-y-6">
+                        <h3 className="text-orange-500 font-bold text-base mb-4 uppercase tracking-wider">Contact</h3>
+                        <ul className="space-y-4">
                             <li className="flex items-start gap-3">
                                 <Mail className="text-orange-500 shrink-0" size={20} />
                                 <a href="mailto:info@smartsolutionsmumbai.com" className="hover:text-white transition-colors">info@smartsolutionsmumbai.com</a>
@@ -97,7 +94,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-xs">
+                <div className="border-t border-gray-800 pt-6 text-center text-gray-500 text-xs">
                     <p>&copy; {new Date().getFullYear()} Smart Solutions. All rights reserved.</p>
                 </div>
             </div>

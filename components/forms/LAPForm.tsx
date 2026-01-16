@@ -45,7 +45,11 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
         newErrors.propertyCity = "Property city is required";
       if (!data.occupancyStatus)
         newErrors.occupancyStatus = "Occupancy status is required";
-      if (!data.loanAmount) newErrors.loanAmount = "Loan amount is required";
+      if (!data.loanAmount) {
+        newErrors.loanAmount = "Loan amount is required";
+      } else if (Number(data.loanAmount) < 10000) {
+        newErrors.loanAmount = "Loan amount must be at least ₹10,000";
+      }
       if (!data.tenure) newErrors.tenure = "Tenure is required";
       if (!data.loanPurpose?.trim())
         newErrors.loanPurpose = "Loan purpose is required";
@@ -214,7 +218,7 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
               <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
             )}
             <p className="text-xs text-gray-500 mt-1">
-              Maximum 70% of property value
+              Minimum amount: ₹10,000. Maximum 70% of property value
             </p>
           </div>
 
@@ -279,11 +283,11 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Name:</span>
-                  <span className="ml-2 font-medium">{formData.fullName}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
                 </div>
                 <div>
                   <span className="text-gray-600">Mobile:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.mobileNumber}
                   </span>
                 </div>
@@ -297,26 +301,26 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Type:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.propertyType}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Market Value:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹
                     {parseFloat(formData.propertyCost || "0").toLocaleString()}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">City:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.propertyCity}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Occupancy:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.occupancyStatus}
                   </span>
                 </div>
@@ -330,19 +334,19 @@ export default function LAPForm({ onSubmit, onClose }: LAPFormProps) {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Amount:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹{parseFloat(formData.loanAmount || "0").toLocaleString()}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Tenure:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.tenure} Years
                   </span>
                 </div>
                 <div className="col-span-2">
                   <span className="text-gray-600">Purpose:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.loanPurpose}
                   </span>
                 </div>

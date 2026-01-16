@@ -56,11 +56,13 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
         newErrors.carYear = "Car year is required for used cars";
       }
 
-      // Validate down payment
+      // Validate down payment and loan amount
       if (data.downPayment && data.carPrice) {
         const dpError = validateDownPayment(data.downPayment, data.carPrice);
         if (dpError) {
           newErrors.downPayment = dpError;
+        } else if (Number(data.carPrice) - Number(data.downPayment) < 10000) {
+          newErrors.downPayment = "Loan amount (Price - Down Payment) must be at least ₹10,000";
         }
       }
     }
@@ -227,7 +229,7 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               <p className="text-red-500 text-xs mt-2">{errors.downPayment}</p>
             )}
             <p className="text-xs text-gray-500 mt-1">
-              Minimum 10% of car price required
+              Min. 10% of car price. Loan amount (Price - Down Payment) must be greater than ₹10,000
             </p>
           </div>
         </div>
@@ -251,11 +253,11 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Name:</span>
-                  <span className="ml-2 font-medium">{formData.fullName}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
                 </div>
                 <div>
                   <span className="text-gray-600">Mobile:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.mobileNumber}
                   </span>
                 </div>
@@ -269,35 +271,35 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Type:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.carType}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Make & Model:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.carMake} {formData.carModel}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Variant:</span>
-                  <span className="ml-2 font-medium">{formData.carVariant}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.carVariant}</span>
                 </div>
                 {formData.carType === "used" && (
                   <div>
                     <span className="text-gray-600">Year:</span>
-                    <span className="ml-2 font-medium">{formData.carYear}</span>
+                    <span className="ml-2 font-medium text-gray-900">{formData.carYear}</span>
                   </div>
                 )}
                 <div>
                   <span className="text-gray-600">On-Road Price:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹{parseFloat(formData.carPrice || "0").toLocaleString()}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Down Payment:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹{parseFloat(formData.downPayment || "0").toLocaleString()}
                   </span>
                 </div>
@@ -311,7 +313,7 @@ export default function CarLoanForm({ onSubmit, onClose }: CarLoanFormProps) {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Loan Amount:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹
                     {(
                       parseFloat(formData.carPrice || "0") -

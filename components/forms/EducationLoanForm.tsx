@@ -47,7 +47,11 @@ export default function EducationLoanForm({
         newErrors.courseCountry = "Course country is required";
       if (!data.courseDuration)
         newErrors.courseDuration = "Course duration is required";
-      if (!data.courseFee) newErrors.courseFee = "Course fee is required";
+      if (!data.courseFee) {
+        newErrors.courseFee = "Course fee is required";
+      } else if (Number(data.courseFee) < 10000) {
+        newErrors.courseFee = "Course fee must be at least ₹10,000";
+      }
     }
 
     if (!isPreview) {
@@ -179,7 +183,7 @@ export default function EducationLoanForm({
               <p className="text-red-500 text-xs mt-2">{errors.courseFee}</p>
             )}
             <p className="text-xs text-gray-500 mt-1">
-              Include tuition and other expenses
+              Minimum amount: ₹10,000. Include tuition and other expenses
             </p>
           </div>
         </div>
@@ -203,17 +207,17 @@ export default function EducationLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Name:</span>
-                  <span className="ml-2 font-medium">{formData.fullName}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
                 </div>
                 <div>
                   <span className="text-gray-600">Mobile:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.mobileNumber}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Email:</span>
-                  <span className="ml-2 font-medium">{formData.email}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.email}</span>
                 </div>
               </div>
             </div>
@@ -225,13 +229,13 @@ export default function EducationLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Employment Type:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.employmentType}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Monthly Income:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹{parseFloat(formData.monthlyIncome || "0").toLocaleString()}
                   </span>
                 </div>
@@ -245,23 +249,23 @@ export default function EducationLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Course:</span>
-                  <span className="ml-2 font-medium">{formData.courseName}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.courseName}</span>
                 </div>
                 <div>
                   <span className="text-gray-600">Institute:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.instituteName}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Country:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.courseCountry}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Duration:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.courseDuration}{" "}
                     {parseInt(formData.courseDuration || "0") === 1
                       ? "Year"
@@ -270,7 +274,7 @@ export default function EducationLoanForm({
                 </div>
                 <div className="col-span-2">
                   <span className="text-gray-600">Total Fee:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹{parseFloat(formData.courseFee || "0").toLocaleString()}
                   </span>
                 </div>

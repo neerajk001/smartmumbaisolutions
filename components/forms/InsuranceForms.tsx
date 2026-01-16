@@ -100,17 +100,30 @@ export default function InsuranceForm({
       case "term-life":
       case "car-insurance":
       case "bike-insurance":
-      case "emi-protector":
         if (!formData.dob) newErrors.dob = "Date of birth is required";
         if (!formData.sumInsured && (type === "health-insurance" || type === "term-life"))
           newErrors.sumInsured = "Sum insured is required";
         break;
 
+      case "emi-protector":
+        if (!formData.dob) newErrors.dob = "Date of birth is required";
+        if (!formData.loanType) newErrors.loanType = "Loan type is required";
+        if (!formData.loanAmount) {
+          newErrors.loanAmount = "Loan amount is required";
+        } else if (Number(formData.loanAmount) < 10000) {
+          newErrors.loanAmount = "Loan amount must be at least ₹10,000";
+        }
+        if (!formData.tenure) newErrors.tenure = "Tenure is required";
+        break;
+
       case "loan-protector":
         if (!formData.age) newErrors.age = "Age is required";
         if (!formData.loanType) newErrors.loanType = "Loan type is required";
-        if (!formData.loanAmount)
+        if (!formData.loanAmount) {
           newErrors.loanAmount = "Loan amount is required";
+        } else if (Number(formData.loanAmount) < 10000) {
+          newErrors.loanAmount = "Loan amount must be at least ₹10,000";
+        }
         if (!formData.tenure) newErrors.tenure = "Tenure is required";
         break;
     }
@@ -636,6 +649,9 @@ export default function InsuranceForm({
             {errors.loanAmount && (
               <p className="text-red-500 text-xs mt-2 font-medium">{errors.loanAmount}</p>
             )}
+            <p className="text-xs text-gray-500 mt-1">
+              Minimum amount: ₹10,000
+            </p>
           </div>
 
           <div>
@@ -791,6 +807,9 @@ export default function InsuranceForm({
             {errors.loanAmount && (
               <p className="text-red-500 text-xs mt-2 font-medium">{errors.loanAmount}</p>
             )}
+            <p className="text-xs text-gray-500 mt-1">
+              Minimum amount: ₹10,000
+            </p>
           </div>
 
           <div>

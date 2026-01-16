@@ -47,7 +47,11 @@ export default function BusinessLoanForm({
       if (!data.gstRegistered)
         newErrors.gstRegistered = "GST registration status is required";
     } else if (stepIndex === 3) {
-      if (!data.loanAmount) newErrors.loanAmount = "Loan amount is required";
+      if (!data.loanAmount) {
+        newErrors.loanAmount = "Loan amount is required";
+      } else if (Number(data.loanAmount) < 10000) {
+        newErrors.loanAmount = "Loan amount must be at least ₹10,000";
+      }
       if (!data.tenure) newErrors.tenure = "Tenure is required";
       if (!data.loanPurpose)
         newErrors.loanPurpose = "Loan purpose is required";
@@ -212,6 +216,9 @@ export default function BusinessLoanForm({
             {errors.loanAmount && (
               <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
             )}
+            <p className="text-xs text-gray-500 mt-1">
+              Minimum amount: ₹10,000
+            </p>
           </div>
 
           <div>
@@ -273,11 +280,11 @@ export default function BusinessLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Name:</span>
-                  <span className="ml-2 font-medium">{formData.fullName}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.fullName}</span>
                 </div>
                 <div>
                   <span className="text-gray-600">Mobile:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.mobileNumber}
                   </span>
                 </div>
@@ -291,25 +298,25 @@ export default function BusinessLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Business Type:</span>
-                  <span className="ml-2 font-medium capitalize">
+                  <span className="ml-2 font-medium text-gray-900 capitalize">
                     {formData.businessType?.replace(/_/g, " ")}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Turnover:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹{parseFloat(formData.turnover || "0").toLocaleString()}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Years in Business:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.yearsInBusiness}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">GST Registered:</span>
-                  <span className="ml-2 font-medium uppercase">
+                  <span className="ml-2 font-medium text-gray-900 uppercase">
                     {formData.gstRegistered}
                   </span>
                 </div>
@@ -323,13 +330,13 @@ export default function BusinessLoanForm({
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Amount:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     ₹{parseFloat(formData.loanAmount || "0").toLocaleString()}
                   </span>
                 </div>
                 <div>
                   <span className="text-gray-600">Tenure:</span>
-                  <span className="ml-2 font-medium">
+                  <span className="ml-2 font-medium text-gray-900">
                     {formData.tenure} Years
                   </span>
                 </div>
