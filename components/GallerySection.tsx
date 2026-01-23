@@ -110,7 +110,7 @@ export default function GallerySection() {
 
                     <div className="pt-4">
                       <Link
-                        href="/gallery/view-all"
+                        href={`/gallery/${event.id}`}
                         className="group flex items-center gap-2 text-blue-900 font-semibold hover:gap-3 transition-all duration-300"
                       >
                         View All Photos <ArrowRight size={18} />
