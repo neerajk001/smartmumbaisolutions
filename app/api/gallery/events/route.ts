@@ -13,18 +13,16 @@ export async function GET(request: NextRequest) {
     const featured = searchParams.get('featured');
     const limit = searchParams.get('limit');
     const offset = searchParams.get('offset');
-    
+
     // Build query string
     const params = new URLSearchParams();
     if (featured) params.append('featured', featured);
     if (limit) params.append('limit', limit);
     if (offset) params.append('offset', offset);
-    
+
     const queryString = params.toString();
     const url = `${BACKEND_URL}/gallery/events${queryString ? `?${queryString}` : ''}`;
-    
-    console.log('API Route: Fetching from backend URL:', url);
-    
+
     // Forward the request to the actual backend
     const response = await fetch(url, {
       method: 'GET',
@@ -35,8 +33,6 @@ export async function GET(request: NextRequest) {
       },
       cache: 'no-store', // Disable caching for fresh data
     });
-
-    console.log('API Route: Response status:', response.status, response.statusText);
 
     // Check if response is OK
     if (!response.ok) {
@@ -68,21 +64,15 @@ export async function GET(request: NextRequest) {
     }
 
     const data = await response.json();
-    console.log('API Route: Response data structure:', {
-      hasSuccess: 'success' in data,
-      hasEvents: 'events' in data,
-      isArray: Array.isArray(data),
-      keys: Object.keys(data),
-    });
 
     // Return the backend response
     return NextResponse.json(data, { status: response.status });
   } catch (error) {
     console.error('API Route: Error fetching gallery events:', error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Failed to fetch gallery events' 
+      {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to fetch gallery events'
       },
       { status: 500 }
     );

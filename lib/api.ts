@@ -13,6 +13,36 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ||
   (typeof window !== 'undefined' ? '/api' : 'http://localhost:3001/api');
 
+// Cache configuration
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+}
+
+// In-memory cache for API responses
+const apiCache = new Map<string, CacheEntry<any>>();
+
+// Helper function to get from cache or fetch
+function getCachedOrFetch<T>(
+  cacheKey: string,
+  fetchFn: () => Promise<T>
+): Promise<T> {
+  const cached = apiCache.get(cacheKey);
+  const now = Date.now();
+
+  // Return cached data if still valid
+  if (cached && (now - cached.timestamp) < CACHE_TTL) {
+    return Promise.resolve(cached.data);
+  }
+
+  // Fetch fresh data and cache it
+  return fetchFn().then(data => {
+    apiCache.set(cacheKey, { data, timestamp: now });
+    return data;
+  });
+}
+
 // API Response Types
 interface ApiSuccessResponse {
   success: true;
@@ -259,42 +289,47 @@ export interface LoanProductsResponse {
 }
 
 export async function getLoanProducts(slug?: string): Promise<LoanProductsResponse> {
-  try {
-    const url = slug
-      ? `${API_BASE_URL}/loan-products?slug=${slug}`
-      : `${API_BASE_URL}/loan-products`;
+  const cacheKey = `loan-products_${slug || 'all'}`;
 
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store', // Always fetch fresh data
-    });
+  return getCachedOrFetch(cacheKey, async () => {
+    try {
+      const url = slug
+        ? `${API_BASE_URL}/loan-products?slug=${slug}`
+        : `${API_BASE_URL}/loan-products`;
 
-    const data = await response.json();
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store', // Don't use browser cache, we have our own
+      });
 
-    if (!response.ok) {
+      const data = await response.json();
+
+      if (!response.ok) {
+        return {
+          success: false,
+          error: data.error || 'Failed to fetch loan products',
+        };
+      }
+
+      return data;
+    } catch (error: any) {
+      // Gracefully handle backend unavailability in development
+      if (error?.cause?.code === 'ECONNREFUSED' || error?.message?.includes('fetch failed')) {
+        // Backend is offline, this is expected in standalone mode
+        // Silently fail - static data will be used instead
+      } else {
+        console.error('Error fetching loan products:', error);
+      }
+
       return {
         success: false,
-        error: data.error || 'Failed to fetch loan products',
+        error: error instanceof Error ? error.message : 'Network error. Please check your connection and try again.',
       };
     }
-
-    return data;
-  } catch (error: any) {
-    // Gracefully handle backend unavailability in development
-    if (error?.cause?.code === 'ECONNREFUSED' || error?.message?.includes('fetch failed')) {
-      // Backend is offline, this is expected in standalone mode
-      // console.warn('Backend API offline, falling back to static data.'); 
-    } else {
-      console.error('Error fetching loan products:', error);
-    }
-
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Network error. Please check your connection and try again.',
-    };
-  }
+  });
 }
+
 

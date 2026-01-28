@@ -8,6 +8,36 @@
 // Backend URL for API and image assets
 const BACKEND_URL = 'https://loansarathi.com';
 
+// Cache configuration
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+}
+
+// In-memory cache
+const apiCache = new Map<string, CacheEntry<any>>();
+
+// Helper function to get from cache or fetch
+function getCachedOrFetch<T>(
+  cacheKey: string,
+  fetchFn: () => Promise<T>
+): Promise<T> {
+  const cached = apiCache.get(cacheKey);
+  const now = Date.now();
+
+  // Return cached data if still valid
+  if (cached && (now - cached.timestamp) < CACHE_TTL) {
+    return Promise.resolve(cached.data);
+  }
+
+  // Fetch fresh data
+  return fetchFn().then(data => {
+    apiCache.set(cacheKey, { data, timestamp: now });
+    return data;
+  });
+}
+
 // Helper function to normalize image URLs
 function normalizeImageUrl(imageUrl: string): string {
   // If already a full URL, return as is
@@ -62,8 +92,8 @@ export interface ApiErrorResponse {
 
 // API Base URL - Use Next.js API routes as proxy to avoid CORS issues
 // The Next.js API routes will proxy requests to the Loan Sarathi backend
-const API_BASE_URL = typeof window !== 'undefined' 
-  ? '/api/gallery' 
+const API_BASE_URL = typeof window !== 'undefined'
+  ? '/api/gallery'
   : `${BACKEND_URL}/api/gallery`;
 
 /**
@@ -77,88 +107,88 @@ export async function getGalleryEvents(
   limit?: number,
   offset?: number
 ): Promise<GalleryEventsResponse | ApiErrorResponse> {
-  try {
-    const params = new URLSearchParams();
-    if (featured !== undefined) params.append('featured', String(featured));
-    if (limit !== undefined) params.append('limit', String(limit));
-    if (offset !== undefined) params.append('offset', String(offset));
+  // Create cache key based on parameters
+  const cacheKey = `events_${featured}_${limit}_${offset}`;
 
-    const queryString = params.toString();
-    const url = `${API_BASE_URL}/events${queryString ? `?${queryString}` : ''}`;
+  return getCachedOrFetch(cacheKey, async () => {
+    try {
+      const params = new URLSearchParams();
+      if (featured !== undefined) params.append('featured', String(featured));
+      if (limit !== undefined) params.append('limit', String(limit));
+      if (offset !== undefined) params.append('offset', String(offset));
 
-    console.log('Fetching gallery events from:', url);
+      const queryString = params.toString();
+      const url = `${API_BASE_URL}/events${queryString ? `?${queryString}` : ''}`;
 
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      cache: 'no-store', // Always fetch fresh data
-    });
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        cache: 'no-store', // Don't use browser cache, we have our own
+      });
 
-    console.log('Response status:', response.status, response.statusText);
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        return {
+          success: false,
+          error: `Invalid response format. Expected JSON but got ${contentType}`,
+        };
+      }
 
-    // Check if response is JSON
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const text = await response.text();
-      console.error('Non-JSON response:', text);
+      const data = await response.json();
+
+      if (!response.ok) {
+        return {
+          success: false,
+          error: data.error || data.message || `Failed to fetch gallery events (${response.status})`,
+        };
+      }
+
+      // Handle different response structures
+      let events: GalleryEvent[] = [];
+      if (data.success && data.events) {
+        events = data.events;
+      } else if (Array.isArray(data)) {
+        // If API returns array directly
+        events = data;
+      } else if (data.data && Array.isArray(data.data)) {
+        // If API wraps in data property
+        events = data.data;
+      } else {
+        console.error('Unexpected response structure:', data);
+        return {
+          success: false,
+          error: 'Unexpected response structure from API',
+        };
+      }
+
+      // Normalize all image URLs
+      const normalizedEvents = events.map((event: GalleryEvent) => ({
+        ...event,
+        images: (event.images || []).map((img: GalleryImage) => ({
+          ...img,
+          imageUrl: normalizeImageUrl(img.imageUrl),
+        })),
+      }));
+
+      return {
+        success: true,
+        total: data.total || normalizedEvents.length,
+        events: normalizedEvents,
+      };
+    } catch (error) {
+      console.error('Error fetching gallery events:', error);
       return {
         success: false,
-        error: `Invalid response format. Expected JSON but got ${contentType}`,
+        error: error instanceof Error ? error.message : 'Network error. Please check your connection and try again.',
       };
     }
-
-    const data = await response.json();
-    console.log('Response data:', data);
-
-    if (!response.ok) {
-      return {
-        success: false,
-        error: data.error || data.message || `Failed to fetch gallery events (${response.status})`,
-      };
-    }
-
-    // Handle different response structures
-    let events: GalleryEvent[] = [];
-    if (data.success && data.events) {
-      events = data.events;
-    } else if (Array.isArray(data)) {
-      // If API returns array directly
-      events = data;
-    } else if (data.data && Array.isArray(data.data)) {
-      // If API wraps in data property
-      events = data.data;
-    } else {
-      console.warn('Unexpected response structure:', data);
-      return {
-        success: false,
-        error: 'Unexpected response structure from API',
-      };
-    }
-
-    // Normalize all image URLs
-    const normalizedEvents = events.map((event: GalleryEvent) => ({
-      ...event,
-      images: (event.images || []).map((img: GalleryImage) => ({
-        ...img,
-        imageUrl: normalizeImageUrl(img.imageUrl),
-      })),
-    }));
-
-    return {
-      success: true,
-      total: data.total || normalizedEvents.length,
-      events: normalizedEvents,
-    };
-  } catch (error) {
-    console.error('Error fetching gallery events:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Network error. Please check your connection and try again.',
-    };
-  }
+  });
 }
 
 /**
@@ -286,5 +316,21 @@ export function getFeaturedImage(event: GalleryEvent): GalleryImage | null {
 export function getSortedImages(event: GalleryEvent): GalleryImage[] {
   if (!event.images) return [];
   return [...event.images].sort((a, b) => a.displayOrder - b.displayOrder);
+}
+
+/**
+ * Clear all cached gallery data
+ * Useful for forcing a refresh of gallery content
+ */
+export function clearGalleryCache(): void {
+  apiCache.clear();
+}
+
+/**
+ * Clear specific cache entry
+ * @param cacheKey - The cache key to clear
+ */
+export function clearCacheEntry(cacheKey: string): void {
+  apiCache.delete(cacheKey);
 }
 
