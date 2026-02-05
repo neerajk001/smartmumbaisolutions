@@ -72,10 +72,11 @@ const DetailedCalculatorContent = () => {
   // Eligibility Calculator State
   const [income, setIncome] = useState<string>('50000'); // Default: 50k
   const [existingEmi, setExistingEmi] = useState<string>('10000'); // Default: 10k
-  const [eligTenure, setEligTenure] = useState<string>('5'); // Default: 5 years
+  const [eligTenure, setEligTenure] = useState<string>('6'); // Default: 6 years
   const [eligibleAmount, setEligibleAmount] = useState(0);
   const [maxEmiCapacity, setMaxEmiCapacity] = useState(0);
   const [applicableROI, setApplicableROI] = useState(11.0);
+  const eligibilityFoir = 0.70;
 
   // Balance Transfer State
   const [btIncome, setBtIncome] = useState(0);
@@ -422,8 +423,7 @@ const DetailedCalculatorContent = () => {
     const existingEmiNum = Number(existingEmi) || 0;
     const eligTenureNum = Number(eligTenure) || 1;
 
-    const foir = 0.50;
-    const maxMonthlyEmi = (incomeNum * foir) - existingEmiNum;
+    const maxMonthlyEmi = (incomeNum * eligibilityFoir) - existingEmiNum;
     setMaxEmiCapacity(Math.round(Math.max(0, maxMonthlyEmi)));
 
     // Calculate Loan Amount for this Max EMI
@@ -437,7 +437,7 @@ const DetailedCalculatorContent = () => {
     }
 
     setEligibleAmount(Math.round(Math.max(0, loan)));
-  }, [income, existingEmi, eligTenure, applicableROI]);
+  }, [income, existingEmi, eligTenure, applicableROI, eligibilityFoir]);
 
   // Balance Transfer Calculation
   useEffect(() => {
@@ -853,6 +853,11 @@ const DetailedCalculatorContent = () => {
 
   const interestPercentage = totalPayment > 0 ? Math.round((totalInterest / totalPayment) * 100) : 0;
   const principalPercentage = 100 - interestPercentage;
+  const eligibilityIncome = Number(income) || 0;
+  const eligibilityExistingEmi = Number(existingEmi) || 0;
+  const eligibilityTenureYears = Number(eligTenure) || 1;
+  const eligibilityFoirPercent = Math.round(eligibilityFoir * 100);
+  const eligibilityTenureLabel = eligibilityTenureYears === 1 ? 'year' : 'years';
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
@@ -1368,6 +1373,22 @@ const DetailedCalculatorContent = () => {
                     <div className="text-sm text-gray-500 mb-2">Max Loan Amount</div>
                     <div className="text-3xl font-bold text-green-600">₹{formatCurrency(eligibleAmount)}</div>
                     <p className="text-xs text-gray-500 mt-1">Total Eligibility of Loan Amount</p>
+                  </div>
+                </div>
+
+                <div className="mt-6 bg-gray-50/80 rounded-xl p-3 border border-gray-100 text-xs text-gray-600">
+                  <div className="flex flex-wrap justify-between gap-2 mb-2 pb-2 border-b border-gray-200 border-dashed">
+                    <div>Income: <span className="font-semibold text-gray-900">₹{formatCurrency(eligibilityIncome)}</span></div>
+                    <div>Existing EMI: <span className="font-semibold text-gray-900">₹{formatCurrency(eligibilityExistingEmi)}</span></div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 items-center text-gray-500">
+                    <span className="font-semibold text-blue-700">Max EMI: ₹{formatCurrency(maxEmiCapacity)}</span>
+                    <span>•</span>
+                    <span>{applicableROI.toFixed(2)}% ROI</span>
+                    <span>•</span>
+                    <span>{eligibilityTenureYears} {eligibilityTenureLabel}</span>
+                    <span>•</span>
+                    <span>FOIR {eligibilityFoirPercent}%</span>
                   </div>
                 </div>
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import Link from "next/link";
 
 const categories = [
     "General",
@@ -155,9 +156,12 @@ export default function FAQSection() {
                                     Contact our support team for help!
                                 </p>
                             </div>
-                            <button className="bg-[#6366F1] hover:bg-[#5558DD] text-white px-5 py-2.5 rounded-xl font-semibold shadow-md shadow-indigo-200 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap text-sm">
+                            <Link
+                                href="/contact"
+                                className="bg-[#6366F1] hover:bg-[#5558DD] text-white px-5 py-2.5 rounded-xl font-semibold shadow-md shadow-indigo-200 transition-all duration-300 hover:-translate-y-0.5 whitespace-nowrap text-sm"
+                            >
                                 Contact Support
-                            </button>
+                            </Link>
                         </div>
                     </div>
 

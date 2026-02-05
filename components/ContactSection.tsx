@@ -14,15 +14,46 @@ export default function ContactSection() {
         { id: "email", label: "Email Address", icon: Mail, type: "email", placeholder: "john@example.com", required: true },
         { id: "phone", label: "Phone Number", icon: Phone, type: "tel", placeholder: "+91 98765 43210", required: true },
         { id: "company", label: "Company Name", icon: Briefcase, type: "text", placeholder: "Your Company Ltd.", required: false },
-        { id: "loanType", label: "Interest", icon: FileText, type: "text", placeholder: "Personal Loan, Insurance...", required: false },
     ];
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        if (e.target.id === "interestCategory") {
+            setFormValues({
+                ...formValues,
+                interestCategory: e.target.value,
+                interestType: ""
+            });
+            return;
+        }
+
         setFormValues({
             ...formValues,
             [e.target.id]: e.target.value
         });
     };
+
+    const loanOptions = [
+        "Personal Loan",
+        "Business Loan",
+        "Home Loan",
+        "Loan Against Property",
+        "Education Loan",
+        "Car Loan"
+    ];
+    const insuranceOptions = [
+        "Health Insurance",
+        "Term Life Insurance",
+        "Car Insurance",
+        "Bike Insurance",
+        "Loan Protector",
+        "EMI Protector"
+    ];
+    const interestTypeOptions =
+        formValues.interestCategory === "Loan"
+            ? loanOptions
+            : formValues.interestCategory === "Insurance"
+                ? insuranceOptions
+                : [];
 
     return (
         <section className="relative py-20 bg-gray-50 overflow-hidden" id="contact">
@@ -132,7 +163,7 @@ export default function ContactSection() {
                                 <form className="space-y-6" action="https://formspree.io/f/mjggvpob" method="POST">
                                     <div className="grid md:grid-cols-2 gap-6">
                                         {inputs.map((input) => (
-                                            <div key={input.id} className={input.id === 'email' || input.id === 'loanType' || input.id === 'company' ? 'col-span-2 md:col-span-1' : ''}>
+                                            <div key={input.id} className={input.id === 'email' || input.id === 'company' ? 'col-span-2 md:col-span-1' : ''}>
                                                 <div className="relative group">
                                                     <label
                                                         htmlFor={input.id}
@@ -161,6 +192,75 @@ export default function ContactSection() {
                                                 </div>
                                             </div>
                                         ))}
+
+                                        <div className="col-span-2 md:col-span-1">
+                                            <div className="relative group">
+                                                <label
+                                                    htmlFor="interestCategory"
+                                                    className={`absolute left-0 -top-6 text-xs font-semibold transition-colors pointer-events-none 
+                                                            ${focusedInput === "interestCategory" || formValues.interestCategory
+                                                            ? 'text-blue-600'
+                                                            : 'text-gray-500'}`}
+                                                >
+                                                    Interest
+                                                </label>
+                                                <div className="relative flex items-center">
+                                                    <select
+                                                        id="interestCategory"
+                                                        name="interestCategory"
+                                                        value={formValues.interestCategory || ""}
+                                                        onChange={handleInputChange}
+                                                        onFocus={() => setFocusedInput("interestCategory")}
+                                                        onBlur={(e) => !e.target.value && setFocusedInput(null)}
+                                                        className={`w-full bg-transparent border-b-2 border-gray-200 py-3 pr-10 focus:border-blue-600 outline-none transition-colors appearance-none ${formValues.interestCategory ? "text-gray-900" : "text-gray-400"}`}
+                                                    >
+                                                        <option value="" disabled>
+                                                            Select Interest
+                                                        </option>
+                                                        <option value="Loan">Loan</option>
+                                                        <option value="Insurance">Insurance</option>
+                                                    </select>
+                                                    <FileText className={`absolute right-0 w-5 h-5 transition-colors ${focusedInput === "interestCategory" ? 'text-blue-600' : 'text-gray-300'}`} />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {formValues.interestCategory ? (
+                                            <div className="col-span-2 md:col-span-1">
+                                                <div className="relative group">
+                                                    <label
+                                                        htmlFor="interestType"
+                                                        className={`absolute left-0 -top-6 text-xs font-semibold transition-colors pointer-events-none 
+                                                            ${focusedInput === "interestType" || formValues.interestType
+                                                            ? 'text-blue-600'
+                                                            : 'text-gray-500'}`}
+                                                    >
+                                                        {formValues.interestCategory === "Loan" ? "Loan Type" : "Insurance Type"}
+                                                    </label>
+                                                    <div className="relative flex items-center">
+                                                        <select
+                                                            id="interestType"
+                                                            name="interestType"
+                                                            value={formValues.interestType || ""}
+                                                            onChange={handleInputChange}
+                                                            onFocus={() => setFocusedInput("interestType")}
+                                                            onBlur={(e) => !e.target.value && setFocusedInput(null)}
+                                                            className={`w-full bg-transparent border-b-2 border-gray-200 py-3 pr-10 focus:border-blue-600 outline-none transition-colors appearance-none ${formValues.interestType ? "text-gray-900" : "text-gray-400"}`}
+                                                        >
+                                                            <option value="" disabled>
+                                                                {formValues.interestCategory === "Loan" ? "Select Loan Type" : "Select Insurance Type"}
+                                                            </option>
+                                                            {interestTypeOptions.map((option) => (
+                                                                <option key={option} value={option}>
+                                                                    {option}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <FileText className={`absolute right-0 w-5 h-5 transition-colors ${focusedInput === "interestType" ? 'text-blue-600' : 'text-gray-300'}`} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : null}
                                     </div>
 
                                     {/* Message Textarea */}
