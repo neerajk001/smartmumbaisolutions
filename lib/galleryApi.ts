@@ -93,10 +93,13 @@ export interface ApiErrorResponse {
   error: string;
 }
 
-// API Base URL - Call loansarathi.com backend directly (both client and server)
-// smartsolutionsmumbai.com is a separate site, so we always call the backend directly.
-// The backend CORS allows smartsolutionsmumbai.com via X-Application-Source header detection.
-const API_BASE_URL = `${BACKEND_URL}/api/gallery`;
+// API Base URL:
+// - Client (browser): use local Next.js proxy (/api/gallery) to avoid CORS issues.
+//   The proxy calls loansarathi.com server-to-server (no CORS block).
+// - Server (SSR/build): call loansarathi.com directly (no CORS restriction server-to-server).
+const API_BASE_URL = typeof window !== 'undefined'
+  ? '/api/gallery'
+  : `${BACKEND_URL}/api/gallery`;
 
 /**
  * Get all gallery events
