@@ -311,7 +311,7 @@ export async function getLoanProducts(slug?: string): Promise<LoanProductsRespon
           'X-Application-Source': 'smartmumbaisolutions',
           'User-Agent': 'SmartMumbaiSolutions/1.0',
         },
-        cache: 'no-store', // Don't use browser cache, we have our own
+        next: { revalidate: 3600 }, // Revalidate every hour - allows static generation
       });
 
       const data = await response.json();
