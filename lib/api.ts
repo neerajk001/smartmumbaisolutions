@@ -10,8 +10,11 @@
  * Production: http://localhost:3001/api (Next.js API routes) → https://loansarathi.com/api
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ||
-  (typeof window !== 'undefined' ? '/api' : 'http://localhost:3001/api');
+const BACKEND_URL = process.env.BACKEND_API_URL || 'https://loansarathi.com';
+
+const API_BASE_URL = typeof window !== 'undefined'
+  ? '/api'
+  : `${BACKEND_URL}/api`;
 
 // Cache configuration
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
@@ -177,6 +180,8 @@ export async function submitLoanApplication(loanType: string, formData: any): Pr
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Application-Source': 'smartmumbaisolutions',
+        'User-Agent': 'SmartMumbaiSolutions/1.0',
       },
       body: JSON.stringify(requestBody),
     });
@@ -245,6 +250,8 @@ export async function submitInsuranceApplication(insuranceType: string, formData
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Application-Source': 'smartmumbaisolutions',
+        'User-Agent': 'SmartMumbaiSolutions/1.0',
       },
       body: JSON.stringify(requestBody),
     });
@@ -301,6 +308,8 @@ export async function getLoanProducts(slug?: string): Promise<LoanProductsRespon
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'X-Application-Source': 'smartmumbaisolutions',
+          'User-Agent': 'SmartMumbaiSolutions/1.0',
         },
         cache: 'no-store', // Don't use browser cache, we have our own
       });

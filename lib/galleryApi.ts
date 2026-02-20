@@ -125,6 +125,8 @@ export async function getGalleryEvents(
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'X-Application-Source': 'smartmumbaisolutions',
+          'User-Agent': 'SmartMumbaiSolutions/1.0',
         },
         cache: 'no-store', // Don't use browser cache, we have our own
       });

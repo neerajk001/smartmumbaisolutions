@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
       method: 'GET',
       headers: {
         'X-Application-Source': 'smartmumbaisolutions', // Required header
+        'User-Agent': 'SmartMumbaiSolutions/1.0',
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
