@@ -70,8 +70,11 @@ export interface GalleryEvent {
   eventDate: string;
   location: string;
   isFeatured: boolean;
+  isPublished: boolean;
+  source: string;
   images: GalleryImage[];
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface GalleryEventsResponse {
@@ -206,6 +209,8 @@ export async function getGalleryEvent(
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'X-Application-Source': 'smartmumbaisolutions',
+        'User-Agent': 'SmartMumbaiSolutions/1.0',
       },
       cache: 'no-store',
     });
@@ -254,6 +259,8 @@ export async function checkGalleryHealth(): Promise<{ success: boolean; message?
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'X-Application-Source': 'smartmumbaisolutions',
+        'User-Agent': 'SmartMumbaiSolutions/1.0',
       },
       cache: 'no-store',
     });
