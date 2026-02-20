@@ -46,10 +46,33 @@ export default function GallerySection() {
     );
   }
 
+  // Show error state
+  if (error) {
+    return (
+      <section className="py-20 bg-[#FCF8F8] overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Gallery & Events
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-6">
+              Capturing memorable moments from our events and celebrations
+            </p>
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 max-w-xl mx-auto">
+              <p className="text-amber-800 font-medium">{error}</p>
+              <p className="text-amber-700 text-sm mt-2">
+                The gallery is temporarily unavailable. Please try again later.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   // Render only API events
   const allEvents = [...events];
 
-  // Render events - Christmas first, then API events
   return (
     <section className="py-20 bg-[#FCF8F8] overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6">

@@ -38,16 +38,18 @@ export async function GET(request: NextRequest) {
     // Check if response is OK
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('API Route: Error response:', errorText);
+      console.error('API Route: Backend error', response.status, errorText);
       try {
         const errorData = JSON.parse(errorText);
+        const message = errorData.error || errorData.message || 'Failed to fetch gallery events';
+        const details = errorData.details;
         return NextResponse.json(
-          { success: false, error: errorData.error || errorData.message || 'Failed to fetch gallery events' },
+          { success: false, error: message, ...(details && { details }) },
           { status: response.status }
         );
       } catch {
         return NextResponse.json(
-          { success: false, error: `Backend returned error: ${response.status} ${response.statusText}` },
+          { success: false, error: `Backend returned ${response.status}: ${errorText || response.statusText}` },
           { status: response.status }
         );
       }
@@ -69,11 +71,13 @@ export async function GET(request: NextRequest) {
     // Return the backend response
     return NextResponse.json(data, { status: response.status });
   } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
     console.error('API Route: Error fetching gallery events:', error);
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to fetch gallery events'
+        error: 'Gallery backend unreachable',
+        details: process.env.NODE_ENV === 'development' ? message : undefined,
       },
       { status: 500 }
     );

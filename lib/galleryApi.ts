@@ -150,9 +150,11 @@ export async function getGalleryEvents(
       const data = await response.json();
 
       if (!response.ok) {
+        const msg = data.error || data.message || `Failed to fetch gallery events (${response.status})`;
+        const details = data.details ? ` — ${data.details}` : '';
         return {
           success: false,
-          error: data.error || data.message || `Failed to fetch gallery events (${response.status})`,
+          error: msg + details,
         };
       }
 
