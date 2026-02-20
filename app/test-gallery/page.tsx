@@ -7,73 +7,22 @@ export default function TestGalleryPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const testDirectBackendCall = async () => {
+  // Use same-origin proxy only (direct loansarathi.com from browser is blocked by CORS)
+  const testGalleryAPI = async () => {
     setLoading(true);
     setError(null);
     setTestResults(null);
 
     try {
-      console.log('Testing direct backend call...');
-      
-      const response = await fetch('https://loansarathi.com/api/gallery/events', {
-        method: 'GET',
-        headers: {
-          'X-Application-Source': 'smartmumbaisolutions',
-        },
-      });
-
+      console.log('Testing gallery API via proxy...');
+      const response = await fetch('/api/gallery/events', { method: 'GET' });
       console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
-
       const data = await response.json();
-      console.log('Response data:', data);
-
-      setTestResults({
-        status: response.status,
-        success: data.success,
-        data: data,
-      });
-
-      if (!response.ok) {
-        setError(`API returned status ${response.status}`);
-      }
+      setTestResults({ status: response.status, success: data.success, data });
+      if (!response.ok) setError(`API returned status ${response.status}`);
     } catch (err: any) {
-      console.error('Error testing backend:', err);
-      setError(err.message || 'Failed to fetch from backend');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const testViaNextAPI = async () => {
-    setLoading(true);
-    setError(null);
-    setTestResults(null);
-
-    try {
-      console.log('Testing via Next.js API route...');
-      
-      const response = await fetch('/api/gallery/events', {
-        method: 'GET',
-      });
-
-      console.log('Response status:', response.status);
-      
-      const data = await response.json();
-      console.log('Response data:', data);
-
-      setTestResults({
-        status: response.status,
-        success: data.success,
-        data: data,
-      });
-
-      if (!response.ok) {
-        setError(`API returned status ${response.status}`);
-      }
-    } catch (err: any) {
-      console.error('Error testing Next.js API:', err);
-      setError(err.message || 'Failed to fetch via Next.js API');
+      console.error('Error testing gallery API:', err);
+      setError(err.message || 'Failed to fetch gallery events');
     } finally {
       setLoading(false);
     }
@@ -89,20 +38,16 @@ export default function TestGalleryPage() {
           <h2 className="text-xl font-semibold mb-4">Test API Connections</h2>
           <div className="flex gap-4">
             <button
-              onClick={testDirectBackendCall}
-              disabled={loading}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
-            >
-              Test Direct Backend Call
-            </button>
-            <button
-              onClick={testViaNextAPI}
+              onClick={testGalleryAPI}
               disabled={loading}
               className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
-              Test Via Next.js API Route
+              Test Gallery API (via proxy)
             </button>
           </div>
+          <p className="mt-2 text-sm text-gray-500">
+            Fetches from your same-origin /api/gallery/events; the server proxies to Loan Sarathi backend (avoids CORS).
+          </p>
           {loading && (
             <p className="mt-4 text-gray-600">Loading...</p>
           )}
@@ -199,20 +144,19 @@ export default function TestGalleryPage() {
         <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg mt-6">
           <h3 className="font-semibold text-blue-900 mb-3">How to Use This Page:</h3>
           <ol className="list-decimal list-inside space-y-2 text-blue-800 text-sm">
-            <li>Click "Test Direct Backend Call" to test direct connection to Loan Sarathi backend</li>
-            <li>Click "Test Via Next.js API Route" to test through your proxy</li>
-            <li>Check the response data below</li>
-            <li>Open browser DevTools Console (F12) for detailed logs</li>
-            <li>If images show, backend is working correctly!</li>
+            <li>Click &quot;Test Gallery API (via proxy)&quot; to fetch gallery events through your Next.js proxy</li>
+            <li>The proxy calls loansarathi.com server-side, so the browser never hits cross-origin (no CORS)</li>
+            <li>Check the response data below; if events and images show, the flow is working</li>
+            <li>Open DevTools Console (F12) for detailed logs</li>
           </ol>
         </div>
 
         {/* API Endpoint Info */}
         <div className="bg-gray-100 p-6 rounded-lg mt-6">
-          <h3 className="font-semibold mb-3">API Endpoints Being Tested:</h3>
+          <h3 className="font-semibold mb-3">API flow:</h3>
           <div className="space-y-2 text-sm font-mono">
-            <p>Direct: <span className="text-blue-600">https://loansarathi.com/api/gallery/events</span></p>
-            <p>Via Next.js: <span className="text-green-600">http://localhost:3001/api/gallery/events</span></p>
+            <p>Browser → <span className="text-green-600">/api/gallery/events</span> (same origin)</p>
+            <p>Next.js server → <span className="text-blue-600">https://loansarathi.com/api/gallery/events</span> (with X-Application-Source: smartmumbaisolutions)</p>
           </div>
         </div>
       </div>
