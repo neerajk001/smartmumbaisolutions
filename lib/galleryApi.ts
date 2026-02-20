@@ -93,11 +93,10 @@ export interface ApiErrorResponse {
   error: string;
 }
 
-// API Base URL - Use Next.js API routes as proxy to avoid CORS issues
-// The Next.js API routes will proxy requests to the Loan Sarathi backend
-const API_BASE_URL = typeof window !== 'undefined'
-  ? '/api/gallery'
-  : `${BACKEND_URL}/api/gallery`;
+// API Base URL - Call loansarathi.com backend directly (both client and server)
+// smartsolutionsmumbai.com is a separate site, so we always call the backend directly.
+// The backend CORS allows smartsolutionsmumbai.com via X-Application-Source header detection.
+const API_BASE_URL = `${BACKEND_URL}/api/gallery`;
 
 /**
  * Get all gallery events
