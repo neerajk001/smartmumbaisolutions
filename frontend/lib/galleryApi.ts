@@ -2,11 +2,10 @@
  * Gallery API Client for Smart Mumbai Solutions
  * 
  * This module handles all gallery-related API calls.
- * It fetches directly from the Loan Sarathi backend API.
+ * It fetches from the local Gallery backend (this project).
  */
 
-// Backend URL for API and image assets
-const BACKEND_URL = 'https://loansarathi.com';
+// Images are served from this app under /uploads/...
 
 // Cache configuration
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
@@ -16,7 +15,7 @@ interface CacheEntry<T> {
 }
 
 // In-memory cache
-const apiCache = new Map<string, CacheEntry<any>>();
+const apiCache = new Map<string, CacheEntry<unknown>>();
 
 // Helper function to get from cache or fetch
 function getCachedOrFetch<T>(
@@ -45,13 +44,9 @@ function normalizeImageUrl(imageUrl: string): string {
     return imageUrl;
   }
 
-  // If relative URL (starts with /), prepend backend URL
-  if (imageUrl.startsWith('/')) {
-    return `${BACKEND_URL}${imageUrl}`;
-  }
-
-  // Otherwise, assume it needs both / and backend URL
-  return `${BACKEND_URL}/${imageUrl}`;
+  // For this app, keep relative URLs (e.g. /uploads/...) as-is
+  if (imageUrl.startsWith('/')) return imageUrl;
+  return `/${imageUrl}`;
 }
 
 // Types
@@ -64,7 +59,7 @@ export interface GalleryImage {
 }
 
 export interface GalleryEvent {
-  id: number;
+  id: number | string;  // API returns MongoDB ObjectId string
   title: string;
   description: string;
   eventDate: string;
@@ -93,13 +88,9 @@ export interface ApiErrorResponse {
   error: string;
 }
 
-// API Base URL:
-// - Client (browser): use local Next.js proxy (/api/gallery) to avoid CORS issues.
-//   The proxy calls loansarathi.com server-to-server (no CORS block).
-// - Server (SSR/build): call loansarathi.com directly (no CORS restriction server-to-server).
-const API_BASE_URL = typeof window !== 'undefined'
-  ? '/api/gallery'
-  : `${BACKEND_URL}/api/gallery`;
+// Gallery backend base URL (Node backend, not Next.js routes)
+// Example: http://localhost:7001/api/gallery
+const API_BASE_URL = process.env.NEXT_PUBLIC_GALLERY_API_BASE || 'http://localhost:7001/api/gallery';
 
 /**
  * Get all gallery events
@@ -152,9 +143,10 @@ export async function getGalleryEvents(
       if (!response.ok) {
         const msg = data.error || data.message || `Failed to fetch gallery events (${response.status})`;
         const details = data.details ? ` — ${data.details}` : '';
+        const debugHint = data._debug?.hint ? ` ${data._debug.hint}` : '';
         return {
           success: false,
-          error: msg + details,
+          error: msg + details + debugHint,
         };
       }
 
@@ -192,9 +184,10 @@ export async function getGalleryEvents(
       };
     } catch (error) {
       console.error('Error fetching gallery events:', error);
+      const msg = error instanceof Error ? error.message : 'Network error. Please check your connection and try again.';
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Network error. Please check your connection and try again.',
+        error: msg,
       };
     }
   });
@@ -202,10 +195,10 @@ export async function getGalleryEvents(
 
 /**
  * Get a single gallery event by ID
- * @param id - Event ID
+ * @param id - Event ID (string from API or number)
  */
 export async function getGalleryEvent(
-  id: number
+  id: number | string
 ): Promise<GalleryEventResponse | ApiErrorResponse> {
   try {
     const response = await fetch(`${API_BASE_URL}/events/${id}`, {

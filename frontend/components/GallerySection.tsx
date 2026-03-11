@@ -95,7 +95,7 @@ export default function GallerySection() {
           {allEvents.map((event, index) => {
             const images = getSortedImages(event);
             const image1 = images[0];
-            const image2 = images[1] || images[0]; // Fallback to first if only one image
+            const image2 = images[1] ?? image1;
 
             return (
               <div
@@ -142,27 +142,39 @@ export default function GallerySection() {
                   </motion.div>
                 </div>
 
-                {/* Image Grid */}
+                {/* Image Grid - only render when we have at least one image */}
                 <div className="flex-1 w-full">
                   <div className="grid grid-cols-2 gap-4 h-[400px] md:h-[500px]">
-                    <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl group">
-                      <Image
-                        src={image1.imageUrl}
-                        alt={image1.altText}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="relative h-[85%] self-center rounded-2xl overflow-hidden shadow-xl mt-8 md:mt-12 group">
-                      <Image
-                        src={image2.imageUrl}
-                        alt={image2.altText}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
+                    {image1?.imageUrl ? (
+                      <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl group">
+                        <Image
+                          src={image1.imageUrl}
+                          alt={image1.altText ?? event.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                    ) : (
+                      <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-500 text-sm">No image</span>
+                      </div>
+                    )}
+                    {image2?.imageUrl ? (
+                      <div className="relative h-[85%] self-center rounded-2xl overflow-hidden shadow-xl mt-8 md:mt-12 group">
+                        <Image
+                          src={image2.imageUrl}
+                          alt={image2.altText ?? event.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                    ) : (
+                      <div className="relative h-[85%] self-center rounded-2xl overflow-hidden shadow-xl mt-8 md:mt-12 bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-500 text-sm">No image</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
