@@ -27,12 +27,12 @@ function getCachedOrFetch<T>(
 
   // Return cached data if still valid
   if (cached && (now - cached.timestamp) < CACHE_TTL) {
-    return Promise.resolve(cached.data);
+    return Promise.resolve(cached.data as T);
   }
 
   // Fetch fresh data
   return fetchFn().then(data => {
-    apiCache.set(cacheKey, { data, timestamp: now });
+    apiCache.set(cacheKey, { data, timestamp: now } as CacheEntry<unknown>);
     return data;
   });
 }
