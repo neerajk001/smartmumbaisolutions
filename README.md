@@ -29,6 +29,23 @@ pnpm start  # production
 
 This project uses [Next.js](https://nextjs.org) in `frontend/` and a small Express gallery API in `gallery-backend/`.
 
+## Configuration (env + nginx)
+
+This repo now has a **separate gallery backend** (Express) that the frontend calls.
+
+- Frontend env template: `frontend/.env.local.example` → copy to `frontend/.env.local`
+- Gallery backend env template: `gallery-backend/.env.example` → copy to `gallery-backend/.env`
+
+Key variables:
+
+- `NEXT_PUBLIC_GALLERY_API_BASE`
+	- Dev: `http://localhost:7001/api/gallery`
+	- Prod (same domain via nginx): `https://yourdomain.com/api/gallery`
+- `MONGODB_URI` (required for `gallery-backend`)
+- `NEXTAUTH_SECRET` (frontend) must match `GALLERY_JWT_SECRET` (backend) so admin auth works.
+
+For production, proxy the gallery backend under `/api/*` (see `nginx.conf` for an example: `/api/` → `127.0.0.1:7001`, `/` → Next.js).
+
 ### Admin panel
 
 - **Login:** `/admin/login` (email/password from gallery-backend `ADMIN_EMAIL` / `ADMIN_PASSWORD_HASH`, or Google if configured).

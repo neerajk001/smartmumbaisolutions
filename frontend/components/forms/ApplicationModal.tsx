@@ -3,12 +3,7 @@
 import { useState } from "react";
 import { X, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import PersonalLoanForm from "./PersonalLoanForm";
-import BusinessLoanForm from "./BusinessLoanForm";
-import HomeLoanForm from "./HomeLoanForm";
-import LAPForm from "./LAPForm";
-import CarLoanForm from "./CarLoanForm";
-import EducationLoanForm from "./EducationLoanForm";
+import LendingForm from "./LendingForm";
 import InsuranceForm from "./InsuranceForms";
 import { submitLoanApplication, submitInsuranceApplication } from "@/lib/api";
 
@@ -137,28 +132,9 @@ export default function ApplicationModal({
 
     // Show form
     if (category === "Loan") {
-      switch (productType) {
-        case "personal-loan":
-          return (
-            <PersonalLoanForm onSubmit={handleSubmit} onClose={handleClose} />
-          );
-        case "business-loan":
-          return (
-            <BusinessLoanForm onSubmit={handleSubmit} onClose={handleClose} />
-          );
-        case "home-loan":
-          return <HomeLoanForm onSubmit={handleSubmit} onClose={handleClose} />;
-        case "mortgage-loan":
-          return <LAPForm onSubmit={handleSubmit} onClose={handleClose} />;
-        case "car-loan":
-          return <CarLoanForm onSubmit={handleSubmit} onClose={handleClose} />;
-        case "education-loan":
-          return (
-            <EducationLoanForm onSubmit={handleSubmit} onClose={handleClose} />
-          );
-        default:
-          return <div>Form not available</div>;
-      }
+      return (
+        <LendingForm onSubmit={handleSubmit} onClose={handleClose} />
+      );
     } else {
       return (
         <InsuranceForm
