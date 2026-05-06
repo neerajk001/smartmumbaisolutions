@@ -25,7 +25,7 @@ export default function LendingForm({ onSubmit, onClose }: LendingFormProps) {
     if (!formData.fullName.trim()) newErrors.fullName = "Name is required";
     if (!formData.mobileNumber.trim()) newErrors.mobileNumber = "Mobile no is required";
     if (!formData.employmentType) newErrors.employmentType = "Please select employment type";
-    if (!formData.monthlyIncome) newErrors.monthlyIncome = "Annual income is required";
+    if (!formData.monthlyIncome) newErrors.monthlyIncome = "Monthly income is required";
     if (!formData.loanAmount) newErrors.loanAmount = "Loan amount is required";
     if (!formData.pincode.trim()) newErrors.pincode = "Pincode is required";
 
@@ -147,7 +147,7 @@ export default function LendingForm({ onSubmit, onClose }: LendingFormProps) {
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Annual income <span className="text-red-500">*</span>
+              Monthly income <span className="text-red-500">*</span>
             </label>
             <div className="relative">
               <Banknote className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
@@ -158,7 +158,7 @@ export default function LendingForm({ onSubmit, onClose }: LendingFormProps) {
                   setFormData({ ...formData, monthlyIncome: e.target.value });
                   if (errors.monthlyIncome) setErrors({ ...errors, monthlyIncome: "" });
                 }}
-                placeholder="Enter annual income"
+                placeholder="Enter monthly income"
                 className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 ${errors.monthlyIncome ? "border-red-500" : "border-gray-200"}`}
               />
             </div>

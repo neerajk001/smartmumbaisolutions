@@ -85,12 +85,21 @@ function parseSumInsured(sumInsured: string): number {
 // Map form loan types to API loan types
 function mapLoanTypeToSlug(loanType: string): string {
   const mapping: Record<string, string> = {
-    'Personal Loan': 'personal-loan',
-    'Business Loan': 'business-loan',
-    'Home Loan': 'home-loan',
-    'Car Loan': 'car-loan',
-    'Education Loan': 'education-loan',
+    'Personal Loan': 'personal',
+    'Business Loan': 'business',
+    'Home Loan': 'home',
+    'Car Loan': 'car',
+    'Education Loan': 'education',
+    'Loan Against Property': 'lap',
   };
+
+  const clean = loanType.toLowerCase();
+  if (clean.includes('personal')) return 'personal';
+  if (clean.includes('business')) return 'business';
+  if (clean.includes('home')) return 'home';
+  if (clean.includes('car')) return 'car';
+  if (clean.includes('education')) return 'education';
+  if (clean.includes('property') || clean.includes('lap')) return 'lap';
 
   return mapping[loanType] || loanType.toLowerCase().replace(/\s+/g, '-');
 }
@@ -100,9 +109,11 @@ function mapLoanTypeToSlug(loanType: string): string {
  */
 export async function submitLoanApplication(loanType: string, formData: any): Promise<ApiResponse> {
   try {
+    const mappedLoanType = mapLoanTypeToSlug(loanType);
+    
     // Map form data to API format
     const requestBody: any = {
-      loanType: loanType,
+      loanType: mappedLoanType,
       personalInfo: {
         fullName: formData.fullName,
         email: formData.email || '',
@@ -115,13 +126,14 @@ export async function submitLoanApplication(loanType: string, formData: any): Pr
       employmentInfo: {
         employmentType: formData.employmentType,
         monthlyIncome: parseFloat(formData.monthlyIncome) || 0,
+        annualIncome: (parseFloat(formData.monthlyIncome) || 0) * 12,
         employerName: formData.employerName || '',
         existingEmi: parseFloat(formData.existingEmi) || 0,
       },
     };
 
     // Add Business Details (for business-loan)
-    if (loanType === 'business-loan' && formData.businessType) {
+    if (mappedLoanType === 'business' && formData.businessType) {
       requestBody.businessDetails = {
         businessType: formData.businessType,
         turnover: parseFloat(formData.turnover) || 0,
@@ -131,7 +143,7 @@ export async function submitLoanApplication(loanType: string, formData: any): Pr
     }
 
     // Add Property Details (for home-loan, loan-against-property)
-    if ((loanType === 'home-loan' || loanType === 'mortgage-loan') && formData.propertyCost) {
+    if ((mappedLoanType === 'home' || mappedLoanType === 'lap') && formData.propertyCost) {
       requestBody.propertyDetails = {
         propertyCost: parseFloat(formData.propertyCost) || 0,
         currentMarketValue: parseFloat(formData.propertyCost) || 0, // Using same value
@@ -153,7 +165,7 @@ export async function submitLoanApplication(loanType: string, formData: any): Pr
     }
 
     // Add Car Details (for car-loan)
-    if (loanType === 'car-loan' && formData.carMake) {
+    if (mappedLoanType === 'car' && formData.carMake) {
       requestBody.carDetails = {
         carType: formData.carType,
         carMake: formData.carMake,
@@ -166,7 +178,7 @@ export async function submitLoanApplication(loanType: string, formData: any): Pr
     }
 
     // Add Education Details (for education-loan)
-    if (loanType === 'education-loan' && formData.courseName) {
+    if (mappedLoanType === 'education' && formData.courseName) {
       requestBody.educationDetails = {
         courseName: formData.courseName,
         instituteName: formData.instituteName,
