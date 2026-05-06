@@ -14,6 +14,7 @@ export default function LendingForm({ onSubmit, onClose }: LendingFormProps) {
     mobileNumber: "",
     employmentType: "",
     monthlyIncome: "",
+    loanAmount: "",
     pincode: ""
   });
 
@@ -25,6 +26,7 @@ export default function LendingForm({ onSubmit, onClose }: LendingFormProps) {
     if (!formData.mobileNumber.trim()) newErrors.mobileNumber = "Mobile no is required";
     if (!formData.employmentType) newErrors.employmentType = "Please select employment type";
     if (!formData.monthlyIncome) newErrors.monthlyIncome = "Annual income is required";
+    if (!formData.loanAmount) newErrors.loanAmount = "Loan amount is required";
     if (!formData.pincode.trim()) newErrors.pincode = "Pincode is required";
 
     setErrors(newErrors);
@@ -161,6 +163,26 @@ export default function LendingForm({ onSubmit, onClose }: LendingFormProps) {
               />
             </div>
             {errors.monthlyIncome && <p className="text-red-500 text-xs mt-1 font-medium">{errors.monthlyIncome}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Loan amount <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <Banknote className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <input
+                type="number"
+                value={formData.loanAmount}
+                onChange={(e) => {
+                  setFormData({ ...formData, loanAmount: e.target.value });
+                  if (errors.loanAmount) setErrors({ ...errors, loanAmount: "" });
+                }}
+                placeholder="Enter loan amount"
+                className={`w-full pl-12 pr-5 py-3 bg-gray-50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-300 text-base text-gray-900 ${errors.loanAmount ? "border-red-500" : "border-gray-200"}`}
+              />
+            </div>
+            {errors.loanAmount && <p className="text-red-500 text-xs mt-1 font-medium">{errors.loanAmount}</p>}
           </div>
 
           <div>

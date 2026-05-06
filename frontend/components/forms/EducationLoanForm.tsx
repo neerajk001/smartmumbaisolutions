@@ -136,6 +136,42 @@ const EducationDetailsStep = ({ formData, setFormData, errors, setErrors }: any)
             Minimum amount: ₹10,000. Include tuition and other expenses
           </p>
         </div>
+
+        {/* Loan Amount */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Required Loan Amount (₹) <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            value={formData.loanAmount || ""}
+            onChange={(e) => handleChange("loanAmount", e.target.value)}
+            placeholder="Enter required loan amount"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.loanAmount ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.loanAmount && (
+            <p className="text-red-500 text-xs mt-2">{errors.loanAmount}</p>
+          )}
+        </div>
+
+        {/* Tenure */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            Tenure (Years) <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="number"
+            value={formData.tenure || ""}
+            onChange={(e) => handleChange("tenure", e.target.value)}
+            placeholder="e.g., 7"
+            className={`w-full px-5 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-base ${errors.tenure ? "border-red-500" : "border-gray-300"
+              }`}
+          />
+          {errors.tenure && (
+            <p className="text-red-500 text-xs mt-2">{errors.tenure}</p>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -228,6 +264,18 @@ const ReviewStep = ({ formData }: any) => {
                   ₹{parseFloat(formData.courseFee || "0").toLocaleString()}
                 </span>
               </div>
+              <div>
+                <span className="text-gray-600">Loan Amount:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  ₹{parseFloat(formData.loanAmount || "0").toLocaleString()}
+                </span>
+              </div>
+              <div>
+                <span className="text-gray-600">Tenure:</span>
+                <span className="ml-2 font-medium text-gray-900">
+                  {formData.tenure} Years
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -286,6 +334,11 @@ export default function EducationLoanForm({
       } else if (Number(data.courseFee) < 10000) {
         newErrors.courseFee = "Course fee must be at least ₹10,000";
       }
+
+      if (!data.loanAmount)
+        newErrors.loanAmount = "Loan amount is required";
+      if (!data.tenure)
+        newErrors.tenure = "Tenure is required";
     }
 
     if (!isPreview) {

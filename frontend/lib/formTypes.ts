@@ -40,6 +40,8 @@ export interface HomeLoanFields extends CommonLoanFields {
   propertyLoanType: string;
   propertyCity: string;
   propertyStatus: "ready" | "construction" | "";
+  loanAmount: string;
+  tenure: string;
 }
 
 // Loan Against Property specific fields
@@ -62,6 +64,8 @@ export interface CarLoanFields extends CommonLoanFields {
   carPrice: string;
   carYear: string;
   downPayment: string;
+  loanAmount: string;
+  tenure: string;
 }
 
 // Education Loan specific fields
@@ -71,6 +75,8 @@ export interface EducationLoanFields extends CommonLoanFields {
   courseCountry: string;
   courseDuration: string;
   courseFee: string;
+  loanAmount: string;
+  tenure: string;
 }
 
 // Insurance Types
