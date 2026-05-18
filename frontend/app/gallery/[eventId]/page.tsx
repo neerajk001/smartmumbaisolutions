@@ -99,7 +99,7 @@ export default function EventGalleryPage({ params }: PageProps) {
             <Navbar />
 
             <div className="pt-24 pb-16">
-                <div className="max-w-[1400px] mx-auto px-6">
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
                     {/* Header */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -195,7 +195,7 @@ export default function EventGalleryPage({ params }: PageProps) {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="relative max-w-7xl w-full max-h-[90vh]"
+                            className="relative max-w-7xl w-full max-h-[92vh] sm:max-h-[90vh]"
                         >
                             {/* Close Button */}
                             <button
@@ -211,7 +211,7 @@ export default function EventGalleryPage({ params }: PageProps) {
                             </div>
 
                             {/* Main Image */}
-                            <div className="relative w-full h-[80vh] rounded-2xl overflow-hidden">
+                            <div className="relative w-full h-[68vh] sm:h-[80vh] rounded-2xl overflow-hidden">
                                 <Image
                                     src={allImages[currentImageIndex].imageUrl}
                                     alt={allImages[currentImageIndex].altText}
@@ -246,7 +246,7 @@ export default function EventGalleryPage({ params }: PageProps) {
                             )}
 
                             {/* Thumbnail Strip */}
-                            <div className="mt-4 flex gap-2 overflow-x-auto pb-2 justify-center">
+                            <div className="mt-3 sm:mt-4 flex gap-2 overflow-x-auto pb-2 justify-start sm:justify-center">
                                 {allImages.map((img, idx) => (
                                     <button
                                         key={img.id}
@@ -254,7 +254,7 @@ export default function EventGalleryPage({ params }: PageProps) {
                                             e.stopPropagation();
                                             setCurrentImageIndex(idx);
                                         }}
-                                        className={`relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 transition-all ${idx === currentImageIndex
+                                        className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0 transition-all ${idx === currentImageIndex
                                             ? "ring-4 ring-blue-500 scale-110"
                                             : "opacity-60 hover:opacity-100"
                                             }`}

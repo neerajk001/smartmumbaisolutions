@@ -181,7 +181,7 @@ export default function AdminGalleryClient({ user }: Props) {
   const handleCreateEvent = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!token) {
-      setEventMessage({ type: 'error', text: 'Sign in with email/password to create events.' });
+      setEventMessage({ type: 'error', text: 'Sign in with Google to create events.' });
       return;
     }
     if (!eventTitle.trim() || !eventDescription.trim() || !eventDate || !eventLocation.trim()) {
@@ -249,7 +249,7 @@ export default function AdminGalleryClient({ user }: Props) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-fr">
           {/* Bento: Welcome - spans 2 cols */}
-          <div className="lg:col-span-2 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 p-6 shadow-lg">
+          <div className="lg:col-span-2 rounded-2xl bg-linear-to-br from-orange-500 to-orange-600 p-6 shadow-lg">
             <h2 className="text-lg font-bold text-white mb-2">Welcome back</h2>
             <p className="text-orange-100 text-sm mb-6">
               Signed in as <strong className="text-white">{user.email}</strong>
@@ -398,7 +398,7 @@ export default function AdminGalleryClient({ user }: Props) {
                     <tbody>
                       {events.map((ev) => (
                         <tr key={ev.id} className="border-b border-gray-700/50">
-                          <td className="py-2 pr-3 text-white font-medium truncate max-w-[120px]">{ev.title}</td>
+                          <td className="py-2 pr-3 text-white font-medium truncate max-w-30">{ev.title}</td>
                           <td className="py-2 pr-3 text-gray-400">{ev.eventDate?.slice(0, 10)}</td>
                           <td className="py-2 pr-3">
                             <span className={`px-2 py-0.5 rounded-lg text-xs font-medium ${ev.isPublished ? 'bg-orange-500/30 text-orange-200' : 'bg-gray-600 text-gray-400'}`}>

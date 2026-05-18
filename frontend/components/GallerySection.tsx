@@ -37,7 +37,7 @@ export default function GallerySection() {
   if (loading) {
     return (
       <section className="py-20 bg-[#FCF8F8] overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center">
             <p className="text-gray-600">Loading gallery...</p>
           </div>
@@ -50,7 +50,7 @@ export default function GallerySection() {
   if (error) {
     return (
       <section className="py-20 bg-[#FCF8F8] overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Gallery & Events
@@ -75,7 +75,7 @@ export default function GallerySection() {
 
   return (
     <section className="py-20 bg-[#FCF8F8] overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-6">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ export default function GallerySection() {
 
                 {/* Image Grid - only render when we have at least one image */}
                 <div className="flex-1 w-full">
-                  <div className="grid grid-cols-2 gap-4 h-[400px] md:h-[500px]">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-auto sm:h-[400px] md:h-[500px]">
                     {image1?.imageUrl ? (
                       <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl group">
                         <Image
@@ -156,12 +156,12 @@ export default function GallerySection() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                     ) : (
-                      <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl bg-gray-200 flex items-center justify-center">
+                      <div className="relative h-64 sm:h-full rounded-2xl overflow-hidden shadow-2xl bg-gray-200 flex items-center justify-center">
                         <span className="text-gray-500 text-sm">No image</span>
                       </div>
                     )}
                     {image2?.imageUrl ? (
-                      <div className="relative h-[85%] self-center rounded-2xl overflow-hidden shadow-xl mt-8 md:mt-12 group">
+                      <div className="relative h-64 sm:h-[85%] self-center rounded-2xl overflow-hidden shadow-xl mt-0 sm:mt-8 md:mt-12 group">
                         <Image
                           src={image2.imageUrl}
                           alt={image2.altText ?? event.title}
@@ -171,7 +171,7 @@ export default function GallerySection() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                     ) : (
-                      <div className="relative h-[85%] self-center rounded-2xl overflow-hidden shadow-xl mt-8 md:mt-12 bg-gray-200 flex items-center justify-center">
+                      <div className="relative h-64 sm:h-[85%] self-center rounded-2xl overflow-hidden shadow-xl mt-0 sm:mt-8 md:mt-12 bg-gray-200 flex items-center justify-center">
                         <span className="text-gray-500 text-sm">No image</span>
                       </div>
                     )}

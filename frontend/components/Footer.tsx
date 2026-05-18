@@ -13,19 +13,19 @@ import Image from "next/image";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#121212] text-gray-400 py-10 text-sm">
-            <div className="container mx-auto px-8 md:px-12 lg:px-16">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-10">
+        <footer className="bg-[#121212] text-gray-400 py-8 sm:py-10 text-sm">
+            <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-10">
 
                     {/* Brand Column */}
-                    <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
-                        <Link href="/" className="flex items-center space-x-2 -ml-4 -mt-8">
+                    <div className="sm:col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
+                        <Link href="/" className="flex items-center space-x-2 -ml-2 sm:-ml-4 -mt-4 sm:-mt-8">
                             <Image
                                 src="/sd.png"
                                 alt="Smart Solutions Logo"
                                 width={500}
                                 height={300}
-                                className="object-contain h-36 md:h-52 w-auto opacity-90 hover:opacity-100 transition-opacity"
+                                className="object-contain h-24 sm:h-28 md:h-52 w-auto max-w-full opacity-90 hover:opacity-100 transition-opacity"
                             />
                         </Link>
                         <div className="flex gap-4">

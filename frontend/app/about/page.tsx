@@ -63,11 +63,11 @@ export default function AboutPage() {
 
             <main className="space-y-12 md:space-y-20 pb-20">
                 {/* HERO SECTION - RESTRUCTURED AS CARD */}
-                <section className="relative w-full md:w-[90%] md:max-w-[1200px] mx-auto mt-6 md:mt-8">
-                    <div className="relative overflow-hidden bg-[#0F3866] text-white rounded-2xl shadow-2xl p-10 md:p-20 md:min-h-[550px] flex flex-col justify-center text-center">
+                <section className="relative w-full px-4 sm:px-6 md:w-[90%] md:max-w-300 mx-auto mt-6 md:mt-8">
+                    <div className="relative overflow-hidden bg-[#0F3866] text-white rounded-2xl shadow-2xl p-8 sm:p-10 md:p-20 min-h-105 md:min-h-137.5 flex flex-col justify-center text-center">
                         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-                        <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                            <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
                         <div className="relative z-10 max-w-4xl mx-auto">
                             <motion.div
@@ -75,16 +75,16 @@ export default function AboutPage() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8 }}
                             >
-                                <span className="inline-block py-1 px-3 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-sm font-semibold mb-6 tracking-wide">
+                                <span className="inline-block py-1 px-3 rounded-full bg-blue-800/50 border border-blue-700 text-blue-200 text-xs sm:text-sm font-semibold mb-4 sm:mb-6 tracking-wide">
                                     ESTABLISHED 2022
                                 </span>
-                                <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                                <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-4 sm:mb-6 leading-tight">
                                     Empowering Your <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">
+                                    <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-200 to-white">
                                         Financial Future
                                     </span>
                                 </h1>
-                                <p className="text-lg md:text-2xl text-blue-100 max-w-2xl mx-auto font-light leading-relaxed">
+                                <p className="text-base sm:text-lg md:text-2xl text-blue-100 max-w-2xl mx-auto font-light leading-relaxed">
                                     We bridge the gap between your dreams and financial reality with expert loan advisory services.
                                 </p>
                             </motion.div>
@@ -93,7 +93,7 @@ export default function AboutPage() {
                 </section>
 
                 {/* STATS SECTION */}
-                <section className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0">
+                <section className="w-full px-4 sm:px-6 md:w-[90%] md:max-w-300 mx-auto md:px-0">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -116,8 +116,8 @@ export default function AboutPage() {
                 </section>
 
                 {/* OUR STORY */}
-                <section className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0">
-                    <div className="grid lg:grid-cols-2 gap-16 items-start">
+                <section className="w-full px-4 sm:px-6 md:w-[90%] md:max-w-300 mx-auto md:px-0">
+                    <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -125,10 +125,10 @@ export default function AboutPage() {
                             transition={{ duration: 0.8 }}
                         >
                             <div className="flex items-center gap-4 mb-6">
-                                <span className="h-[2px] w-12 bg-orange-500"></span>
-                                <span className="text-orange-600 font-bold uppercase tracking-widest text-sm">About Smart Solutions</span>
+                                <span className="h-0.5 w-12 bg-orange-500"></span>
+                                <span className="text-orange-600 font-bold uppercase tracking-widest text-xs sm:text-sm">About Smart Solutions</span>
                             </div>
-                            <h2 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
                                 We act as a trusted bridge between <span className="text-blue-700">customers & financial partners.</span>
                             </h2>
                             <div className="space-y-6 text-lg text-gray-600 font-light leading-relaxed">
@@ -162,16 +162,16 @@ export default function AboutPage() {
                             transition={{ duration: 0.8 }}
                             className="relative mt-8 lg:mt-0"
                         >
-                            <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600 to-orange-500 rounded-3xl opacity-20 blur-lg"></div>
-                            <div className="relative h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl">
+                            <div className="absolute -inset-4 bg-linear-to-tr from-blue-600 to-orange-500 rounded-3xl opacity-20 blur-lg"></div>
+                            <div className="relative h-80 sm:h-105 lg:h-150 w-full rounded-2xl overflow-hidden shadow-2xl">
                                 <img
                                     src="/intro/office-meeting.png"
                                     alt="Office Meeting"
                                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                <div className="absolute bottom-8 left-8 text-white pr-8">
-                                    <div className="text-2xl font-bold mb-2">End-to-End Support</div>
+                                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
+                                <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 text-white pr-4 sm:pr-8">
+                                    <div className="text-xl sm:text-2xl font-bold mb-2">End-to-End Support</div>
                                     <p className="text-blue-100 font-light opacity-90">
                                         From eligibility evaluation and documentation to approval coordination and disbursement.
                                     </p>
@@ -182,21 +182,21 @@ export default function AboutPage() {
                 </section>
 
                 {/* OUR PRODUCTS & PLATFORMS */}
-                <section className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0">
+                <section className="w-full px-4 sm:px-6 md:w-[90%] md:max-w-300 mx-auto md:px-0">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Our Products & Platforms</h2>
-                        <p className="text-lg text-gray-600">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">Our Products & Platforms</h2>
+                        <p className="text-base sm:text-lg text-gray-600">
                             Leveraging technology to simplify your financial journey.
                         </p>
                     </div>
 
-                    <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
+                    <div className="grid lg:grid-cols-2 gap-6 md:gap-12">
                         {/* LOAN SARATHI */}
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-blue-100 relative overflow-hidden group"
+                            className="bg-white rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl border border-blue-100 relative overflow-hidden group"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-bl-[100px] transition-all group-hover:bg-blue-500/10"></div>
                             <div className="flex items-center gap-4 mb-8">
@@ -211,7 +211,7 @@ export default function AboutPage() {
                                     </div>
                                 </a>
                                 <div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Loan Sarathi</h3>
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Loan Sarathi</h3>
                                     <p className="text-blue-600 font-medium">Your Loan Guidance Partner</p>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@ export default function AboutPage() {
                                     "Transparent and compliant processes"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-start gap-3 text-gray-700">
-                                        <CheckCircle2 className="text-green-500 mt-1 flex-shrink-0" size={18} />
+                                        <CheckCircle2 className="text-green-500 mt-1 shrink-0" size={18} />
                                         <span>{item}</span>
                                     </li>
                                 ))}
@@ -239,14 +239,14 @@ export default function AboutPage() {
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-orange-100 relative overflow-hidden group"
+                            className="bg-white rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl border border-orange-100 relative overflow-hidden group"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-[100px] transition-all group-hover:bg-orange-500/10"></div>
                             <div className="flex items-center gap-4 mb-8">
                                 <a href="https://smartdial.co.in/" target="_blank" rel="noopener noreferrer">
                                     <div className="relative w-24 h-24 shrink-0 rounded-2xl overflow-hidden bg-white p-2 border border-orange-50 hover:shadow-md transition-shadow cursor-pointer">
                                         <Image
-                                            src="/our-product/smart-dial.jpg"
+                                            src="/events/smartdial.png"
                                             alt="Smart Dial Logo"
                                             fill
                                             className="object-contain p-1"
@@ -254,7 +254,7 @@ export default function AboutPage() {
                                     </div>
                                 </a>
                                 <div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Smart Dial</h3>
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">Smart Dial</h3>
                                     <p className="text-orange-600 font-medium">Intelligent Communication Platform</p>
                                 </div>
                             </div>
@@ -269,7 +269,7 @@ export default function AboutPage() {
                                     "Maintain accountability and transparency"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-start gap-3 text-gray-700">
-                                        <CheckCircle2 className="text-orange-500 mt-1 flex-shrink-0" size={18} />
+                                        <CheckCircle2 className="text-orange-500 mt-1 shrink-0" size={18} />
                                         <span>{item}</span>
                                     </li>
                                 ))}
@@ -279,10 +279,10 @@ export default function AboutPage() {
                 </section>
 
                 {/* TEAM SECTION */}
-                <section className="w-full md:w-[90%] md:max-w-[1200px] mx-auto px-4 md:px-0">
+                <section className="w-full px-4 sm:px-6 md:w-[90%] md:max-w-300 mx-auto md:px-0">
                     <div className="mb-20">
-                        <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Meet The Team</h2>
-                        <p className="text-xl text-gray-500 max-w-2xl">The dedicated professionals driving your financial success.</p>
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">Meet The Team</h2>
+                        <p className="text-base sm:text-lg md:text-xl text-gray-500 max-w-2xl">The dedicated professionals driving your financial success.</p>
                     </div>
 
                     {/* Managers */}
@@ -301,16 +301,16 @@ export default function AboutPage() {
                                     transition={{ delay: idx * 0.1 }}
                                     className="group relative"
                                 >
-                                    <div className="h-[400px] rounded-2xl overflow-hidden shadow-lg relative bg-white">
+                                    <div className="h-80 sm:h-100 rounded-2xl overflow-hidden shadow-lg relative bg-white">
                                         <Image
                                             src={manager.image}
                                             alt={manager.name}
                                             fill
                                             className="object-contain transition-transform duration-700 group-hover:scale-110"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
                                         <div className="absolute bottom-0 left-0 p-8 w-full">
-                                            <h4 className="text-2xl font-bold text-white mb-1 group-hover:translate-x-2 transition-transform duration-300">{manager.name}</h4>
+                                            <h4 className="text-xl sm:text-2xl font-bold text-white mb-1 group-hover:translate-x-2 transition-transform duration-300">{manager.name}</h4>
                                             <p className="text-blue-300 font-medium">{manager.position}</p>
                                         </div>
                                     </div>
@@ -335,16 +335,16 @@ export default function AboutPage() {
                                     transition={{ delay: idx * 0.1 }}
                                     className="group relative"
                                 >
-                                    <div className="h-[400px] rounded-2xl overflow-hidden shadow-lg relative bg-white">
+                                    <div className="h-80 sm:h-100 rounded-2xl overflow-hidden shadow-lg relative bg-white">
                                         <Image
                                             src={assistant.image}
                                             alt={assistant.name}
                                             fill
                                             className={`object-contain transition-transform duration-700 ${assistant.name === "Ashwini Mishra" ? "scale-[1.6] group-hover:scale-[1.7]" : "group-hover:scale-110"}`}
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
                                         <div className="absolute bottom-0 left-0 p-8 w-full">
-                                            <h4 className="text-2xl font-bold text-white mb-1 group-hover:translate-x-2 transition-transform duration-300">{assistant.name}</h4>
+                                            <h4 className="text-xl sm:text-2xl font-bold text-white mb-1 group-hover:translate-x-2 transition-transform duration-300">{assistant.name}</h4>
                                             <p className="text-orange-300 font-medium">{assistant.position}</p>
                                         </div>
                                     </div>

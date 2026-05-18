@@ -92,7 +92,7 @@ export default function HeroSlider() {
 
     return (
         <>
-            <div className="relative w-[90%] max-w-[1200px] mx-auto mt-8 h-[550px] rounded-2xl overflow-hidden bg-gray-900 shadow-2xl group">
+            <div className="relative w-full sm:w-[90%] max-w-[1200px] mx-auto mt-4 sm:mt-8 h-[420px] sm:h-[500px] lg:h-[550px] rounded-2xl overflow-hidden bg-gray-900 shadow-2xl group">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={current}
@@ -113,12 +113,12 @@ export default function HeroSlider() {
                         <div className="absolute inset-0 bg-black/50" />
 
                         {/* Content */}
-                        <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-20 text-white z-10 w-full md:w-3/4 lg:w-1/2">
+                        <div className="absolute inset-0 flex flex-col justify-end sm:justify-center px-4 sm:px-6 md:px-20 pb-16 sm:pb-0 text-white z-10 w-full md:w-3/4 lg:w-1/2">
                             <motion.h1
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-                                className="text-4xl md:text-6xl font-bold leading-tight mb-4"
+                                className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight mb-3 sm:mb-4"
                             >
                                 {slide.title}
                             </motion.h1>
@@ -128,7 +128,7 @@ export default function HeroSlider() {
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-                                    className="text-lg md:text-xl text-gray-200 mb-8"
+                                    className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8"
                                 >
                                     {slide.subtitle}
                                 </motion.p>
@@ -139,10 +139,10 @@ export default function HeroSlider() {
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.7, duration: 0.8 }}
-                                    className="flex flex-col gap-3 mb-8"
+                                    className="flex flex-col gap-2 sm:gap-3 mb-6 sm:mb-8"
                                 >
                                     {slide.features.map((feature, idx) => (
-                                        <div key={idx} className="flex items-center gap-2 text-amber-400 font-semibold tracking-wide uppercase text-sm">
+                                        <div key={idx} className="flex items-center gap-2 text-amber-400 font-semibold tracking-wide uppercase text-xs sm:text-sm">
                                             <ChevronRight size={20} strokeWidth={3} />
                                             {feature}
                                         </div>
@@ -157,7 +157,7 @@ export default function HeroSlider() {
                             >
                                 <button
                                     onClick={handlePrimaryClick}
-                                    className="bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-8 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 shadow-lg shadow-amber-500/20"
+                                    className="bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 px-6 sm:px-8 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 shadow-lg shadow-amber-500/20"
                                 >
                                     {slide.primaryButton}
                                     <ArrowRight size={20} />
@@ -169,7 +169,7 @@ export default function HeroSlider() {
                 </AnimatePresence>
 
                 {/* Navigation Dots */}
-                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex items-center gap-3 z-20">
+                <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex items-center gap-2 sm:gap-3 z-20">
                     {slides.map((_, index) => (
                         <button
                             key={index}

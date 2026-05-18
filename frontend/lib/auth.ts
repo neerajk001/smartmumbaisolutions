@@ -1,5 +1,4 @@
 import type { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { getServerSession as _getServerSession } from 'next-auth';
 
@@ -18,34 +17,6 @@ export const authOptions: NextAuthOptions = {
           }),
         ]
       : []),
-    CredentialsProvider({
-      id: 'credentials',
-      name: 'Credentials',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
-        const res = await fetch(`${backendBase}/api/admin/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: credentials.email,
-            password: credentials.password,
-          }),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok || !data.success || !data.token) return null;
-        return {
-          id: 'admin',
-          email: credentials.email,
-          name: 'Admin',
-          image: null,
-          galleryToken: data.token as string,
-        };
-      },
-    }),
   ],
   callbacks: {
     async signIn({ user, account }) {
@@ -73,16 +44,14 @@ export const authOptions: NextAuthOptions = {
         }
         return false;
       }
-      return true;
+      return false;
     },
     async jwt({ token, user, account }) {
       if (user) {
         token.email = user.email ?? token.email;
         token.name = user.name ?? token.name;
         token.picture = user.image ?? token.picture;
-        if (user.galleryToken) {
-          token.galleryToken = user.galleryToken;
-        } else if (account?.provider === 'google' && user.email) {
+        if (account?.provider === 'google' && user.email) {
           const secret = process.env.NEXTAUTH_SECRET || process.env.GALLERY_JWT_SECRET;
           try {
             const res = await fetch(`${backendBase}/api/admin/token-for-email`, {
@@ -125,7 +94,6 @@ export interface SessionUser {
 
 declare module 'next-auth' {
   interface User {
-    galleryToken?: string;
   }
   interface Session {
     user: SessionUser;

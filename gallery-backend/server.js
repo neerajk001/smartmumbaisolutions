@@ -1,3 +1,16 @@
+// Prefer IPv4 DNS results to avoid SRV/IPv6 resolution issues on some Windows+Node setups
+const dns = require('dns');
+if (typeof dns.setDefaultResultOrder === 'function') {
+  try { dns.setDefaultResultOrder('ipv4first'); } catch (err) { /* ignore */ }
+}
+if (typeof dns.setServers === 'function') {
+  try {
+    dns.setServers(['8.8.8.8', '8.8.4.4']);
+  } catch (err) {
+    console.warn('[gallery-backend] failed to override DNS servers:', err.message);
+  }
+}
+
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env.local') });
 require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 const express = require('express');
@@ -189,33 +202,6 @@ app.delete('/api/admin/settings/allowed-emails', authRequired, async (req, res) 
 });
 
 // Admin auth: login to get JWT (only if email is in allowed list)
-app.post('/api/admin/login', async (req, res) => {
-  const { email, password } = req.body || {};
-  const adminEmail = process.env.ADMIN_EMAIL;
-  const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH; // bcrypt hash
-
-  if (!adminEmail || !adminPasswordHash) {
-    return res.status(500).json({ success: false, error: 'Admin credentials not configured' });
-  }
-  if (!email || !password) return res.status(400).json({ success: false, error: 'Missing credentials' });
-  const normalized = normalizeEmail(email);
-  if (normalized !== normalizeEmail(adminEmail)) {
-    return res.status(401).json({ success: false, error: 'Invalid credentials' });
-  }
-
-  const ok = await bcrypt.compare(String(password), String(adminPasswordHash));
-  if (!ok) return res.status(401).json({ success: false, error: 'Invalid credentials' });
-
-  const allowedColl = db.collection(ALLOWED_ADMIN_EMAILS_COLLECTION);
-  const allowed = await allowedColl.findOne({ email: normalized });
-  if (!allowed) {
-    return res.status(403).json({ success: false, error: 'Access denied. Your email is not allowed to use the admin panel.' });
-  }
-
-  const token = jwt.sign({ email: adminEmail, role: 'admin' }, JWT_SECRET, { expiresIn: '7d' });
-  res.json({ success: true, token });
-});
-
 // Admin: upload event + images (stored on Cloudinary)
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 

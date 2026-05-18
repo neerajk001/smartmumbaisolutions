@@ -860,10 +860,10 @@ const DetailedCalculatorContent = () => {
   const eligibilityTenureLabel = eligibilityTenureYears === 1 ? 'year' : 'years';
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
+    <main className="min-h-screen bg-linear-to-b from-gray-50 to-white font-sans">
       <Navbar />
 
-      <div className="w-[90%] max-w-[1200px] mx-auto py-12">
+      <div className="w-[90%] max-w-300 mx-auto py-12">
         {/* Tabs */}
         <div className="flex justify-center mb-12">
           <div className="bg-white p-1 rounded-xl shadow-sm border border-gray-200 inline-flex overflow-x-auto max-w-full">
@@ -1038,7 +1038,7 @@ const DetailedCalculatorContent = () => {
               </div>
 
               {/* Eligibility Check CTA */}
-              <div className="flex-1 bg-blue-900 border border-blue-900 rounded-3xl p-5 md:p-6 text-white relative overflow-hidden min-h-[200px] flex flex-col justify-center">
+              <div className="flex-1 bg-blue-900 border border-blue-900 rounded-3xl p-5 md:p-6 text-white relative overflow-hidden min-h-50 flex flex-col justify-center">
                 <div className="absolute bottom-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl" />
                 <div className="relative">
                   <div className="flex items-center gap-3 mb-3">
@@ -1408,9 +1408,9 @@ const DetailedCalculatorContent = () => {
         {activeTab === 'balance' && (
           <div className="grid grid-cols-12 gap-4 md:gap-6">
             {/* BT Inputs Card */}
-            <div className="col-span-12 lg:col-span-6 bg-gradient-to-br from-blue-50 to-orange-50/30 border-2 border-blue-200 rounded-3xl p-6 md:p-8 shadow-lg">
+            <div className="col-span-12 lg:col-span-6 bg-linear-to-br from-blue-50 to-orange-50/30 border-2 border-blue-200 rounded-3xl p-6 md:p-8 shadow-lg">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-orange-600 rounded-2xl flex items-center justify-center shadow-md">
+                <div className="w-12 h-12 bg-linear-to-br from-blue-600 to-orange-600 rounded-2xl flex items-center justify-center shadow-md">
                   <RefreshCw className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -1467,7 +1467,7 @@ const DetailedCalculatorContent = () => {
             <div className="col-span-12 lg:col-span-6 space-y-6">
 
               {/* Top Summary Card */}
-              <div className="bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded-3xl p-6 md:p-8 relative overflow-hidden border-2 border-orange-500/20">
+              <div className="bg-linear-to-br from-blue-900 to-blue-800 text-white rounded-3xl p-6 md:p-8 relative overflow-hidden border-2 border-orange-500/20">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                 <div className="relative">
                   <div className="text-orange-300 text-sm font-bold mb-2">NET IN HAND</div>
@@ -1492,14 +1492,14 @@ const DetailedCalculatorContent = () => {
                 </div>
 
                 {/* Max Loan Amount */}
-                <div className="bg-gradient-to-br from-blue-900 to-blue-800 border-2 border-orange-500/30 rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all col-span-2">
+                <div className="bg-linear-to-br from-blue-900 to-blue-800 border-2 border-orange-500/30 rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all col-span-2">
                   <div className="flex justify-between items-end">
                     <div>
                       <div className="text-sm text-orange-300 font-semibold mb-2">Max Loan Eligibility</div>
                       <div className="text-3xl font-bold text-white">₹{formatCurrency(btMaxLoan)}</div>
                       <div className="text-xs text-blue-200 font-semibold mt-1">Total eligible amount based on your income</div>
                     </div>
-                    <Link href="/apply" className="bg-gradient-to-r from-orange-600 to-orange-500 text-white p-3 rounded-xl hover:shadow-lg hover:from-orange-700 hover:to-orange-600 transition-all">
+                    <Link href="/apply" className="bg-linear-to-r from-orange-600 to-orange-500 text-white p-3 rounded-xl hover:shadow-lg hover:from-orange-700 hover:to-orange-600 transition-all">
                       <ArrowRight className="w-6 h-6" />
                     </Link>
                   </div>
@@ -1863,8 +1863,8 @@ const SliderInput = ({ label, value, setValue, min, max, step, prefix = '', suff
 
   return (
     <div>
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex-1">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-4">
+        <div className="flex-1 min-w-0">
           <label className="flex items-center gap-2 text-gray-700 font-medium mb-1">
             {label}
           </label>
@@ -1872,7 +1872,7 @@ const SliderInput = ({ label, value, setValue, min, max, step, prefix = '', suff
             <p className="text-xs text-gray-500 font-semibold mt-0.5">{description}</p>
           )}
         </div>
-        <div className="bg-white px-4 py-2 rounded-xl border-2 border-gray-200 focus-within:border-blue-500 transition-all">
+        <div className="bg-white px-3 sm:px-4 py-2 rounded-xl border-2 border-gray-200 focus-within:border-blue-500 transition-all w-full sm:w-auto">
           <input
             type="text"
             value={displayValue}
@@ -1880,7 +1880,7 @@ const SliderInput = ({ label, value, setValue, min, max, step, prefix = '', suff
             onFocus={handleFocus}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-            className="font-bold text-gray-900 text-right outline-none bg-transparent w-full min-w-[120px]"
+            className="font-bold text-gray-900 text-right outline-none bg-transparent w-full min-w-0 sm:min-w-30"
           />
         </div>
       </div>
