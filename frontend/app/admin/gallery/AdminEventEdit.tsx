@@ -36,9 +36,22 @@ export default function AdminEventEdit({ event, token, backendBase, onSaved, onC
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  const readUploadError = async (res: Response, fallback: string) => {
+    try {
+      const data = await res.clone().json();
+      if (data && typeof data === 'object' && 'error' in data) {
+        const errVal = (data as { error?: unknown }).error;
+        if (typeof errVal === 'string' && errVal.trim()) return errVal;
+      }
+    } catch {
+      // ignore
+    }
+    return `${fallback} (HTTP ${res.status})`;
+  };
+
   const uploadImagesInChunks = async (files: FileList) => {
     const all = Array.from(files);
-    const chunkSize = 5;
+    const chunkSize = 1;
     for (let i = 0; i < all.length; i += chunkSize) {
       const chunk = all.slice(i, i + chunkSize);
       const form = new FormData();
@@ -48,8 +61,7 @@ export default function AdminEventEdit({ event, token, backendBase, onSaved, onC
         headers: { Authorization: `Bearer ${token}` },
         body: form,
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || 'Failed to upload images');
+      if (!res.ok) throw new Error(await readUploadError(res, 'Failed to upload images'));
     }
   };
 

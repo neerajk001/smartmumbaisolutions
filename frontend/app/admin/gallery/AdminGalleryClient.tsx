@@ -29,9 +29,23 @@ export default function AdminGalleryClient({ user }: Props) {
   const token = user.galleryToken;
   const backendBase = getBackendBase();
 
+  const readUploadError = async (res: Response, fallback: string) => {
+    try {
+      const data = await res.clone().json();
+      if (data && typeof data === 'object' && 'error' in data) {
+        const errVal = (data as { error?: unknown }).error;
+        if (typeof errVal === 'string' && errVal.trim()) return errVal;
+      }
+    } catch {
+      // ignore
+    }
+
+    return `${fallback} (HTTP ${res.status})`;
+  };
+
   const uploadImagesInChunks = async (eventId: string, files: FileList) => {
     const all = Array.from(files);
-    const chunkSize = 5;
+    const chunkSize = 1;
     for (let i = 0; i < all.length; i += chunkSize) {
       const chunk = all.slice(i, i + chunkSize);
       const form = new FormData();
@@ -41,8 +55,7 @@ export default function AdminGalleryClient({ user }: Props) {
         headers: { Authorization: `Bearer ${token}` },
         body: form,
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || 'Upload failed');
+      if (!res.ok) throw new Error(await readUploadError(res, 'Upload failed'));
     }
   };
 
