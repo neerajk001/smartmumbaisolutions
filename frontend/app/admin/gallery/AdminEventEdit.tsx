@@ -36,6 +36,16 @@ export default function AdminEventEdit({ event, token, backendBase, onSaved, onC
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  const fetchWithTimeout = async (input: RequestInfo | URL, init: RequestInit, timeoutMs: number) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(input, { ...init, signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
   const readUploadError = async (res: Response, fallback: string) => {
     try {
       const data = await res.clone().json();
@@ -49,18 +59,22 @@ export default function AdminEventEdit({ event, token, backendBase, onSaved, onC
     return `${fallback} (HTTP ${res.status})`;
   };
 
-  const uploadImagesInChunks = async (files: FileList) => {
-    const all = Array.from(files);
+  const uploadImagesInChunks = async (files: File[]) => {
+    const all = files;
     const chunkSize = 1;
     for (let i = 0; i < all.length; i += chunkSize) {
       const chunk = all.slice(i, i + chunkSize);
       const form = new FormData();
       for (const f of chunk) form.append('images', f);
-      const res = await fetch(`${backendBase}/api/admin/gallery/events/${event.id}/images`, {
-        method: 'PATCH',
-        headers: { Authorization: `Bearer ${token}` },
-        body: form,
-      });
+      const res = await fetchWithTimeout(
+        `${backendBase}/api/admin/gallery/events/${event.id}/images`,
+        {
+          method: 'PATCH',
+          headers: { Authorization: `Bearer ${token}` },
+          body: form,
+        },
+        5 * 60 * 1000
+      );
       if (!res.ok) throw new Error(await readUploadError(res, 'Failed to upload images'));
     }
   };
@@ -110,7 +124,7 @@ export default function AdminEventEdit({ event, token, backendBase, onSaved, onC
       }
 
       if (newFiles && newFiles.length > 0) {
-        await uploadImagesInChunks(newFiles);
+        await uploadImagesInChunks(Array.from(newFiles));
       }
 
       const order = images.map((img) => img.id);

@@ -29,6 +29,16 @@ export default function AdminGalleryClient({ user }: Props) {
   const token = user.galleryToken;
   const backendBase = getBackendBase();
 
+  const fetchWithTimeout = async (input: RequestInfo | URL, init: RequestInit, timeoutMs: number) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(input, { ...init, signal: controller.signal });
+    } finally {
+      clearTimeout(timer);
+    }
+  };
+
   const readUploadError = async (res: Response, fallback: string) => {
     try {
       const data = await res.clone().json();
@@ -43,19 +53,29 @@ export default function AdminGalleryClient({ user }: Props) {
     return `${fallback} (HTTP ${res.status})`;
   };
 
-  const uploadImagesInChunks = async (eventId: string, files: FileList) => {
-    const all = Array.from(files);
+  const uploadImagesInChunks = async (
+    eventId: string,
+    files: File[],
+    onProgress?: (uploaded: number, total: number) => void
+  ) => {
+    const all = files;
     const chunkSize = 1;
     for (let i = 0; i < all.length; i += chunkSize) {
       const chunk = all.slice(i, i + chunkSize);
       const form = new FormData();
       for (const f of chunk) form.append('images', f);
-      const res = await fetch(`${backendBase}/api/admin/gallery/events/${eventId}/images`, {
-        method: 'PATCH',
-        headers: { Authorization: `Bearer ${token}` },
-        body: form,
-      });
+      const res = await fetchWithTimeout(
+        `${backendBase}/api/admin/gallery/events/${eventId}/images`,
+        {
+          method: 'PATCH',
+          headers: { Authorization: `Bearer ${token}` },
+          body: form,
+        },
+        5 * 60 * 1000
+      );
       if (!res.ok) throw new Error(await readUploadError(res, 'Upload failed'));
+
+      onProgress?.(Math.min(i + chunk.length, all.length), all.length);
     }
   };
 
@@ -81,6 +101,7 @@ export default function AdminGalleryClient({ user }: Props) {
   const [eventPublished, setEventPublished] = useState(true);
   const [eventFiles, setEventFiles] = useState<FileList | null>(null);
   const [eventSubmitting, setEventSubmitting] = useState(false);
+  const [eventUploadProgress, setEventUploadProgress] = useState<{ current: number; total: number } | null>(null);
   const [eventMessage, setEventMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   const fetchAllowedEmails = async () => {
@@ -219,6 +240,7 @@ export default function AdminGalleryClient({ user }: Props) {
       return;
     }
     setEventSubmitting(true);
+    setEventUploadProgress(null);
     setEventMessage(null);
     try {
       const form = new FormData();
@@ -228,20 +250,43 @@ export default function AdminGalleryClient({ user }: Props) {
       form.append('location', eventLocation.trim());
       form.append('isFeatured', String(eventFeatured));
       form.append('isPublished', String(eventPublished));
-      const res = await fetch(`${backendBase}/api/admin/gallery/events`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
-        body: form,
-      });
+      const res = await fetchWithTimeout(
+        `${backendBase}/api/admin/gallery/events`,
+        {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+          body: form,
+        },
+        60 * 1000
+      );
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Upload failed');
 
       const createdId = data?.event?.id;
+
+      // Refresh the list immediately so the user sees the created event without needing a manual refresh.
+      fetchEvents();
+
       if (eventFiles && eventFiles.length > 0 && createdId) {
-        await uploadImagesInChunks(String(createdId), eventFiles);
+        const all = Array.from(eventFiles);
+        const total = all.length;
+        setEventUploadProgress({ current: 0, total });
+        try {
+          await uploadImagesInChunks(String(createdId), all, (uploaded, totalFiles) => {
+            setEventUploadProgress({ current: uploaded, total: totalFiles });
+          });
+        } catch (err) {
+          setEventMessage({
+            type: 'error',
+            text:
+              'Event created, but image upload failed. Open the event and upload images from Edit. ' +
+              (err instanceof Error ? err.message : ''),
+          });
+          return;
+        }
       }
 
-      setEventMessage({ type: 'success', text: 'Event created. It will appear on the public gallery.' });
+      setEventMessage({ type: 'success', text: 'Event created successfully.' });
       setEventTitle('');
       setEventDescription('');
       setEventDate('');
@@ -249,7 +294,6 @@ export default function AdminGalleryClient({ user }: Props) {
       setEventFeatured(false);
       setEventPublished(true);
       setEventFiles(null);
-      fetchEvents();
     } catch (err) {
       setEventMessage({
         type: 'error',
@@ -257,6 +301,7 @@ export default function AdminGalleryClient({ user }: Props) {
       });
     } finally {
       setEventSubmitting(false);
+      setEventUploadProgress(null);
     }
   };
 
@@ -406,7 +451,11 @@ export default function AdminGalleryClient({ user }: Props) {
                     disabled={eventSubmitting}
                     className="w-full py-3 bg-orange-500 text-white font-bold rounded-xl hover:bg-orange-600 disabled:opacity-50 transition-colors"
                   >
-                    {eventSubmitting ? 'Creating…' : 'Create event'}
+                    {eventSubmitting
+                      ? eventUploadProgress
+                        ? `Uploading ${eventUploadProgress.current}/${eventUploadProgress.total}…`
+                        : 'Creating…'
+                      : 'Create event'}
                   </button>
                 </form>
               </div>
