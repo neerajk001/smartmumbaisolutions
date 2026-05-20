@@ -3,7 +3,8 @@ import GoogleProvider from 'next-auth/providers/google';
 import { getServerSession as _getServerSession } from 'next-auth';
 
 const galleryApiBase = process.env.NEXT_PUBLIC_GALLERY_API_BASE || 'http://localhost:7001/api/gallery';
-const backendBase = galleryApiBase.replace(/\/api\/gallery\/?$/, '') || 'http://localhost:7001';
+// Use INTERNAL_GALLERY_URL if defined, otherwise fallback to 127.0.0.1 for server-side fetches to avoid NAT loopback issues
+const backendBase = process.env.INTERNAL_GALLERY_URL || 'http://127.0.0.1:7001';
 
 const hasGoogle = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET;
 
