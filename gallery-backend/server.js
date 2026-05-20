@@ -43,7 +43,7 @@ if (CLOUDINARY_CLOUD && CLOUDINARY_KEY && CLOUDINARY_SECRET) {
 const client = new MongoClient(MONGODB_URI);
 let db;
 
-app.use(express.json({ limit: '10mb' }));
+app.use(express.json({ limit: process.env.GALLERY_JSON_LIMIT || '50mb' }));
 
 const allowedOrigins = (process.env.GALLERY_ALLOWED_ORIGINS || '')
   .split(',')
@@ -203,7 +203,11 @@ app.delete('/api/admin/settings/allowed-emails', authRequired, async (req, res) 
 
 // Admin auth: login to get JWT (only if email is in allowed list)
 // Admin: upload event + images (stored on Cloudinary)
-const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
+const maxImageMb = Math.max(1, parseInt(process.env.GALLERY_MAX_IMAGE_MB || '20', 10) || 20);
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: maxImageMb * 1024 * 1024 },
+});
 
 app.post('/api/admin/gallery/events', authRequired, upload.array('images', 20), async (req, res) => {
   const { title, description, eventDate, location } = req.body || {};
@@ -384,6 +388,27 @@ app.patch('/api/admin/gallery/events/:id/images/reorder', authRequired, async (r
   );
   const updated = await db.collection(GALLERY_EVENTS_COLLECTION).findOne({ _id: objectId });
   res.json({ success: true, event: formatEvent(updated) });
+});
+
+// Error handler (must be after routes)
+app.use((err, _req, res, _next) => {
+  if (err && err.name === 'MulterError') {
+    const code = err.code;
+    if (code === 'LIMIT_FILE_SIZE') {
+      return res.status(413).json({
+        success: false,
+        error: `Image too large. Max ${maxImageMb}MB per image.`,
+      });
+    }
+    return res.status(400).json({ success: false, error: err.message || 'Upload failed' });
+  }
+
+  if (err && (err.type === 'entity.too.large' || err.name === 'PayloadTooLargeError')) {
+    return res.status(413).json({ success: false, error: 'Upload too large (request entity too large).' });
+  }
+
+  console.error('[gallery-backend] unhandled error:', err);
+  return res.status(500).json({ success: false, error: 'Internal server error' });
 });
 
 async function start() {

@@ -36,6 +36,23 @@ export default function AdminEventEdit({ event, token, backendBase, onSaved, onC
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  const uploadImagesInChunks = async (files: FileList) => {
+    const all = Array.from(files);
+    const chunkSize = 5;
+    for (let i = 0; i < all.length; i += chunkSize) {
+      const chunk = all.slice(i, i + chunkSize);
+      const form = new FormData();
+      for (const f of chunk) form.append('images', f);
+      const res = await fetch(`${backendBase}/api/admin/gallery/events/${event.id}/images`, {
+        method: 'PATCH',
+        headers: { Authorization: `Bearer ${token}` },
+        body: form,
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || 'Failed to upload images');
+    }
+  };
+
   useEffect(() => {
     setImages([...event.images].sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)));
   }, [event.images]);
@@ -81,13 +98,7 @@ export default function AdminEventEdit({ event, token, backendBase, onSaved, onC
       }
 
       if (newFiles && newFiles.length > 0) {
-        const form = new FormData();
-        for (let i = 0; i < newFiles.length; i++) form.append('images', newFiles[i]);
-        await fetch(`${backendBase}/api/admin/gallery/events/${event.id}/images`, {
-          method: 'PATCH',
-          headers: { Authorization: `Bearer ${token}` },
-          body: form,
-        });
+        await uploadImagesInChunks(newFiles);
       }
 
       const order = images.map((img) => img.id);

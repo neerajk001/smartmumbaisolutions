@@ -5,7 +5,7 @@ import AdminGalleryClient from './AdminGalleryClient';
 export default async function AdminGalleryPage() {
   const session = await getServerSession();
   if (!session?.user) {
-    redirect('/admin/login');
+    redirect('/admin');
   }
 
   return (
