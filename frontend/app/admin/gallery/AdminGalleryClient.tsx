@@ -6,8 +6,9 @@ import { useState, useEffect } from 'react';
 import AdminEventEdit from './AdminEventEdit';
 
 const getBackendBase = () => {
-  const base = process.env.NEXT_PUBLIC_GALLERY_API_BASE || 'http://localhost:7001/api/gallery';
-  return base.replace(/\/api\/gallery\/?$/, '') || 'http://localhost:7001';
+  const base = process.env.NEXT_PUBLIC_GALLERY_API_BASE || '/api/gallery';
+  const cleaned = base.replace(/\/api\/gallery\/?$/, '');
+  return cleaned || '';
 };
 
 type AdminEvent = {

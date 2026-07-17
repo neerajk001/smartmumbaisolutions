@@ -1,3 +1,4 @@
+export const dynamic = 'force-static';
 import Navbar from "@/components/Navbar";
 import HeroSlider from "@/components/HeroSlider";
 import Introduction from "@/components/Introduction";

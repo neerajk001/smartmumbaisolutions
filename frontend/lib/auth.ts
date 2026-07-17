@@ -1,10 +1,9 @@
 import type { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { getServerSession as _getServerSession } from 'next-auth';
-
-const galleryApiBase = process.env.NEXT_PUBLIC_GALLERY_API_BASE || 'http://localhost:7001/api/gallery';
-// Use INTERNAL_GALLERY_URL if defined, otherwise fallback to 127.0.0.1 for server-side fetches to avoid NAT loopback issues
-const backendBase = process.env.INTERNAL_GALLERY_URL || 'http://127.0.0.1:7001';
+import { getDb } from '@/lib/gallery/db';
+import { verifyInternalSecret, issueToken } from '@/lib/gallery/auth';
+import { ALLOWED_ADMIN_EMAILS_COLLECTION, normalizeEmail } from '@/lib/gallery/constants';
 
 const hasGoogle = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET;
 
@@ -22,23 +21,18 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === 'google' && user?.email) {
-        const email = String(user.email).toLowerCase().trim();
+        const email = normalizeEmail(user.email);
         const allowedList = (process.env.ALLOWED_ADMIN_EMAILS || '')
           .split(',')
           .map((e) => e.trim().toLowerCase())
           .filter(Boolean);
         if (allowedList.length > 0 && allowedList.includes(email)) return true;
 
-        const secret = process.env.NEXTAUTH_SECRET || process.env.GALLERY_JWT_SECRET;
         try {
-          const res = await fetch(
-            `${backendBase}/api/admin/check-allowed?email=${encodeURIComponent(user.email)}`,
-            { headers: { 'X-Internal-Secret': secret || '' } }
-          );
-          const data = await res.json().catch(() => ({}));
-          if (res.ok && data.allowed) return true;
-          if (res.ok && !data.allowed) return false;
-          if (!res.ok && allowedList.length > 0 && allowedList.includes(email)) return true;
+          const db = await getDb();
+          const coll = db.collection(ALLOWED_ADMIN_EMAILS_COLLECTION);
+          const doc = await coll.findOne({ email });
+          if (doc) return true;
         } catch {
           if (allowedList.length > 0 && allowedList.includes(email)) return true;
           return false;
@@ -53,15 +47,14 @@ export const authOptions: NextAuthOptions = {
         token.name = user.name ?? token.name;
         token.picture = user.image ?? token.picture;
         if (account?.provider === 'google' && user.email) {
-          const secret = process.env.NEXTAUTH_SECRET || process.env.GALLERY_JWT_SECRET;
           try {
-            const res = await fetch(`${backendBase}/api/admin/token-for-email`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': secret || '' },
-              body: JSON.stringify({ email: user.email }),
-            });
-            const data = await res.json().catch(() => ({}));
-            if (res.ok && data.token) token.galleryToken = data.token;
+            const email = normalizeEmail(user.email);
+            const db = await getDb();
+            const coll = db.collection(ALLOWED_ADMIN_EMAILS_COLLECTION);
+            const doc = await coll.findOne({ email });
+            if (doc) {
+              token.galleryToken = issueToken(email);
+            }
           } catch {
             // keep token without galleryToken
           }

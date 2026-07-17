@@ -263,6 +263,7 @@ export default function EventGalleryPage({ params }: PageProps) {
                                             src={img.imageUrl}
                                             alt={`Thumbnail ${idx + 1}`}
                                             fill
+                                            unoptimized
                                             className="object-cover"
                                             sizes="80px"
                                         />

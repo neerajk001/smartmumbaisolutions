@@ -8,8 +8,6 @@ import { Calculator as CalculatorIcon, TrendingUp, Wallet, Calendar, Percent, In
 import { formatCurrency } from '@/lib/utils';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 
 const DetailedCalculatorContent = () => {
   // Custom formatter for PDF that doesn't use toLocaleString (causes rendering issues in jsPDF)
@@ -214,7 +212,9 @@ const DetailedCalculatorContent = () => {
     setAmortizationSchedule(yearlySchedule);
   };
 
-  const downloadEmiPDF = () => {
+  const downloadEmiPDF = async () => {
+    const { default: jsPDF } = await import('jspdf');
+    const { default: autoTable } = await import('jspdf-autotable');
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
@@ -474,7 +474,9 @@ const DetailedCalculatorContent = () => {
 
   }, [btIncome, outstanding, btExistingEmi, btTenure]);
 
-  const downloadPartPaymentPDF = () => {
+  const downloadPartPaymentPDF = async () => {
+    const jsPDF = (await import('jspdf')).default;
+    const autoTable = (await import('jspdf-autotable')).default;
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();

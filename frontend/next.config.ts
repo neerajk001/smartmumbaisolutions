@@ -1,8 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
+    minimumCacheTTL: 86400,
+    deviceSizes: [640, 1080, 1440],
+    imageSizes: [16, 32, 48, 64, 96],
     remotePatterns: [
       {
         protocol: "https",
@@ -18,18 +20,5 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/admin/:path*',
-        destination: 'http://127.0.0.1:7001/api/admin/:path*',
-      },
-      {
-        source: '/api/gallery/:path*',
-        destination: 'http://127.0.0.1:7001/api/gallery/:path*',
-      },
-    ];
-  },
 };
-
 export default nextConfig;

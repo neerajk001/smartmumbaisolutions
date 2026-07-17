@@ -1,3 +1,4 @@
+export const dynamic = 'force-static';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GallerySection from "@/components/GallerySection";

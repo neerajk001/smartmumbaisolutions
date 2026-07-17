@@ -28,8 +28,12 @@ export async function GET(request: NextRequest) {
 
     const data = await response.json();
 
-    // Return the backend response
-    return NextResponse.json(data, { status: response.status });
+    // Return the backend response with CDN caching
+    const res = NextResponse.json(data, { status: response.status });
+    if (response.ok) {
+      res.headers.set('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
+    }
+    return res;
   } catch (error) {
     console.error('Error fetching loan products:', error);
     return NextResponse.json(

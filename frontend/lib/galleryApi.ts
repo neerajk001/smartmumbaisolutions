@@ -88,9 +88,8 @@ export interface ApiErrorResponse {
   error: string;
 }
 
-// Gallery backend base URL (Node backend, not Next.js routes)
-// Example: http://localhost:7001/api/gallery
-const API_BASE_URL = process.env.NEXT_PUBLIC_GALLERY_API_BASE || 'http://localhost:7001/api/gallery';
+// Gallery API is now served directly by Next.js on the same origin
+const API_BASE_URL = process.env.NEXT_PUBLIC_GALLERY_API_BASE || '/api/gallery';
 
 /**
  * Get all gallery events
